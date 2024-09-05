@@ -1,0 +1,280 @@
+Week 2: CSS 
+
+Selector : how can we select element to make the style 
+
+1. Select by id (we create id in the element) 
+
+#pa{
+        background-color: yellow;
+    }
+
+    #pb {
+        background-color: red;
+    }
+
+2. Select by tag : use the tag html to select 
+ p {
+        margin: 20px 30px 20px 30px;
+    }
+
+==>
+
+<p id="pa" class="sh">wellcome to cambodia</p>
+<p id="pb" class="sh">Sea Game 2024</p>
+
+3. Select by class ( we prepare the class style then we can use in each element we want) 
+
+.sh{
+        color: blue;
+        font-size: larger;
+    }
+
+
+==>
+
+<p id="pa" class="sh">wellcome to cambodia</p>
+
+
+4. Select by Tag and Class 
+
+ p.sh{
+        color: rgb(254, 0, 0);
+        font-size: larger;
+    }
+
+==>
+
+<p id="pa" class="sh">wellcome to cambodia</p>
+
+5. Select All * 
+
+ * {
+        border: 1px solid green;
+    }
+
+6. select group 
+
+h1,h2,h3 {
+
+color: rgb(254, 0, 0);
+        font-size: larger;
+} 
+
+================================================
+
+https://www.w3schools.com/css/css_combinators.asp
+
+Combinator : A combinator is something that explains the relationship between the selectors.
+
+- Descendant កូនចៅ
+- child​ កូន 
+- Adjacent ជិតគ្នា
+
+sibling​ បងប្អូនជីដូនមួយ (មែឧខុសគ្នា)​
+
+1. descendant selector ( space ) : div p {} 
+2. child selector (>)
+3. adjacent sibling selector (+) 
+4. general sibling selector (~)
+
+
+Example : 
+
+1. descendant selector : យកតែកូនចៅ អោយតានៅក្រោមវា ត្រូវគោរពតាមទាំងអស់
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div p {
+  background-color: yellow;
+}
+</style>
+</head>
+<body>
+
+<h2>Descendant Selector</h2>
+
+<p>The descendant selector matches all elements that are descendants of a specified element.</p>
+
+<div>
+  <p>Paragraph 1 in the div.</p>
+  <p>Paragraph 2 in the div.</p>
+  <section><p>Paragraph 3 in the div.</p></section>
+</div>
+
+<p>Paragraph 4. Not in a div.</p>
+<p>Paragraph 5. Not in a div.</p>
+
+</body>
+</html>
+
+==> result 
+
+Paragraph 1 in the div.
+
+Paragraph 2 in the div.
+
+Paragraph 3 in the div.
+
+យើងមើលនៅខាងក្រោម div ទៅអោយតែមាន tap <p> វាយកទាំងអស់
+
+2. Child Selector (>) យកទាំងអស់អោយតានៅក្រោម div ហើយវាជា P
+
+div > p {
+  background-color: yellow;
+}
+
+== 
+
+selects all <p> elements that are children of a <div> element:
+
+
+3. Adjacent Sibling Selector (+) យក P ណាដែលជិតជាងគេបន្ទប់ពី </div? (យកអាបន្ទាប់ end div) 
+
+div + p {
+  background-color: yellow;
+}
+
+selects the first <p> element that are placed immediately after <div> elements:
+
+
+4. General Sibling Selector (~) : យកទាំងអស់បន្ទាប់ពី End </div>
+
+selects all <p> elements that are next siblings of <div> elements: 
+
+div ~ p {
+  background-color: yellow;
+}
+
+
+-----------------------------------------------------------
+
+II. CSS Pseudo-class: បើដើម្បីផ្លាស់ប្តូវ អ្វីដែលវាកំពុងស្ថិតនៅ
+
+/* unvisited link */
+a:link {
+  color: #FF0000;
+}
+
+/* visited link */
+a:visited {
+  color: #00FF00;
+}
+
+/* mouse over link */
+a:hover {
+  color: #FF00FF;
+}
+
+/* selected link */
+a:active {
+  color: #0000FF;
+}
+
+------------------- select elect with first cheil and last gith 
+
+ #ch > p:first-child{
+        background-color: yellow;
+    }
+    
+
+</style>
+
+
+<body>
+
+    <div id="ch">
+        <p>Chile 1</p>
+        <p>Chile 2</p>
+        <p>Chile 3</p>
+        <p>Chile 4</p>
+    </div>
+
+
+<< last child>> 
+ #ch > p:last-child{
+        background-color: rgb(255, 0, 30);
+    }
+    
+<<select by number>>
+    #ch > p:nth-child(2){
+        background-color: rgb(34, 0, 255);
+    }
+
+--------------------------- 
+
+CSS height and width Values
+
+
+===============
+
+Margin : គឺជាគម្លាតពី ​element 1 ទៅមួយ 
+Border : ផ្ទះព័ត្ទជុំវិញវានឹង
+Padding : គឺគម្លេតពីកាន់ border មកកាន់ content របស់យើង
+
+
+ដូចនេះសម្រាប់កំពស់សរុប និង ប្រវែងសរុបត្រូវបូកចូលទាំងអស់ = 2 Margin + 2 border + 2 Padding +
+
+width = 300 + 30 + 100 + 40 = 470px
+height = 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

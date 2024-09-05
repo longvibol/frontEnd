@@ -1,0 +1,233 @@
+Week 1 : HTML
+
+- Tag : សម្រាប់បង្កើត structre inside HTML 
+
+<h1></h1>
+
+-  Attribute : សម្រាប់បន្ថែម មុខងាអោយ tag 
+
+<a href="https://www.w3schools.com">Visit W3Schools</a>
+
+href : is the  Attribute 
+
+------------------------------------- Most use Tag in HTML
+
+1. Table 
+
+<th> table header មាតិការសម្រាប់ជួរឈរ នីមួយៗ
+<tr> = table row ជួរដេក
+
+2. form 
+
+<body>
+    <form>
+        <label><h1>Student Input Form</h1></label>
+        <label for="fname">Name</label>
+        <input type="text" id="fname" name="fname"><br><br>
+
+        <label for="fgender">Gender</label>
+        <input type="radio" id="male" name="fgender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="fgender" value="femal">
+        <label for="femal">Femal</label><br><br>
+
+        <label for="grad">Grad</label>
+        <input type="text" id="fgrad" name="fgrad"><br><br>
+
+        <input type="button" value="Save">
+    </form> 
+
+   
+</body>
+
+- name="fgender" = វាដូចជាគ្រប់ចឹងសំខាន់សម្រាប់ផ្តល់ពត៌អោយ BE
+- id="male" = សំខាន់សំរាប់ CSS and JS 
+
+
+***** Submit form to BE ***
+
+ <form action="test.php">
+----
+
+----
+
+<input type="submit" value="Save"> <!-- when we click it submit the data to BE -->
+
+</form> 
+ 
+- action="test.php" URL ដែលយើងត្រូវធ្វើការ submit ទៅ (API )
+- <input type="submit" value="Save"> : when click the submit bottom it will check the option on the header form URL when to submit
+
+
+-------------
+
+Ajax = Asynchronous JavaScrip XML : Refresh data ដោយមិនចាំបាច់ធ្វើការ Refresh page ឡើងវិញ No need to render page again from server. 
+It need to connect to back end 
+
+----------------
+**
+
+HTML Block & Inline មានន័យថាយើង Group វាជាក្រុម ដោយប្រើជា Block ឬ នៅជាមួយគ្នា ជាបន្ទាត់តែមួយ 
+
+1. Block-level
+
+A block-level element always starts on a new line, 
+and the browsers automatically add some space (a margin) before and after the element.
+
+example: 
+ 
+ <p>My name is Vicheck</p>
+ Hello Dara. How are you?
+
+==> result 
+My name is Vicheck
+----New line----
+Hello Dara. How are you?
+
+Here are the block-level elements in HTML:
+
+<address><article><aside><blockquote><canvas><dd><div><dl><dt><fieldset><figcaption><figure><footer><form><h1>-<h6><header><hr><li><main><nav><noscript><ol><p><pre><section><table><tfoot><ul><video>
+
+
+https://www.w3schools.com/html/html_blocks.asp
+
+
+2. Inline Elements: 
+
+An inline element does not start on a new line.
+
+<span style="color: rgb(214, 19, 19);">Hello</span><samp style="color: blue;">Thida</samp><br>
+
+
+html : ដូចជាមនុស្សម្នាក់
+css: ការតុបតែខ្លួន
+javascript : ជាបញ្ញា អាចធ្វើអ្វីបានខ្លះ
+
+
+----------
+
+Using CSS : there are three way to create style to html 
+
+1. Inline : ផ្ទាល់ជាមួយ tag by using the style attribute inside HTML elements
+
+<span style="color: rgb(214, 19, 19);">Hello</span><samp style="color: blue;">Thida</samp><br>
+
+2. Internal : ដាក់នៅក្នុង element = gourp of tag
+- by using a <style> element in the <head> section 
+
+<!DOCTYPE html>
+<html>
+<head>
+-----------
+    <style>
+       body{background-color: rgb(235, 243, 167);}
+       img {width: 500px; height: 500px;}
+    </style>
+-----------
+</head>
+<body>  
+
+   <img src="Java-Logo.png">
+   
+</body>
+
+</html>
+
+3. External: ដោយបង្កើតជា Folder and link to that folder that have CSS 
+by using a <link> element to link to an external CSS file
+
+- Step one : put the link in the header when the page render it will find the css first :
+
+<head>
+
+<link rel="stylesheet" href="my_style.css">
+
+</head>
+
+- Step two : create style in external file that have .css
+
+body{background-color: rgb(180, 240, 15);}
+form{background-color: rgb(209, 234, 234);}
+
+Note: 
+
+Priority is the style we put inside the main html 
+</head>
+<body style="background-color: aliceblue;">  
+
+
+=====================
+
+** magin : គេគិតចាប់ពី Element មួយទៅមួយ <P> or <tr>
+** padding : គឺរបស់ដែលស្ថិតនៅក្នុង Container នឹង
+
+
+padding-left: 100px;
+    outline: 1px solid red;
+    margin: 30px 20px 0px 100px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
