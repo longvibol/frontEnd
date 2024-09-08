@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/phoneshopmvc
+    username: phoneshopmvc
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  liquibase:
+        change-log: classpath:db/changelog/db.changelog-master.yaml
+        enabled: false
