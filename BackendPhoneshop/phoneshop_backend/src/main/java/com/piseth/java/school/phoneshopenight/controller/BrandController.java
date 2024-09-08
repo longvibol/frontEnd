@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +28,12 @@ import com.piseth.java.school.phoneshopenight.service.BrandService;
 import com.piseth.java.school.phoneshopenight.service.ModelService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("brands")
+@Slf4j
 public class BrandController {
 	
 	private final BrandService brandService;
@@ -41,8 +44,13 @@ public class BrandController {
 	@PreAuthorize("hasAuthority('brand:write')")
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody BrandDTO brandDTO) {
+		log.info("create Brands"+brandDTO.getName());
 		Brand brand = BrandMapper.INSTANCE.toBrand(brandDTO);
-		brand = brandService.create(brand);
+		if (brandDTO == null) {
+			ResponseEntity.status(HttpStatus.BAD_REQUEST);
+		}else {
+			brand = brandService.create(brand);
+		}		
 		
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brand));
 	}

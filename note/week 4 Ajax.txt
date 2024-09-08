@@ -1,0 +1,252 @@
+week 4 : Ajax
+
+- Create node server : 
+
+1. Install node : https://nodejs.org/en/download/package-manager 
+- check node version 
+
+>> node --version
+
+2. Create Server to listen the url and port 
+
+យើងមិនអាច Run ពី local url from our machine បានរហូតទេ យើងត្រូវកាបង្កើត server អោយវា 
+
+search : how to create nodejs server : 
+
+file:///C:/Users/GE66/Desktop/frontEnd/Lession/Week%204%20Ajax/Ajax_Demo/index.html?name=hello
+
+==> so we use server to make request and responde 
+
+We create file :server.js
+
+------------------------
+
+const http = require("http");
+const fs = require("fs");
+
+const host = 'localhost';
+const port = 8000;
+
+const requestListener = function(req, res) {
+    res.writeHead(200);
+
+    fs.readFile("index.html",function(error,data){
+      if(error){
+        res.writeHead(404);
+        res.write("Error : file not found!")
+      }else{
+        res.write(data)
+      }
+      res.end();
+    });
+    // res.end("Hello World from Node.js HTTP Server");
+}
+
+const server = http.createServer(requestListener);
+server.listen(port, host, () => {
+    console.log(`Server is running on http://${host}:${port}`);
+});
+
+------------------
+
+To run the server >> node server.js
+
+So we can see the server running on port : http://localhost:8000/
+
+
+Node :
+
+const requestListener = function(req, res) {
+    res.writeHead(200); // we responde the status 200 mean it working 
+
+    fs.readFile("index.html",function(error,data){ // index.html : is our page want to show 
+      if(error){
+        res.writeHead(404);
+        res.write("Error : file not found!")
+      }else{
+        res.write(data)
+      }
+      res.end(); // we need to end the read file after we finished 
+    });
+}
+
+
+========================================================================
+
+
+*** Now we want to submit from the front End to backend server *** 
+
+
+We use front end Phone shop for example : 
+
+- we find the Postman to see where we can submit the source : check Method POST from POST MANT 
+
+http://localhost:8080/brands
+
+JSON: we want to submit from the form : 
+
+{
+    "name" : "SamSung"
+}
+
+---------------------------------
+Importance concept : Asynchouse JavaScript 
+
+AJAX: we refresh block and we no need to refresh all the page 
+
+របៀបគេធ្វើជំហាន់ដំបូង ត្រូវចាំងថាវាត្រូវមានទំ២ជាមួយគ្នាសិន​
+
+1. creqte object that we want to send to server :
+
+let xhr = new XMLHttpRequest();
+
+2. Open : refer to Method that we want to submit 
+
+xhr.open("POST","http://localhost:8080/brands");
+
+3, setup Header while sending :
+
+ xhr.setRequestHeader("Content-Type","application/json");
+
+4. When success what it will return : ពេលផ្ញើរហើយយើងចង់បានអីគេ
+
+
+Error solve :
+
+Access to XMLHttpRequest at 'http://localhost:8080/brands' from origin 'http://localhost:8000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+1. Error with :Access-Control-Allow-Origin: CORS 
+
+We need to allow from backend to access port 8000 : in webconfig class : http://localhost:8000/
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer{
+	
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+		.allowedOriginPatterns("http://localhost:4200", "http://localhost:8000/","http://localhost:8080/swagger-ui/");
+	}
+
+}
+
+2. Uncaught TypeError: xhr.onreadystatechange is not a function:
+
+xhr.onreadystatechange = function(){
+
+                if(xhr.status ==200){
+                    console.log(xhr.response);
+                }
+
+            };
+
+
+--------------- We setup in the log at the backend when the request from front end was called it show we create branch 
+
+3. Error JSON deserilife 
+Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.piseth.java.school.phoneshopenight.dto.BrandDTO` from Array value (token `JsonToken.START_ARRAY`); nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize value of type `com.piseth.java.school.phoneshopenight.dto.BrandDTO` from Array value (token `JsonToken.START_ARRAY`)<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]]
+
+មានន័យថាយើងផ្ញើរមកនឹងមិនមែនជា JSON form te : error 400 bad request 
+
+
+==> fix we catch from form 
+
+=======================================
+
+let form = document.getElementById("form1"); // យើងចាប់ form នឹងមកសិន
+          
+let fData = new FormData(form); យើងប្រើជំនួយពី FormData បោះ form ចូលយើងអោយវាបង្កើតជា object អោយយើង​
+
+Cannot deserialize value of type `com.piseth.java.school.phoneshopenight.dto.BrandDTO` from Array value (token `JsonToken.START_ARRAY`)<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 1]]
+
+==>
+
+when we send : console.log(Object.fromEntries(fData));
+
+we get error becuae it don't have "" in name 
+
+
+{name: 'Nokia'}
+
+So we need to convert to JSon first 
+
+let json =JSON.stringify(Object.fromEntries(fData));
+            xhr.send(json);
+
+
+============================== code correct : 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function save(){
+            let form = document.getElementById("form1");
+            //let name = document.getElementById("name");
+
+            let fData = new FormData(form);
+
+            // console.log("OK");
+            // console.log(form);
+
+            //1- xml http request 
+            //2- Open mean check security togeher 
+            //3. send 
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("POST","http://localhost:8080/brands");
+            xhr.setRequestHeader("Content-Type","application/json");
+
+            let data = {"name": name};
+            // xhr.send(JSON.stringify(data));
+
+            let json =JSON.stringify(Object.fromEntries(fData));
+            xhr.send(json);
+
+           console.log(Object.fromEntries(fData));
+           console.log(json);
+
+            xhr.onreadystatechange = function(){
+
+
+		// we want after success or not success it show the statu 
+                if(xhr.readyState == XMLHttpRequest.DONE){
+                    console.log(xhr.response);
+                }
+
+                // if(xhr.status ==200){
+                //     console.log(xhr.response);
+                // }
+
+            };
+
+
+
+        }
+
+    </script>
+</head>
+<body>
+    <p><h1>Welcome to Cambodia!</h1></p>
+    <form id="form1">
+        <input type="text" name="name" id="name">
+        <input type="button" value="Save" onclick="save()">
+    </form>
+    
+</body>
+</html>
+
+
+
+
+
+------------------- in case we send and wrong Json input : name ==> name2
+
+it will get null ==> so we need to validate at backend to not allow null input 
+
+{"name2":"rwer"}
+(index):40 {"name":null}
