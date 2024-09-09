@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="jquery-3.7.1.min.js"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#hideAll0").click(function(){
+                $("p.pe").show(1500);
+            });
+
+            $("#hideAll").mouseover(function(){
+                $("*").hide();
+            })
+
+            $("#hideAll1").dblclick(function(){
+                $("*").hide();
+            })
+
+        });
+
+    </script>
+
+    <style>
+        .pe {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+ 
+    <button id="hideAll0">Show Button</button>
+    <button id="hideAll">Hidden Button</button><br>
+    <br><br>
+    <button id="hideAll1">Double click to hide</button><br>
+    <br>
+    <p​ id="p1">Welcome to Cambodia</p>
+    <p class="pe">Sea Game 2023</p>
+    <p class="pe">Phnom Penh</p>
+    <div class="pe">Test</div>
+</body>
+
+<script>
+</script>
+</html>
