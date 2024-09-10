@@ -1,0 +1,57 @@
+Week5 jQuery
+
+- fadeIn = បង្កើនភាពច្បាស់
+
+<script>
+        $(document).ready(function(){
+
+            $("button").click(function(){
+                $("div").fadeIn();
+            });
+          
+
+        });
+
+</script>
+
+-----------------------
+
+
+ <style>
+       div{        
+        display: none;
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+       }
+
+    </style>
+</head>
+<body>
+
+    <button>Play</button>
+ <div>
+
+
+ </div>
+   
+</body>
+
+2. fadeOut; បិទទៅវិញ
+3. fadeToggle បិទបើតែមួយ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
