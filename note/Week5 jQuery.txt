@@ -39,6 +39,91 @@ Week5 jQuery
 
 2. fadeOut; បិទទៅវិញ
 3. fadeToggle បិទបើតែមួយ
+4, fadeTo មានភាគរយច្បាស់
+
+ex: 
+
+ $("#fadeTo").click(function(){
+                $("div").fadeTo(100, 0.5);
+            });  
+
+---------------------------------------
+* effect
+- hide
+- show
+- hide(speed, callback)
+- toggle
+- fade
+- fadeIn (show)
+- fadeout
+- fadeToggle
+- fadeTo(speed, opacity)
+- slide
+- slideDown
+- slideUp
+- slideToggle
+- animate ({params}) (camelCase)
+- single property
+- multiple properties 
+
+
+======================== 
+Animate : ពន្រេចហើយ អោយវាទៅខាងឆ្វេង 400
+
+$("#btn").click(function(){
+                $("#box").animate({
+                    width:"200px", left: '400'                
+                });
+            });  
+
+Note:
+
+- static = defale can not move 
+- absolute
+- relative 
+- fixed
+- tricky 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

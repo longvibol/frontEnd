@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $("button").click(function(){
+                $("img").animate({
+                    width:"200px",
+                    height: '200px'
+                })
+                $('#st1').hide();
+            });  
+            
+            
+
+        });
+
+    </script>
+
+    <style>
+       
+       img{
+        width: 100px;
+        height: 100px;
+       }
+
+       button {
+        position: static;
+        align-items: center;
+       }
+
+       div {
+        position: relative;
+        text-align: center;
+       }
+
+       h2{
+        display: none;
+        position: relative;
+       }
+
+    </style>
+</head>
+<body>
+
+    <div id="st1">
+        <h4>Dara</h4>
+        <img src="image/css.png" alt=""><br>
+        <button id="btn">Click for Detail!</button>
+        <p id="thida"><h2>Thida live in Phnom Penh!</h2></p>
+    </div>
+
+    <div id="st2">
+        <h4>Thida</h4>
+        <img src="image/java.png" alt=""><br>
+        <button id="btn">Click for Detail!</button>
+        <p id="Dara"><h2>Dara live in Phnom Penh!</h2></p>
+
+    </div>
+
+    <div id="st3">
+        <h4>Tola</h4>
+        <img src="image/css.png" alt=""><br>
+        <button id="btn">Click for Detail!</button>
+        <p id="Tola"><h2>Tola live in Phnom Penh!</h2></p>
+
+    </div>
+
+    
+    
+    
+    
+
+    
+   
+</body>
+
+<script>
+</script>
+</html>
