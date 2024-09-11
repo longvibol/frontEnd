@@ -1,0 +1,21 @@
+Week 5.5 Enum
+
+វាជា Class ហើយតម្លៃវាមិនប្រែប្រួល 
+វាមានគេប្រើវាជាលក្ខណៈ String and Numberic.
+
+1. Numeric Enum - Defualt 
+
+enum Color{
+    WHITE, RED, YELLOW
+}
+
+let myColor:Color =Color.RED;
+
+console.log(myColor);
+
+==> 1
+
+គោលបំណង់គឺ Type safe គឺវាមិនមានអាចសរសេរខុសបានទេ
+
+
+

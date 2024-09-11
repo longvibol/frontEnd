@@ -1,0 +1,177 @@
+week 5.2 : Array
+
+1. Array have specific syntax ;
+
+Ex:
+
+const name: String[] = [];
+
+- const variable we can not change the value or we can use let or var 
+
+let names:string[] = ["Dara"];
+console.log(names);
+
+==> [ 'Dara' ]
+
+Array in TS is special it have method Push to add the element 
+
+let names:string[] = ["Dara"];
+names.push("Thida");
+names.push(5); // it will error we can not add different type 
+console.log(names);
+
+2. Readonly : យើងបានតែប្រើប្រាស់ទេ 
+
+let names:readonly string[] = ["Dara"];
+names.push("Thida");
+
+it will error we can not add new element to readonly! 
+
+
+3. infer យើងអាចអោយវាទាយដោយខ្លួនឯងបាន
+
+let ns= ["dara"];
+console.log(ns);
+
+or 
+
+let ns= [5,6,7,8];
+console.log(typeof ns);
+console.log(ns);
+==> 
+object
+[ 5, 6, 7, 8 ]
+
+
+or as number :
+
+let ns:number[] = [5,6,7,8];
+console.log(typeof ns);
+console.log(ns);
+
+or any :
+
+let ns:any = [5,6,7,8];
+console.log(typeof ns);
+console.log(ns);
+
+or any[]
+
+let ns:any[] = [5,6,7,8];
+console.log(typeof ns);
+console.log(ns);
+
+
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
