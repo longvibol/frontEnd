@@ -84,8 +84,35 @@ Note:
 - fixed
 - tricky 
 
+-----------------------------------------
+
+Tag : 
+
+<img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600">
+
+-src = source 
+- alt = alternate ជំរើស
+The alt attribute provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
 
 
+==============================
+
+(selector).animate({styles},speed,easing,callback)
+
+- styles :
+
+they use CamelCase អក្សរកណ្តាលជាអក្សរធំ នៅក្នុង CSS គេប្រើ - 
+
+Ex: 
+
+CSS : background-color: blue;
+animate :  backgroundColor : 'yellow'
+
+https://www.w3schools.com/jquery/eff_animate.asp
+
+
+1. reset view to previos state 
+2. while view is display, if we click on other profile, please use this image 
 
 
 

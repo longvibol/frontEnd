@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Animation</title>
+    <script src="Week 4 JQuery/jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#myImage').click(function() {
+                $(this).toggleClass('animate');
+                
+                if ($(this).hasClass('animate')) {
+                    setTimeout(() => {
+                        $(this).removeClass('animate').fadeOut(500, function() {
+                            $(this).fadeIn(500);
+                        });
+                    }, 1000); // Adjust the delay as needed
+                }
+            });
+        });      
+        
+    </script>
+
+    <style>
+        #myImage {
+            width: 300px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+        
+        .animate {
+            transform: scale(1.2);
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <img id="myImage" src="image/kaka.jpg" alt="Image">
+</body>
+</html>
