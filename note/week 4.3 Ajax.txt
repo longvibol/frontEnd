@@ -27,6 +27,8 @@ const fs = require("fs");
 const host = 'localhost';
 const port = 8000;
 
+//File Server =fs =The Node.js file system module allows you to work with the file system on your computer.
+
 const requestListener = function(req, res) {
     res.writeHead(200);
 
@@ -96,7 +98,7 @@ AJAX: we refresh block and we no need to refresh all the page
 
 របៀបគេធ្វើជំហាន់ដំបូង ត្រូវចាំងថាវាត្រូវមានទំ២ជាមួយគ្នាសិន​
 
-1. creqte object that we want to send to server :
+1. create object that we want to send to server :
 
 let xhr = new XMLHttpRequest();
 

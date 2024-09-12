@@ -1,0 +1,256 @@
+Week 5.8 Function 
+
+1. លក្ខណៈ void 
+
+function test(){
+    
+}
+
+Ex:
+
+function test(): void{
+    return ;
+}
+
+let limit = test();
+console.log(limit);
+
+កន្លែង return ; យើងមិនចាំបាច់ដាក់ក៏បានដែល កន្លែងនឹងគ្រាន់តែសំគាល់ថា វា ចប់ function te. 
+
+- បើអត់មានដាក់ Return វាជា Void 
+
+2. លក្ខណៈ Return 
+
+function test(): number{
+    return 5;
+}
+- បើមាន Return វាជា Funcion return type 
+
+3. with Union 
+
+function test(): number | string{
+    return 5;
+}
+
+console.log(test());
+
+==> 5
+
+
+or 
+
+function test(): number | string{
+    return 5;
+}
+
+let limit = test();
+console.log(limit);
+
+4. declear function with return 
+
+function sum(a:number, b:number){
+    return a+b;
+}
+
+let sum1 = sum(2,3);
+console.log(sum1);
+
+==> 5
+
+noted for the javascrip it is not saft :
+
+function sum(a, b){
+    return a+b;
+}
+
+
+let s = sum("2",3);
+console.log(s);
+
+
+==> 23 វាចេញទៅជាត String វិញ
+
+5. Option in function 
+
+function info(a:number, message?: string){
+    if (message != undefined){
+
+        console.log(message+" : "+a);
+    }else{
+        console.log(a);
+    }
+    
+}
+
+info(20);
+info(45,"Test")
+
+==>
+
+20
+Test : 45
+
+6. ?
+
+function add (a:number, b:number, c?:number){
+    return a + b + (c || 0);
+}
+
+--> បើ C មានតម្លៃ វាបូក តែបើវាមិនមាន គឺអោយវាស្មើរ ចឹងវាបូកសូន្រដដៃល
+
+
+7. Default parameter : យើងកំណត់តម្លៃអោយវា 
+
+function add (a:number, b:number, c:number = 10){
+    return a + b + c;
+}
+
+
+let y = add(5,3);
+let y2 =add(5,3,6);
+
+console.log(y);
+console.log(y2);
+
+==> 
+
+18
+14
+
+8. **** Parameter Name (tomake it readable ស្រួលមើលថាយើងចង់និយាយអំពីអ្វី)
+
+function getArea({width,height}:{width:number, height:number}){
+
+    return width*height;
+}
+
+let area = getArea({width:20,height:30});
+console.log(area);
+
+==>
+
+600
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

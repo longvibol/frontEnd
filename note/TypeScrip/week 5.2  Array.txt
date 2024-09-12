@@ -1,9 +1,8 @@
-week 5.2 : Array
+Week 5.2 : Array
 
-1. Array have specific syntax ;
+1. Array have specific syntax;
 
 Ex:
-
 const name: String[] = [];
 
 - const variable we can not change the value or we can use let or var 
@@ -28,7 +27,7 @@ names.push("Thida");
 it will error we can not add new element to readonly! 
 
 
-3. infer យើងអាចអោយវាទាយដោយខ្លួនឯងបាន
+3. inference យើងអាចអោយវាទាយដោយខ្លួនឯងបាន
 
 let ns= ["dara"];
 console.log(ns);

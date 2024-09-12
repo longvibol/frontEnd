@@ -17,5 +17,124 @@ console.log(myColor);
 
 គោលបំណង់គឺ Type safe គឺវាមិនមានអាចសរសេរខុសបានទេ
 
+Example : 
+
+enum Day{
+    MON,
+    TUE,
+    WEN,
+    THU,
+    FRI,
+    STA
+}
+
+let dayNum:Day = Day.FRI; // we supose the input from outside what Day.FRI
+
+if(dayNum > Day.FRI){
+    console.log('Holiday');
+}else {
+    console.log("Working Day");
+}
+
+==> Working Day
+
+ចឹងមានន័យថា នៅពេល Input from outside មកគឺវាមិនអាច Input ក្រៅពីអ្វីដែលយើងបានកំនត់មកនោះទេ
+
+--------------------------------------------------------------
+
+2. Enum that have initial Number : 
+
+enum Day{
+    MON =5,
+    TUE,
+    WEN,
+    THU,
+    FRI,
+    STA
+}
+
+console.log(Day.THU); // no intitial value = 3
+console.log(Day.THU); // intitail valeu on MON = 5 it will show 
+
+3. 2. Enum that have initial String : 
+
+enum Day{
+    MON ='Monday',
+    TUE ='Tueday',
+    WEN = 'Wenesday',
+    THU = 'Thurday',
+    FRI = 'Friday',
+    STA = 'Staturday'
+}
+
+console.log(Day.THU); // no intitial value = 3
+
+
+------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

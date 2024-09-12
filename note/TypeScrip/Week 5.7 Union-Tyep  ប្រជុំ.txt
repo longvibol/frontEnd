@@ -1,0 +1,12 @@
+Week 5.7 Union-Tyep : ប្រជុំ
+
+- the same as OR logic we can assign type to them 
+
+Ex:
+
+let v : String | boolean;
+
+v = "Vibol";
+v = true;
+
+v = 45; // can not assign type to number 

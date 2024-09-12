@@ -1,4 +1,4 @@
-Week 2: CSS 
+qWeek 2: CSS 
 
 Selector : how can we select element to make the style 
 
