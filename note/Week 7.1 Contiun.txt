@@ -377,6 +377,146 @@ export class TestComponent implements OnInit {
 =================
 
 
+2. Apply class base on condition: (single class)
+
+In css :
+
+.danger {
+    background-color: red;
+}
+
+In html: property class
+
+<h1 [class.danger] ="hasError">Info Erro</h1>
+
+In TS
+
+export class ViewComponent implements OnInit {
+
+  hasError = false;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+we assign the hasError = false ==> h1 will use the css file 
+
+=======================================================
+
+****
+3. ngClass directive (multiple class)
+
+directive is custom html attribute provide by angular 
+
+
+- In CSS:
+
+
+.danger {
+    background-color: red;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.text-success{
+    color: gre
+
+en;
+}
+
+
+- In html 
+
+<h2 [ngClass]="myClass">Uning Multiple Style from ngClass</h2>
+
+- In TS : we create class : myClass
+
+
+export class ViewComponent implements OnInit {
+
+  hasError = false;
+  isItalic = true;
+
+  myClass = {
+    "danger":this.hasError,
+    "italic":this.isItalic,
+    "text-success": !this.hasError
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+=========================================
+
+- For inline Style 
+
+1. single css prop 
+
+*** Appliy Style in and condition ***
+
+<h2 [style.color]="'green'">Test Color</h2>
+<h2 [style.color]="hasError? 'blue' : 'red'">condition appliy with style</h2>
+<h2 [style.font-style]="'italic'">change font style inline prop</h2>
+
+
+condition from Ts
+
+export class ViewComponent implements OnInit {
+
+  hasError = true;
+  isItalic = true;
+
+  myClass = {
+    "danger":this.hasError,
+    "italic":this.isItalic,
+    "text-success": !this.hasError
+  }
+
+
+2. Multiple css prop : [ngStyle] : "object"
+
+export class ViewComponent implements OnInit {
+
+  myStyle={
+    color: 'black',
+    fontStyle: 'italic' // use Camel case
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+----------in html : myStyle is the object 
+
+<h1 [ngStyle]="myStyle">Multiple Style </h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

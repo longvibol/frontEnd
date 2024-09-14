@@ -1,0 +1,11 @@
+<p>view works!</p>
+
+<h1 [class.danger] ="hasError">Info Erro</h1>
+
+<h2 [ngClass]="myClass">Uning Multiple Style from ngClass</h2>
+
+<h2 [style.color]="'green'">Test Color</h2>
+<h2 [style.color]="hasError? 'blue' : 'red'">condition appliy with style</h2>
+<h2 [style.font-style]="'italic'">change font style inline prop</h2>
+
+<h1 [ngStyle]="myStyle">Multiple Style </h1>

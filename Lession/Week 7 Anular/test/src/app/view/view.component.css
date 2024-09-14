@@ -1,0 +1,16 @@
+.text-header{
+    font-style: italic;
+    color: blue;
+}
+
+.danger {
+    background-color: red;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.text-success{
+    color: green;
+}
