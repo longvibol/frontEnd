@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'week8';
+
+  name:string="";
+
+  showMessage(){
+    // alert(this.name);
+
+    this.name ="Thida"
+
+  }
+
 }

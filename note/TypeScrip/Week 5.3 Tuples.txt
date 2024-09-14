@@ -25,7 +25,6 @@ It the same object that we can store!
 To allow us to Provide context for our values at each index. 
 
 Syntax: 
-
 Ex1: 
 const graph: [number, number] = [55.4, 34.2];
 const [x , y] = graph;

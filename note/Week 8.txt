@@ -1,0 +1,97 @@
+Week 8 :
+
+----------------- Event binding -----------------
+
+class to template : data binding (យើងទិន្នន័យទៅបង្កើញលើ អេក្រង់)
+template to class: event binding (input from form យើងយកទិន្នន៏យបញ្ចូលពី អេក្រង់)
+
+Ex: want to create form that we input to the font and it information show in the template 
+
+<button (click)="showMessage()">Save</button>
+
+-  (click) : event 
+-  ="showMessage()" : event handler 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

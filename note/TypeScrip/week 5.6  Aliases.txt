@@ -15,7 +15,6 @@ console.log(n);
 
 - យើងបង្កើតវានៅក្នុង Class មួយដាច់ដោយឯង
 
-
 Interface are similar to type aliases, except they only apply to object types. 
 
 interface Rectangle{
