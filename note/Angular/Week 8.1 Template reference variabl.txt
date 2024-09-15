@@ -113,7 +113,34 @@ export class StructuralDirectiveComponent implements OnInit {
 
 2. with else block: 
 
-- Create ng-template : 
+- Create ng-template : ub html 
+
+<h2 *ngIf="isCambodia ; else notCambodia">Welcome to Cambodia!</h2>
+
+<ng-template #notCambodia>
+
+    <h3>Other Country!</h3>
+
+</ng-template>
+
+
+- in Ts:
+
+export class StructuralDirectiveComponent implements OnInit {
+
+
+  isCambodia = false;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  showText(){
+    this.isCambodia =!this.isCambodia;
+  }
+
+}
 
 
 
