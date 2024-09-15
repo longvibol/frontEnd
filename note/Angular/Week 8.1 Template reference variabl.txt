@@ -1,0 +1,230 @@
+Week 8.1 Template reference variable 
+
+Access value from template : ចង់ចាប់តម្លៃពី​ Input form to show in the screen template 
+
+We can full control to the value of form:
+
+In Ts:
+
+  display(control:any){
+    this.name = control.id;
+  }
+
+In HTML:
+
+<input type="text" name="txt_name" id="txt1" #textName>
+<button (click)="display(textName)">Show</button>
+
+
+==> it will show : txt1
+
+-----------------------------------------------------------------------
+
+
+Note:
+
+1. class > Template : Property [] Call : Data Binding ; use Interpolation {{}}
+2. Template > class : Event () Call ; event binding 
+* 3 . class and template មានទំនាក់ទំនង់ទៅវិញទៅមកគេហៅថា Two way binding 
+
+យើងចង់បានពេលយើង  Typing អោយវាបង្ហាញលើ view ដូចគ្នា 
+
+Step by step to do it :
+
++ In HTML :
+
+<input type="text" [(ngModel)] ="someName"> {{someName}}
+
+- [(ngModel)] ="someName" the syntax to create two ways binding 
+- [()] this is the property from ng ; how to remember it 
+
+** Banana in the box**
+
+- {{someName}} : is the Interpolation 
+
++ in the ts: we create one field to assing when they call the function :
+
+export class TwoWaysBindingComponent implements OnInit {
+
+  someName ="";
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
++ in the app.module.ts we import : FormsModule
+
+import { FormsModule } from '@angular/forms';
+
+- then we put the formModule to the array :
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    TwoWaysBindingComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule  // where we put the import form 
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+------------------------------------
+
+
+structural-directive : add and remove html tag (use condition to remove and add) 
+
+1. *ngIF
+
+Ex: create button to do click show and hide Text: Uning *ngIf
+
+In html :
+
+<button (click)="showText()" >Show Welcom</button>
+
+<h2 *ngIf="isCambodia">Welcome to Cambodia!</h2>
+
+In Ts :
+
+export class StructuralDirectiveComponent implements OnInit {
+
+
+  isCambodia = false;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  showText(){
+    this.isCambodia =!this.isCambodia;
+  }
+
+}
+
+2. with else block: 
+
+- Create ng-template : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

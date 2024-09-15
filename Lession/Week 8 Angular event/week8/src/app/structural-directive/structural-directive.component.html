@@ -1,0 +1,11 @@
+<p>structural-directive works!</p>
+
+<button (click)="showText()" >Show Welcom</button>
+
+<h2 *ngIf="isCambodia ; else notCambodia">Welcome to Cambodia!</h2>
+
+<ng-template #notCambodia>
+
+    <h3>Other Country!</h3>
+
+</ng-template>

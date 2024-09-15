@@ -11,10 +11,21 @@ export class AppComponent {
   name:string="";
 
   showMessage(){
-    // alert(this.name);
 
     this.name ="Thida"
 
+  }
+
+  showInfo(e:any){
+    console.log(e);
+  }
+
+  show(text:string){
+    this.name=text;
+  }
+
+  display(control:any){
+    this.name = control.id;
   }
 
 }
