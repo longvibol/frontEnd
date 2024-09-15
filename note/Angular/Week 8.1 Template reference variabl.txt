@@ -113,6 +113,21 @@ export class StructuralDirectiveComponent implements OnInit {
 
 2. with else block: 
 
+
+syntax:
+
+<h1 *ngIf="someBooleanPro; else yourElseBlock">Hello</h1>
+
+<ng-template #thenBlock>
+<h1>block 1</h1>
+<ng-temlate>
+
+<ng-template #elseBlock>
+
+<h1>the hiden block</h1>
+
+<ng-template>
+
 - Create ng-template : ub html 
 
 <h2 *ngIf="isCambodia ; else notCambodia">Welcome to Cambodia!</h2>
@@ -142,11 +157,118 @@ export class StructuralDirectiveComponent implements OnInit {
 
 }
 
+3. inline ngIf then else : 
+
+<div *ngIf="isCambodia; then cambodia;else ortherCountry"> ngIf black</div>
+
+<ng-template #cambodia>
+    <h3>Cambodia Block !</h3>
+</ng-template>
+
+<ng-template #ortherCountry>
+    <h3>Other Country Block !</h3>
+</ng-template>
+
+4. ngSwitchCase 
+
+if we put "red" = in "" it think it is variable but in switch "'red'" = value 
+
+Example :
+
+In HTML:
+
+<div [ngSwitch] ="color">
+    <div *ngSwitchCase = "'yellow'" style="color: yellow;"> this is yellow</div>
+    <div *ngSwitchCase = "'blac'"> this is blac</div>
+    <div *ngSwitchDefault> Wrong Color!</div>
+</div>
+
+In TS:
+
+export class StructuralDirectiveComponent implements OnInit {
+
+  color ="white";
+
+--------------------------------------
+
+5. *ngFor : interate in the loop 
+
+HTML:
+
+<div *ngFor = "let c of colors">
+    <h3>{{c}}</h3>
+</div>
+
+or list:
+
+<ul *ngFor = "let c of colors">
+    <li>{{c}}</li>
+</ul>
+
+TS:
+
+colors =["red","blue","yellow","black"];
+
+Featur in for :
+
+- show indext : index as i
+
+<div *ngFor = "let c of colors; index as i">
+    <h3>{{i}}-{{c}}</h3>
+</div>
 
 
+==> 
+
+0-red
+1-blue
+2-yellow
+3-black
+
+- first as f (yuk first indes to make condition ture or false )
+
+EX: 
+
+<div *ngFor = "let c of colors; first as f">
+    <h3>{{f}}-{{c}}</h3>
+</div>
+
+==>
+
+true-red
+false-blue
+false-yellow
+false-black
+
+- last as ture : 
+
+ex:
+
+<div *ngFor = "let c of colors; last as l">
+    <h3>{{l}}-{{c}}</h3>
+</div>
+
+==>
+
+false-red
+false-blue
+false-yellow
+true-black
+
+- Even as ture :
+
+<div *ngFor = "let c of colors; even as e">
+    <h3>{{e}}-{{c}}</h3>
+</div>
 
 
+==> យើងអាចយកវាមកឆ្លាស់ពត៌គ្នាបាន
 
+
+true-red
+false-blue
+true-yellow
+false-black
 
 
 

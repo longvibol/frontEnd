@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StructuralDirectiveComponent implements OnInit {
 
+  color ="yellow";
+
+  colors =["red","blue","yellow","black"];
+
 
   isCambodia = false;
 
