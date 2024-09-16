@@ -1,2 +1,199 @@
 Week 8.2 : Component Interaction 
 
+1. Parent and Child : 
+
+- យើងចង់បោះតម្លៃពី កូនទៅ មេ : out put value from Child to parent 
+- Parent : app.component 
+- Child : What we add to parent (app-structural-directive) 
+
+
+Note:
+
+* send Data from Parent to Child we use "Input" : from app.compoent to other app
+* Child to Parent Use "Output" 
+
+ចង់ប្រើឆ្លង់ Project build libarey tuk 
+
+---------------------------
+
+Ex: Send data from Parent to Child (use Input) 
+
+@Input មានន័យថាយើងទទួលពីគេមក 
+
+Step by step :
+
+1. Parent App.component 
+
+export class AppComponent {
+  title = 'Interactive';
+
+  name = "Dara";
+  gender = "Male";
+
+}
+
+- We create two variable in the TS : name and gender  
+
+2. In HTML : View we need to input (Children: app-test-child)  
+
+<app-test-child [parentData] = "name" [sendGender]="gender"></app-test-child>  
+
+- [parentData] គឺជា Attribute ដែលយើងទទួលពី name and gender ទៅ Childen
+
+3. In children ts: Use (@input)
+
+export class TestChildComponent implements OnInit {
+
+  @Input() parentData ="";
+  @Input() sendGender ="";
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+4. In the children in order to view we use Interpolation: 
+
+<p>test-child works!</p>
+<p>Here is the data from parent : {{parentData}}</p>
+<p>Gender : {{sendGender}}</p>
+
+
+==> យើងប្រើវានៅពេលដែល ផ្លាស់ប្តូរ អ្វីមួយ អោយទៅ កន្លែងផ្សាងទៀត 
+-----------------------------------------------------------------------------------------
+
+2. From Child to Parent 
+
+- យើងត្រូវធ្វើទំនាក់ទំនងអ្វីមួយអោយគ្នា ទៅវិញទៅមក​ ដោយប្រើ Output 
+- ចឹងយើងត្រូវចេញពី Children 
+
+
+1. Create customer event in the child 
+
+- ចាំនាំអោយតា Event យើងដាក់ក្នុង ()
+- យើងចេញពី Parent ving 
+
+<app-test-child (myChildEvent)="receiveFromChild($event)" [parentData] = "name" [sendGender]="gender"></app-test-child>
+
++ (myChildEvent)="receiveFromChild($event)" we crate custom event : myChildEvent
++ receiveFromChild($event) : function create in parent ts 
++ 
+
+2. in parent TS 
+
+export class AppComponent {
+  title = 'Interactive';
+  theAge = 0;
+
+  receiveFromChild(a:number){
+    this.theAge=a;
+  }
+
+}
+
+- theAge = 0; we want to send value theAge to child by using function receiveFromChild
+
+- receiveFromChild(a:number) : a is what we get from input; number is the type 
+
+
+3. in childrent TS 
+ 
+export class TestChildComponent implements OnInit {
+
+  //custom event 
+  @Output() myChildEvent = new EventEmitter();
+
+  age=18;
+
+  sendAge(){
+    this.myChildEvent.emit(this.age);
+  }
+
+}
+
+*  @Output() myChildEvent = new EventEmitter(); must create relation to Parent 
+
+- age=18;
+
+  sendAge(){
+    this.myChildEvent.emit(this.age);
+  }
+
+}
+
+what we want to do
+
+
+or when we want to us in one line :
+
+
+<app-test-child (myChildEvent)="theAge = $event" [parentData] = "name" [sendGender]="gender"></app-test-child>
+
+
++ (myChildEvent)="theAge = $event" កន្លែងទំនាក់ទំនង់គ្នារវាង child and parent 
+
+
+
+====================
+
+Homework 
+
+1. បញ្ចូលលេខពី Text box then send to parent to display 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
