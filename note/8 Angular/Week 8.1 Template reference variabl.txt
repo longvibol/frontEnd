@@ -16,11 +16,9 @@ In HTML:
 <button (click)="display(textName)">Show</button>
 
 
-==> it will show : txt1
+==> it will show : txt 1
 
------------------------------------------------------------------------
-
-
+------------------------------------------------------------------------------
 Note:
 
 1. class > Template : Property [] Call : Data Binding ; use Interpolation {{}}

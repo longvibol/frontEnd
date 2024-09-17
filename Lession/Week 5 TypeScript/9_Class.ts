@@ -36,8 +36,6 @@ abstract class Polygon {
         return `Polygon[area=${this.getArea()}]`;
     }
 }
-
-
 class Rectangle extends Polygon{
     public constructor(protected readonly width: number, protected readonly height:number){
         super();

@@ -9,7 +9,7 @@ Now Augular
 - Framework to build client side application
 - វាមានតែមួយ Page ទេ ហើយពេលវាចង់ប្តូរគឺប្តូរតែមួយ Page mok neng : Great for signle page app. 
 - Modular approach ផ្តាចវាជា ក្រុមបានស្រួលគ្រប់គ្រង់
-អោយតែវាជាមួយ Function នឹងយើងផ្តាច់វាជា Modular Ex: in the back it have many function and task to do 
+អោយតែវាជាមួយ Function នឹងយើងផ្តាច់វាជា Modular Ex: in the bank it have many function and task to do 
 college information, load, borrow …
 
 - Reduse able យើងអាចយក function vir tov tver ey pseng ban 
@@ -30,7 +30,14 @@ Install Augular :
 3. after we install we check the Augular 
 >> ng version
 
--------------------------------------
+Extra:
+
+>>npm uninstall -g @angular/cli
+>>npm cache clean --force
+>>npm install -g @angular/cli@13.0.3  //customer install angular version
+
+
+------------------------------------------------------------------------
 
 *** Create applicaton *** 
 
@@ -53,7 +60,7 @@ Where the page view location :
 
 \src\app\app.component.html
 
-====================
+=============================================================================
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
@@ -65,6 +72,7 @@ Where the page view location :
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <style>
+
   :host {
     --bright-blue: oklch(51.01% 0.274 263.83);
     --electric-violet: oklch(53.18% 0.28 296.97);
@@ -78,13 +86,13 @@ Where the page view location :
     --gray-400: oklch(70.9% 0.015 304.04);
 
 
-===========================
+==============================================================================
 
 
 app.components.ts : where we use our TypeScrip 
 
 - components ជាផ្នែកមួយដែល គ្រប់គ្រងទៅលើអ្វីមួយ ដូចជាផ្នែក slide bar, button , button page … 
-or one block that display in the webpage 
+or one block that display in the Webpage 
 
 
 ****
@@ -98,7 +106,7 @@ one component have  =
 , service is a class that control business logic of app module contain component 
 and service 
 
-================= Flow working 
+================= Flow working ================================================
 
 1. main.ts ផ្លូវចូល
 

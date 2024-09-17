@@ -20,7 +20,7 @@ Class members also be given special modifiers which affect visibility.
 
 There are three main visibility modifiers in TypeScript. 
 
-1-public - (default) allows access to the class member from anywhere បានគ្រប់ទាំងអស់
+1-public - (default) allows access to the class member from anywhere ប្រើបានគ្រប់ទាំងអស់
 2-private - only allows access to the class member from within the class បានតែ Class ខ្លួនឯង
 3-protected - allow access to the class member from itself and classes that inherit it, 
 which is covered in the inherit. បានតែ Class កូន និង class ខ្លួនឯង
@@ -155,9 +155,19 @@ console.log(are.getArea());
 
 ====================================================
 
-8 - abstract classes 
+8 - Abstract classes : classes that cannot be directly instantiated and serve as a blueprint for derived classes. They are designed to be extended by other classes, providing a common set of properties, methods, and behavior that can be inherited and implemented by subclasses.
 
-Classes can be written in a way that allows them to be used as a base class for other classe without having to implement:
+- Classes can be written in a way that allows them to be used as a base class for other classe without having to implement:
+
+Example:
+
+abstract class Polygon {
+    public abstract getArea():number;
+
+    public toString() : string{
+        return `Polygon[area=${this.getArea()}]`;
+    }
+}
 
 
 class Rectangle extends Polygon{
@@ -175,7 +185,7 @@ console.log(are2.toString())
 
 ==> 200
 
-abstract neng vir Automatic for typescrip 
+Abstract គឺមិនអាចធ្វើការបង្កើត class បានទេ គឺជា Property, methods and behavior ដែលអាចអោយនាក់បន្តវេន របស់វា Implement 
 
 
 
