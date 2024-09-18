@@ -1,0 +1,92 @@
+Week 10.1 Navigation Next and Previous
+
+1. want to click on Button Next or Previous it will change the route url 
+
+export class StudentDetailComponent implements OnInit {
+
+  studentId! :number;
+
+  constructor(private activateRoute : ActivatedRoute, private router:Router) { }
+
+  ngOnInit(): void {
+    let id = this.activateRoute.snapshot.paramMap.get("id");
+    this.studentId = parseInt(id || "-1");
+  }
+
+  goNext(){
+    let nextId = this.studentId + 1;
+    this.router.navigate(["/detail", nextId]);
+  }
+
+  goPrevious(){
+    let previousId = this.studentId -1;
+    this.router.navigate(["/detail", previousId]);
+  }
+
+}
+
+--------------------- In the OnInit (in angular it create only one value not refress
+ពេលវា call one time the function snapshot only remember first time call 
+- in angular វាយកតម្លៃ reduce one time neng te 
+
+
+==> we can see that it called only one time and Angular use this variable again: 
+let id = this.activateRoute.snapshot.paramMap.get("id");
+
+- We use paraMap (the same as Map : have Key :value) ==> use method GET 
+
+ngOnInit(): void {
+    // let id = this.activateRoute.snapshot.paramMap.get("id");
+    // this.studentId = parseInt(id || "-1");
+
+    this.activateRoute.paramMap.subscribe((paramMap:ParamMap) =>{
+
+      this.studentId = parseInt(paramMap.get("id") || "-1");
+
+    });
+  }
+
+ចឹងយើងអាចធ្វើការចាប់យកតម្លៃវាបានហើយ
+====================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
