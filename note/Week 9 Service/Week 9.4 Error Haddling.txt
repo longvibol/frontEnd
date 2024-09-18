@@ -1,0 +1,106 @@
+Week 9.4 Error Handling
+
+Noted different version of Angular will change the error messagse : 
+Now we use 13.0.3 Version
+
+1. In service : Import the error 
+
+import { throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
+
+--------------------
+
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StudentService {
+
+  constructor(private http: HttpClient) { }
+
+  getStudents(){
+
+    let students =[
+
+      {name:"Dara",gender:"male",age:23},
+      {name:"Thida",gender:"Female",age:18},
+      {name:"Tola",gender:"male",age:22},
+      {name:"Kim",gender:"male",age:14},
+      {name:"Socheata",gender:"Female",age:24}
+  
+    ];  
+  
+  return students;
+  
+  }
+
+  url ="/assets/data/students.json";
+
+  getStudentsV2(): Observable<any[]>{
+
+    return this.http.get<any[]>(this.url).pipe(catchError(this.handleError))
+
+  }
+
+  handleError(error : HttpErrorResponse){
+
+    let errorMessage = error.message || "Error from server";
+
+    return throwError(errorMessage);
+
+  }
+
+}
+
+
+2. Add callback function to return: (Student.component)
+
+export class StudentDetailComponent implements OnInit {
+
+  constructor(private _studentService: StudentService) { }
+
+  studentInDetail :any;
+  errorMessage :any;
+
+  ngOnInit(): void {
+
+    //this.studentInDetail = this._studentService.getStudents();
+
+    this._studentService.getStudentsV2().subscribe(data =>{
+
+      this.studentInDetail = data;
+
+    },error =>{
+      this.errorMessage = error;
+    } );
+
+  }
+
+}
+
+-----------------where we add the error handle :
++++++
+
+},error =>{
+      this.errorMessage = error;
+    } );
+
+++++++
+
+ errorMessage :any;
+
+++++++
+
+3. Add error Message:
+
+student.component.html
+
+{{errorMessage}} : interpolation 
+
+
+==================================================================================

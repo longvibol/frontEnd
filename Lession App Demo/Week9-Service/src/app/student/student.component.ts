@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../service/student.service';
 
+
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -11,6 +12,7 @@ export class StudentComponent implements OnInit {
   constructor(private _studentService : StudentService) { }
 
   students:any;  
+  errorMessage:any;
 
   ngOnInit(): void {
 
@@ -18,7 +20,9 @@ export class StudentComponent implements OnInit {
 
     this._studentService.getStudentsV2().subscribe(data => {
       this.students =data;
-    })
+    },error =>{
+      this.errorMessage = error;
+    });
 
   }
 

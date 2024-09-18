@@ -1,0 +1,387 @@
+Week 9.1 : Service 
+
+Use for business logic:
+
+How to design the best practice!
+
+Student list!
+Dara
+Thida
+Tola
+Kim
+-----------------------------
+Student Detal!
+Dara - male - 23
+Thida - Female - 18
+Tola - male - 22
+Kim - male - 14
+
+EX: We create separate component and write the same code to display. it is now the best practice 
+
+------ Solution how to desing class and have functionality ---------
+
+1. DRY: Don't Repeat Yourself កុំសរសេរដដៃលៗ
+
+2. SOLID - Priciple :
+
+- Single responsibility : have only one function បែងចែកគ្ណាអោយធ្វើតែមួយមុនងារបានហើយ
+
+Ex: we create component the main gold is the display data only! 
+- so that why they create service to separate their function then we can call it to use 
+
+* Service is a class with specific purpose:
+- share data (across multiple component)
+Ex: service is the គោលបំណង ឧទាហរ៍ យើងបញ្ជូល ថ្ងៃខែឆ្នាំ កំណើរ បន្ទាប់មកវាចេញ អាយុយើងមក អោយប្រៀបធៀបជាមួយឆ្នាំយើងកើត
+
+- implement interaction (ex: connect to db)
+
+* Convention: somename.service.ts 
+ដាក់ឈ្មោះអីក៏បាន តែខាងចុងដាក់ថា service.ts ដើម្បីសំគាល់ថាវាជា Service 
+
+* in Augluar we use dependency injection to autowire the service 
+
+
+1. NO DI (dependency injection)
+
+* code without DI has drawback:ពិបាកធ្វើតេស្ត
+- code not flexible : each time dependcy change, the current class is change as well
+- Not suitable for testing (new engine, new tires, old tires... not possible bec every will have same Engine and Tires) 
+
+Ex:
+
+class Car{
+
+    private eng : Engine;
+    private tire : Tires;
+
+    constructor(){
+        this.eng = new Engine();
+        this.tire = new Tires();
+    }
+
+}
+
+
+ចឹងមានន័យថាពេលដែលយើងត្រូវការបង្កើត Object ថ្មីវាត្រូវការបង្កើត Engine new and Tired new. វាពេលបាក់ពេលដែលយើងត្រូវធ្វើការ ផ្លាស់ប្តូរ Engein ថ្មី ចឹងវាប៉ះពាល់ដល់ object Car 
+របស់ហើយ គេមិនប្រើនចឹងទេ។​
+
+2. Use DI as design pattern: បើ Injection level 1 ដែលអាចអោយយើងពេលបង្កើត New object Car យើងអាចធ្វើការ Input ចូលបាន
+ទោះបីយើងចង់បន្ថែម អីក្នុង Engine and Tire ទៀតក៏វាមិនអីដែល ព្រោះហើយបោះតម្លៃចូលទេ។
+
+DI is a coding pattern in which a class receives its dependencies 
+from external sources rather than creating them itself. 
+
+Example for DI as pattern:
+
+-----------------------------------------------------------------------------
+
+class Car {
+
+    private eng : Engine;
+    private tire : Tires;
+
+    constructor(e:Engine, t:Tires){
+        this.eng = e;
+        this.tire = t;
+    }
+
+}
+
+-----------------------------------------------------------------------------
+
+3. DI as a Framwork 
+
+ពេលដែលយើងប្រើវាជា framework គឺវាជានាក់បង្កើត dependacy ក្នុង class មួយៗអោយយើងដោយចឹងមិនចាំបាច់ទៅខ្វល់ទេ 
+Ex: Engine they create new dependency so we no need to worry, framework will crate new denpancey for us 
+
+Therefore while we create new object Car no need to worry about the Engine update their side 
+
+Ex: យើងនឹងបង្កើត Service មួយជំនួនអោយការបង្កើត New object students.  
+
+Step to setup DI as framework :
+
+  students =[
+
+    {name:"Dara",gender:"male",age:23},
+    {name:"Thida",gender:"Female",age:18},
+    {name:"Tola",gender:"male",age:22},
+    {name:"Kim",gender:"male",age:14}
+
+  ];  
+
+3.1 we create service then injection into the component:
+
+>> ng g s service/student
+
+- s is Service 
+- service/student = create new folder "service" then create service :student
+
+3.2 in service/student.ts
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StudentService {
+  constructor() { }
+
+
+  getStudents(){
+
+    let students =[
+
+      {name:"Dara",gender:"male",age:23},
+      {name:"Thida",gender:"Female",age:18},
+      {name:"Tola",gender:"male",age:22},
+      {name:"Kim",gender:"male",age:14}
+  
+    ];  
+  
+  return students;
+  
+  }
+
+}
+
+
+- We create method :getStudents to create object and can use with other component
+
+3.3 How to call getStudents service in other component 
+
+import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../service/student.service';
+
+@Component({
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.css']
+})
+export class StudentComponent implements OnInit {
+
+  constructor(private _studentService : StudentService) { }
+
+  students:any;  
+
+  ngOnInit(): void {
+
+    this.students = this._studentService.getStudents();
+
+  }
+
+}
+
+----------------------------------------------------------------------------------------
+
+Remark :
+
++ Inject the service:
+
+- constructor(private _studentService : StudentService) { }
+- _studentService នៅក្នុង Javascrip គេដាក់ _
+
++ Call when it create :
+
+ngOnInit(): void {
+
+    this.students = this._studentService.getStudents();
+
+  }
+
++ Assign variable: 
+
+- students:any; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
