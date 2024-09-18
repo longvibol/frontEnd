@@ -1,0 +1,179 @@
+Week 9.3 Example get data from DB
+
+1. Crate Json file to demo 
+
+in app > crate folder data then crate file :students.json 
+
+2. import httpclient in app.module (want to use in all component in app need to add this place)
+
+import { HttpClientModule } from '@angular/common/http';
+
+Then add to import: 
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+
+-----------------------
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { PipeDemoComponent } from './pipe-demo/pipe-demo.component';
+import { StudentComponent } from './student/student.component';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { CarComponent } from './car/car.component';
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    PipeDemoComponent,
+    StudentComponent,
+    StudentDetailComponent,
+    CarComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+===========================================
+
+3. Using service : student.service.ts
+
+- constructor(private http: HttpClient) { }
+- url ="/assets/data/students.json";
+- getStudentsV2(): Observable<any[]>{
+
+    return this.http.get<any[]>(this.url);
+
+  }
+
+
+----------------------
+
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StudentService {
+
+
+  constructor(private http: HttpClient) { }
+
+
+  getStudents(){
+
+    let students =[
+
+      {name:"Dara",gender:"male",age:23},
+      {name:"Thida",gender:"Female",age:18},
+      {name:"Tola",gender:"male",age:22},
+      {name:"Kim",gender:"male",age:14},
+      {name:"Socheata",gender:"Female",age:24}
+  
+    ];  
+  
+  return students;
+  
+  }
+
+  url ="/assets/data/students.json";
+
+  getStudentsV2(): Observable<any[]>{
+
+    return this.http.get<any[]>(this.url);
+
+  }
+
+}
+
+
+=============================
+
+4 Call to use in : student.component.ts 
+
+
+import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../service/student.service';
+
+@Component({
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.css']
+})
+export class StudentComponent implements OnInit {
+
+  constructor(private _studentService : StudentService) { }
+
+  students:any;  
+
+  ngOnInit(): void {
+
+    //this.students = this._studentService.getStudents();
+
+    this._studentService.getStudentsV2().subscribe(data => {
+      this.students =data;
+    })
+
+  }
+
+}
+
+
+5. view in app.component :
+
+- <app-student></app-student>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,178 @@
+Week 9.2 Http and Observable 
+
+- Service function : 
+
+1. Share data 
+2. Code reduce able * flexible 
+3. External interaction (connect to BE :server (db)) 
+Ex: server call to db in backend 
+
+-------------------------------------------
+
+*** Flow how the FE working with BE *** 
+
+Request = FE : have component : ComA -> Service (we create service inside ComA) -->use protocol (HTTP) ->request to BE : Server(db). 
+Response from BE = server (db) -> Observable (where the component subscriber to the observable). 
+
+---------- Observable -------------
+
+- A sequence of items that arrive asynchronously over time.  
+វាជា Asynchornuse វាបោះ data មកម្តង១ៗ 
+
+- បើយើង request data from one page it is call one item : Http call : single item 
+- single item: http response (វាអាចជា List of data from db)
+
+----------------- RXjs --------------------
+- asynchronously:
+
+RXjs វាជា Library ដែល Angular យកមកប្រើដើម្បីបង្កើត  asynchronously style 
+
+**** ចាំអោយតែគេនិយាយ asynchronously គឺវាជា Reactive Extension នឹងហើយ **** 
+
+- Reactive Extension for js 
+- External library to work with observable 
+
+
+--------------------------------------------------------------------------------
+
+*** Observable = subscriber អោយតែ Service មួយណា បានធ្វើការចុះឈ្មោះជាមួយវា រាល់ពេលមានការ Emit មកពី Publiser 
+it will send to subscriber 
+
+
+---------------- Fetch Data Using Http -------------------------------
+
+1. Http get request from StudentService " use Json first test" 
+2. Receive Observable and cast it to Student array - []
+3. Subscribe to Observable from StudentList and StudentDetail 
+4. Assign student array to local variable 
+
+
+Note: in app.module.ts 
+
+* import គេដាក់ចូលក្នុង Import :
+
+* component គេដាក់ចូលក្នុង declarations:
+
+
+------------------------------- very importanct note 
+
+- in the filed member នៅក្នុង Class នឹងគេប្រើ This 
+
+===============================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

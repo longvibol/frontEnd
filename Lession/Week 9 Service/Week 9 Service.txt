@@ -1,0 +1,219 @@
+Week 9: Service
+
+-----------Pipe----------------
+
+Transform data before display to view 
+
+- Convert in presentation layer = view 
+
+Ex: 
+
+in Ts:
+
+name:string = "Dara"
+
+In HTML:
+
+1. Upper case
+
+<h1>{{name | uppercase}}</h1>
+
+==> DARA
+
+2. title case 
+
+in Ts:
+
+text ="welcome to cambodia";
+
+In HTML:
+
+<h1>{{text | titlecase}}</h1>
+
+==> Welcome To Cambodia
+
+
+3. slide : index 
+
+<h1>{{text | slice:5}}</h1>
+
+==> me to Cambodia
+
+4. slide : index:end 
+
+<h1>{{text | slice:5:10}}</h1>
+
+==> me to
+
+5. *** Json ** 
+
+In Ts:
+
+student ={name:"Dara",gender:"Female",age:21};
+
+In HTML:
+
+<h1>{{student}}</h1>
+
+==> [object Object]:
+
+To convert from object to JSON we use json 
+
+==> { "name": "Dara", "gender": "Female", "age": 21 }
+
+
+6. number number:'2.2' កំណត់ និងថែម សូន្យ Format 
+
+In TS:
+
+myNumber = 6.47;
+
+TS:
+
+ myNumber = 6.47;
+
+In HTML:
+
+<p>{{myNumber | number:'2.2'}}</p>
+
+==> 06.47
+
+
+7. Percent %
+
+In Html:
+
+<p>{{0.67 | percent}}</p>
+
+8. *** Date Format ***
+
+In TS:
+
+dob = new Date();
+
+In HTML:
+
+<p>{{dob}}</p>
+<p>{{dob | date:'short'}}</p>
+<p>{{dob | date:'shortDate'}}</p>
+<p>{{dob | date:'shortTime'}}</p>
+<p>{{dob | date:'medium'}}</p>
+<p>{{dob | date:'long'}}</p>
+
+==>
+
+9/17/24, 2:17 PM
+
+9/17/24
+
+2:17 PM
+
+Sep 17, 2024, 2:17:41 PM
+
+September 17, 2024 at 2:17:41 PM GMT+7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
