@@ -5,5 +5,5 @@
 </p> -->
 
 <p *ngFor="let st of students">
-    <button (click)="goToDetail(st.id)">{{st.name}}</button>
+    <button (click)="goToDetail(st.id)" [class.highLight] = "checkHightlight(st.id)">{{st.name}}</button>
 </p>

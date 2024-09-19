@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 
 @Component({
@@ -17,16 +17,24 @@ export class StudentListComponent implements OnInit {
 
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private activatRouter: ActivatedRoute) { }
+
+  lastVisitedId = 0;
 
   ngOnInit(): void {
+    this.activatRouter.paramMap.subscribe((paramMap: ParamMap) =>{
+      this.lastVisitedId = parseInt(paramMap.get("myId") || "0");
+    });
   }
 
   goToDetail(studentId :number){
     // alert(studentId);
-
     this.router.navigate(["/detail", studentId]);
     
+  }
+
+  checkHightlight(studentId :number){
+    return studentId === this.lastVisitedId;
   }
   
 

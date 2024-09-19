@@ -33,4 +33,8 @@ export class StudentDetailComponent implements OnInit {
     this.router.navigate(["/detail", previousId]);
   }
 
+  goBack(){
+    this.router.navigate(["/list", {myId : this.studentId}]);
+  }
+
 }
