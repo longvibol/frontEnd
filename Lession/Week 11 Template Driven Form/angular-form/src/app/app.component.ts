@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { Student } from './model/student';
+import { inject } from '@angular/core/testing';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { Student } from './model/student';
 export class AppComponent {
   title = 'angular-form';
 
+
   subjects = ["Java","PHP","C#","Pyton"];
 
   student = new Student("Dara","dara@gmail.com","Java","Male");
+
+
 }

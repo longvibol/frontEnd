@@ -1,0 +1,105 @@
+Week 12 : Tracking State and Validity 
+
+1. NG-Class: #txtName => {{txtName.className}}
+
+visited ? ng-touch : ng-untouched
+value changed? ng-dirty : ng-pristine
+valid? ng-valid : ng-invalid 
+
+Ex: 
+
+1. In Html 
+
+<div class="form-group">
+      <label for="">Name</label>
+      <input type="text" required="" #txtName class="form-control" name="name" [(ngModel)]="student.name" >
+    </div>
+
+- #txtName : is the variable we put in the form 
+
+to show start we use {{}}
+
+{{txtName.className}} : put it in the same HTML file 
+
+In view : 
+
+form-control ng-untouched ng-pristine ng-valid
+
+- ng-untouched : មិនទាន់បានប៉ះវា ពេលប៉ះហើយវាចេញ => ng-touched (visited) 
+- ng-pristine : មិនទាន់បានកែ => ពេលធ្វើការកែហើយ ng-dirty (Value changed) 
+- ng-valid : (we put validation : required ) when we remove all the txt it will change to in valide => ng-invalid
+
+: ng = angular 
+
+
+2. NG : Property 
+
+** ngModel property:
+*class => property 
+ng-touched => touched
+ng-untouched => untouched
+ng-dirty => dirty 
+
+* How to get access to ngModel properties? 
+
+Example:
+
+<br>
+    <h3>{{txtName.valid}}</h3>
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" required="" #txtName="ngModel" class="form-control" name="name" [(ngModel)]="student.name" >
+    </div>
+
+ចឹងពេល វាចេញមកដំបូង វា check valide on the Name : so it will say : Ture after we remove the txt name = 0 ==> false 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
