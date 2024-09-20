@@ -103,6 +103,119 @@ core.mjs:6484 ERROR Error: If ngModel is used within a form tag, either the name
 
 វាប្រាប់ថាត្រូវដាក់ name អោយវាទៀត
 
+----------------------- Group Element --------------- Ex address, 
+
+
+<div ngModelGroup="address">
+
+      <div class="form-group">
+        <label for="">Provice</label>
+        <input type="text" name="province" class="form-control" ngModel>
+      </div>
+
+      <div class="form-group">
+        <label for="">Distric</label>
+        <input type="text" name="district" class="form-control" ngModel>
+      </div>
+
+
+    </div>
+
+- <div ngModelGroup="address"> We group the province and district
+
+Hold :
+
+{ "name": "", "email": "", "subject": "", "rdGender": "", "address": { "province": "Phnom Penh", "district": "Cambodia " } }
+
+==>
+
+"address": { "province": "Phnom Penh", "district": "Cambodia " }
+
+
+
+---------------------- Bind Form Data To Model ( o class) ------------------------  
+យើងចង់បង្ហាញ ទិន្នន័យ From class student To Template :
+
+1. Create class: 
+
+>> ng generate class model/student
+
+export class Student {
+
+    // private name: string;
+    // private gender: string;
+    // private subject: string;
+    // private course: string;
+
+    public constructor(
+        public name: string,
+        public gender: string,
+        public email: string,
+        public course: string
+    ){
+
+    }
+
+}
+
+in javascrip : we no need to crate flild one by one : we can create constructor then put the field inside! then it will create setter and setter ory yerng. 
+
+2. in the app.component. ts : we crate object student
+
+export class AppComponent {
+  title = 'angular-form';
+
+  subjects = ["Java","PHP","C#","Pyton"];
+
+  student = new Student("Dara","Male","dara@gmail.com","Java");
+}
+
+-----------------------------------------------------------------
+
+3. in the HTML we want to Bind from class to template:
+
+<div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" name="name" [ngModel]="student.name" >
+    </div>
+
+==> we use [ngModel]="student.name" to bind from class to template: 
+
+{ "name": "Dara", "email": "dara@gmail.com", "subject": "Java", "rdGender": "Male" }
+
+
+ចំណាំ 
+[ngModel]="student.name" = Flow from class to template (view) 
+
+
+--------------------- Two way bind from class to template from template to class 
+មានន័យថាពេលដែលយើង ផ្លាស់ប្តូរទិន្នន័យថាធ្វើការ ប្តូរទិន្នន័យ Object del 
+
+EX: 
+
+{ "name": "Dara 123", "email": "dara@gmail.com", "subject": "Java", "rdGender": "Male" } - from #studentForm="ngForm"
+{ "name": "Dara", "gender": "Male", "email": "dara@gmail.com", "course": "Java" } - from class 
+
+
+solution we use Banana in the box [()] in the [(ngModel)]="student.name"
+
+==> 
+
+{ "name": "Dara 123", "email": "dara@gmail.com", "subject": "Java", "gender": "Male" }
+{ "name": "Dara 123", "email": "dara@gmail.com", "subject": "Java", "gender": "Male" }
+
+
+============== Radio form Male and Female
+
+<div class="form-group">
+      <label for="">Gender</label> &nbsp;
+      <input class="form-check-input" type="radio" name="gender" [checked]="true" value="Male" value="Male" [(ngModel)]="student.gender">
+      <label class="form-check-label">Male</label>&nbsp;
+
+      <input class="form-check-input" type="radio" name="gender" [checked]="false" value="Female" [(ngModel)]="student.gender">
+      <label class="form-check-label">Female</label>&nbsp;
+    </div>
+
 
 
 

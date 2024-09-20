@@ -34,6 +34,16 @@ Solution :
 >> npm install --save-dev @angular-devkit/build-angular
 
 
+---------------- Create class in Angular 
+
+>> ng generate class model/student
+
+- model is the folder 
+- student is the class name 
+
+
+
+
 
 
 
