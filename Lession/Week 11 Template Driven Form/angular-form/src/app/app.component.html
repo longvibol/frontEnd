@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <form #studentForm="ngForm">
+    <h2>Student Form</h2>
+    {{ studentForm.value | json }}
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" name="name" ngModel />
+    </div>
+
+    <div class="form-group">
+      <label for="">Email</label>
+      <input type="email" class="form-control" name="email" ngModel />
+    </div>
+
+    <div class="form-group">
+      <label for="">Subject</label>
+      <select class="form-control" name="subject" ngModel>
+        <option value="">Select your subject</option>
+        <!-- <option value="java">Java</option>
+              <option value="php">PHP</option>
+              <option value="cs">C#</option> -->
+
+        <option *ngFor="let s of subjects">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="">Gender</label> &nbsp;
+      <input class="form-check-input" type="radio" name="rdGender" [value]="true" value="male" ngModel>
+      <label class="form-check-label">Male</label>&nbsp;
+
+      <input class="form-check-input" type="radio" name="rdGender" value="female"ngModel>
+      <label class="form-check-label">Female</label>&nbsp;
+    </div>
+
+    <div>
+      <button class="btn btn-primary">Save</button>
+    </div>
+  </form>
+  <div></div>
+</div>
