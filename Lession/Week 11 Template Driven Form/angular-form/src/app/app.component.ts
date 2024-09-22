@@ -8,7 +8,7 @@ import { inject } from '@angular/core/testing';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-form';
+  title = '';
 
 
   subjects = ["Java","PHP","C#","Pyton"];

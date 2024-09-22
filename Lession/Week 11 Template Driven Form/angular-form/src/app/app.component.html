@@ -5,15 +5,23 @@
     <br>
     {{student | json}}
     <br>
-    <h3>{{txtName.valid}}</h3>
+    <h3>Valid: {{txtName.valid}}</h3>
+    <h3>Any Change: {{txtName.pristine}}</h3>
+    <h3>Touch: {{txtName.touched}}</h3>
     <div class="form-group">
       <label for="">Name</label>
-      <input type="text" required="" #txtName="ngModel" class="form-control" name="name" [(ngModel)]="student.name" >
+      <input type="text" [class.is-invalid] = "txtName.invalid && txtName.touched"
+      required pattern="^[a-zA-Z0-9]{10,}$" #txtName="ngModel" 
+      class="form-control is-invalid" name="name" [(ngModel)]="title" >
+    </div>
+    <div *ngIf="txtName.invalid && txtName.touched">
+      <small *ngIf="txtName.errors?.['required']">Name is required</small>
+      <small *ngIf="txtName.errors?.['touched']">Name is at least 10 charaters !</small>
     </div>
 
     <div class="form-group">
       <label for="">Email</label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="student.email" />
+      <input type="email" #emailControl class="form-control" name="email" [(ngModel)]="student.email" />
     </div>
 
     <div class="form-group">
@@ -40,4 +48,4 @@
   
 </div>
 
-<!-- {{txtName.className}} -->
+{{emailControl.className}}

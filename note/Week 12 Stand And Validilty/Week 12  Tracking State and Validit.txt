@@ -54,6 +54,31 @@ Example:
 ចឹងពេល វាចេញមកដំបូង វា check valide on the Name : so it will say : Ture after we remove the txt name = 0 ==> false 
 
 
+3. Validation with visual feedback
+
+bootstrap class : is-invalid ( check the form validation)
+
+To access and show in the template Form in Angular we create variable #txtName 
+
+==> to display :
+Ex: we put in the Email to vailidate: 
+
+1. in email form :
+
+<div class="form-group">
+      <label for="">Email</label>
+      <input type="email" #emailControl class="form-control" name="email" [(ngModel)]="student.email" />
+    </div>
+
+2. User Interpolation : {{emailControl.className}}
+
+
+form-control ng-untouched ng-pristine ng-valid
+
+
+
+
+
 
 
 
