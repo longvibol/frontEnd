@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Student } from './student';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,18 @@ export class StudentService {
 
   constructor(private http: HttpClient) { }
 
+  // saveStudent(student: Student){
+  //   return this.http.post(this.url, student).subscribe(data =>{
+  //     console.log(data);
+  //   });
+  // }
+
   saveStudent(student: Student){
-    return this.http.post(this.url, student).subscribe(data =>{
-      console.log(data);
-    });
+    return this.http.post(this.url, student).pipe(catchError(this.handleError));
+  }
+
+  handleError(error :HttpErrorResponse){
+    let errorMessage =  error.message || "Error happen from server";
+    return throwError(errorMessage);
   }
 }

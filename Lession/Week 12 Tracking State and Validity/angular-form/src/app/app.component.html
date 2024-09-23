@@ -1,13 +1,13 @@
 <div class="container-fluid">
-  <form #studentForm="ngForm" (ngSubmit)="doSubmit()" novalidate>
+  <form #studentForm="ngForm" (ngSubmit)="doSubmit(studentForm)" novalidate>
     <h2>Student Form</h2>
-    {{ studentForm.value | json }}
+    <!-- {{ studentForm.value | json }}
     <br>
     {{student | json}}
     <br>
     <h3>Valid: {{txtName.valid}}</h3>
     <h3>Any Change: {{txtName.pristine}}</h3>
-    <h3>Touch: {{txtName.touched}}</h3>
+    <h3>Touch: {{txtName.touched}}</h3> -->
 
     <div class="form-group">
       <label>Name</label>
@@ -52,7 +52,7 @@
 
 <!-- {{emailControl.className}} -->
 
-<h3>Subject valid? :{{cboSubject.valid}}</h3>
+<!-- <h3>Subject valid? :{{cboSubject.valid}}</h3>
 <h3>Subject Value: {{cboSubject.value}}</h3>
 
-<h1>Check Form Valid ? {{studentForm.form.valid}}</h1>
+<h1>Check Form Valid ? {{studentForm.form.valid}}</h1> -->
