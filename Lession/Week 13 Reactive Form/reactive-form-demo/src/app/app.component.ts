@@ -13,11 +13,28 @@ export class AppComponent {
 
     username : new FormControl,
     pwd : new FormControl,
-    confirmPwd : new FormControl
+    confirmPwd : new FormControl,
+
+    address : new FormGroup({
+
+      province : new FormControl,
+      district : new FormControl,
+      commune : new FormControl,
+
+    })
+
   });
 
-  test(){
-    this.registrationForm.value;
+  setValue(){
+    this.registrationForm.patchValue({
+      username : 'Thida',
+      pwd : 't',
+      confirmPwd : 't',
+      address : {
+        province : 'PP',
+        district : 'BKK',
+        commune : 'bkk1'
+      }
+    });
   }
-
 }
