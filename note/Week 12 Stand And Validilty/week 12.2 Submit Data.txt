@@ -1,0 +1,185 @@
+Week 12.2 Submit form Data: 
+
+1. In HTML : Form 
+
+<form #studentForm="ngForm" (ngSubmit)="doSubmit()">
+    <h2>Student Form</h2>
+
+- We use (ngSubmit)="doSubmit()" : 
+
+2. In Ts:
+
+doSubmit(){
+    console.log("submit work")
+  }
+
+To do testing. 
+
+3. Auto validate from browser (utility from browser): 
+
+Some time we need to disable from validation from Borwser : we put " novalidate"
+
+  <form #studentForm="ngForm" (ngSubmit)="doSubmit()" novalidate> 
+
+
+----------------------------------
+
+*** Generate server to handdle transfter data from FORM to Server *** 
+
+>> ng g s model/student
+
+1. In app.module.ts : import HttpClientModule
+
+
+import {HttpClientModule} from '@angular/common/http';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+
+
+2. in app.components.ts 
+
+We inject studentService in the constructor : 
+
+constructor(private studentService: StudentService){}
+
+  doSubmit(){
+    console.log("submit work")
+    this.studentService.saveStudent(this.student);
+  }
+
+
+3. in student.ts (class student) 
+
+export class Student {
+
+    // private name: string;
+    // private gender: string;
+    // private subject: string;
+    // private course: string;
+
+    public constructor(
+        public name: string,
+        public email: string,
+        public subject: string,
+        public gender: string
+        
+    ){
+
+    }
+
+}
+
+*****
+
+4. student.service.js 
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Student } from './student';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StudentService {
+
+  url = "http://localhost:3000/registerStudent";
+
+  constructor(private http: HttpClient) { }
+
+  saveStudent(student: Student){
+    return this.http.post(this.url, student);
+  }
+} 
+
+
+------------------------------------------------------------
+
+** we create express server to do testing from FE ** 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

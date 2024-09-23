@@ -72,8 +72,98 @@ Ex: we put in the Email to vailidate:
 
 2. User Interpolation : {{emailControl.className}}
 
+2.1 - validate to input from by using : is-invalid
 
-form-control ng-untouched ng-pristine ng-valid
+in bootstrap : have class called : is-invalid that can validate the form:
+
+==> It will show red color where we put the is-invalide 
+
+<input type="text" required #txtName="ngModel" class="form-control is-invalid" [(ngModel)]="title" >
+
+តែពេលវាបង្ហាញមកវាចេញ validate neng but we want when it have error on validate then it show : 
+
+We need to apply: ចឹងយើងប្រើ form control from NG property to set : when it invalte then can use this class: is-invalide
+
+Ex: 
+
+[class.is-invalid] = "txtName.invalid" មានន័យថា យើង apply calss is-invalid when property formControl is invalid 
+
+តែពេលយើងធ្វើចឹងពេលបើ Form មកវាចេញ error ចឹងយើងត្រូវប្រើលក្ខខណ ផ្គាប់គ្នា
+
+==> [class.is-invalid] = "txtName.invalid && txtName.touched" ចឹងចាំយើងប៉ះពាល់វាសិន ចាំ Apply class is-invalid នឹង
+
+2.2 Apply pattern : at least 10 charator :
+
+>> pattern="^[a-zA-Z0-9]{10,}$"
+
+show we need to write more than 10 ban vir valide. 
+
+2.3 : show more information : when have error it will show the message to template:
+
+We use : *ngIf ចឹងវាមានលក្ខណៈពិសេស ពេលវាអត់មានលក្ខខណ្ឌត្រូវវាទេ វាមិនបង្ហាញក្នុង Form ទេ
+
+Ex: 
+
+ <div *ngIf="txtName.invalid && txtName.touched">
+        <small *ngIf="txtName.errors?.['required']">Name is required</small>
+        <small *ngIf="txtName.errors?.['pattern']">Name is at least 10 charaters !</small>
+ </div>
+
+*ngIf="txtName.invalid && txtName.touched" = បើសិនជា មិបានវាយបញ្ចូល និង អត់បានប៉ះចាំវា ធ្វើការ
+វាធ្វើការអីខ្លះ 
+
+- <small *ngIf="txtName.errors?.['required']"> Name is required</small> នៅក្នុង form Control it have error collection 
+if have anything error it will show up : ==> ?.['required']" សញ្ញា ? គឺវាធ្វើការសិនជាអត់មានកុំទាន់អោយធ្វើការ ? = null 
+
+
+-------------------
+
+<label>Name</label>
+      <input type="text" [class.is-invalid] = "txtName.invalid && txtName.touched" name="name" 
+      required #txtName="ngModel" class="form-control" pattern="^[a-zA-Z0-9]{10,}$" 
+      [(ngModel)]="title" >
+
+      <div *ngIf="txtName.invalid && txtName.touched">
+        <small *ngIf="txtName.errors?.['required']">Name is required</small>
+        <small *ngIf="txtName.errors?.['pattern']">Name is at least 10 charaters !</small>
+      </div>
+
+    </div>   
+
+
+--------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

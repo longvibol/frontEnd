@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <form #studentForm="ngForm">
+  <form #studentForm="ngForm" (ngSubmit)="doSubmit()" novalidate>
     <h2>Student Form</h2>
     {{ studentForm.value | json }}
     <br>
@@ -8,16 +8,19 @@
     <h3>Valid: {{txtName.valid}}</h3>
     <h3>Any Change: {{txtName.pristine}}</h3>
     <h3>Touch: {{txtName.touched}}</h3>
+
     <div class="form-group">
-      <label for="">Name</label>
-      <input type="text" [class.is-invalid] = "txtName.invalid && txtName.touched"
-      required pattern="^[a-zA-Z0-9]{10,}$" #txtName="ngModel" 
-      class="form-control is-invalid" name="name" [(ngModel)]="title" >
-    </div>
-    <div *ngIf="txtName.invalid && txtName.touched">
-      <small *ngIf="txtName.errors?.['required']">Name is required</small>
-      <small *ngIf="txtName.errors?.['touched']">Name is at least 10 charaters !</small>
-    </div>
+      <label>Name</label>
+      <input type="text" [class.is-invalid] = "txtName.invalid && txtName.touched" name="name" 
+      required #txtName="ngModel" class="form-control" pattern="^[a-zA-Z0-9]{5,}$" 
+      [(ngModel)]="title" >
+
+      <div *ngIf="txtName.invalid && txtName.touched">
+        <small *ngIf="txtName.errors?.['required']">Name is required</small>
+        <small *ngIf="txtName.errors?.['pattern']">Name is at least 10 charaters !</small>
+      </div>
+
+    </div>   
 
     <div class="form-group">
       <label for="">Email</label>
@@ -25,10 +28,9 @@
     </div>
 
     <div class="form-group">
-      <label for="">Subject</label>
-      <select class="form-control" name="subject" [(ngModel)]="student.subject">
-        <option value="">Select your subject</option>
-        <option *ngFor="let s of subjects">{{ s }}</option>
+      <label for="subject" name="subject">Subject</label>
+      <select [class.is-invalid] = "cboSubject.invalid && cboSubject.touched" class="form-control" required="" #cboSubject="ngModel" name="subjects" [(ngModel)]="subjects.values">
+        <option *ngFor="let s of subjects">{{s}}</option>
       </select>
     </div>
 
@@ -42,10 +44,15 @@
     </div>
 
     <div>
-      <button class="btn btn-primary">Save</button>
+      <button class="btn btn-primary" [disabled]="!studentForm.form.valid">Save</button>
     </div>
   </form>
   
 </div>
 
-{{emailControl.className}}
+<!-- {{emailControl.className}} -->
+
+<h3>Subject valid? :{{cboSubject.valid}}</h3>
+<h3>Subject Value: {{cboSubject.value}}</h3>
+
+<h1>Check Form Valid ? {{studentForm.form.valid}}</h1>
