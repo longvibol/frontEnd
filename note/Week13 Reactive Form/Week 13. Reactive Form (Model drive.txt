@@ -112,6 +112,33 @@ so we can check property in the registrationForm
 
 ==================================================================== 
 
+Short Form to create FormControl :
+
+1. in app.component.ts
+
+- inject the FormBuilder 
+
+constructor(private fb: FormBuilder){}
+
+- how to create :
+
+registrationForm = this.fb.group({
+    username : [],
+    pwe : [],
+    confirmPwd : [],
+    address : this.fb.group({
+
+      province : [],
+      district : [],
+      commune  : []
+
+    })
+  });
+
+noted: username : new FormControl, ==> username : [],
+
+
+---------------------------------------------------------------------------
 
 
 

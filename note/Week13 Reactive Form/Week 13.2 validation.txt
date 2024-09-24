@@ -1,0 +1,125 @@
+Week 13.4 Simple Validation
+
+1. apply validation rule : control or field moy neng apply rule or not 
+2. visual feedback 
+3. display appropriate message : ex some user already create so we need to check, age , 
+
+-------------------------
+1. apply validation rule: we put require 
+
+registrationForm = this.fb.group({
+    username : ['Tola',Validators.required],
+    pwe : [''],
+    confirmPwd : [''],
+    address : this.fb.group({
+
+
+++ username : ['Tola',Validators.required] = it have Value and Validate (in that have many Method we can apply or customer
+by ourselve) 
+
+-------------------------
+
+
+2. Visul feedback : invalide 
+
+class="form-control" [class.is-invalid]="registrationForm.get('username').invalid" 
+
+ពេលយើងដាក់ចឹងវា Error error TS2531: Object is possibly 'null'.
+
+[class.is-invalid]="registrationForm.get('username').invalid" formControlName="username">
+
+ចឹងយើងត្រូវដាក់ សញ្ញា ? or !
+
+==> 
+
+<form [formGroup]="registrationForm">
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" [class.is-invalid]="registrationForm.get('username')?.invalid &&
+      registrationForm.get('username')?.touched" 
+      formControlName="username">
+    </div>
+
+ចឹងយើងបាន Apply requiren បានហើយ
+
++ ថែមអោយគេវាយយ៉ាងតិច ៣អក្សរ
+
+In Ts:
+
+registrationForm = this.fb.group({
+    username : ['',[Validators.required, Validators.minLength(3)]],
+    pwe : [''],
+
+- [Validators.required, Validators.maxLength(3)] = we use in Array [] to add more validate 
+
+-----------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

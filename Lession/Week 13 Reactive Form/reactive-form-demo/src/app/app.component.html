@@ -1,10 +1,17 @@
 <div class="container-fluid">
-  <h2>Register Form</h2>
-  {{registrationForm.value| json}}
+  <h2>Register Form</h2><br>
+  {{registrationForm.value| json}} <br>
+  <h1>Form valid?: {{registrationForm.valid}}</h1>
   <form [formGroup]="registrationForm">
     <div class="form-group">
       <label for="">Name</label>
-      <input type="text" class="form-control" formControlName="username">
+      <input type="text" class="form-control" [class.is-invalid]="registrationForm.get('username')?.invalid &&
+      registrationForm.get('username')?.touched" 
+      formControlName="username">
+    <div *ngIf="registrationForm.get('username')?.touched">
+      <small *ngIf="registrationForm.get('username')?.errors?.['required']">Username is requirement</small>
+    </div>
+      
     </div>
     <div class="form-group">
       <label for="">Password</label>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,21 +9,38 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class AppComponent {
   title = 'reactive-form-demo';
 
-  registrationForm = new FormGroup({
+  constructor(private fb: FormBuilder){}
 
-    username : new FormControl,
-    pwd : new FormControl,
-    confirmPwd : new FormControl,
+  registrationForm = this.fb.group({
+    username : ['',[Validators.required, Validators.minLength(3)]],
+    pwe : [''],
+    confirmPwd : [''],
+    address : this.fb.group({
 
-    address : new FormGroup({
-
-      province : new FormControl,
-      district : new FormControl,
-      commune : new FormControl,
+      province : [''],
+      district : [''],
+      commune  : ['']
 
     })
-
   });
+
+
+
+  // registrationForm = new FormGroup({
+
+  //   username : new FormControl,
+  //   pwd : new FormControl,
+  //   confirmPwd : new FormControl,
+
+  //   address : new FormGroup({
+
+  //     province : new FormControl,
+  //     district : new FormControl,
+  //     commune : new FormControl,
+
+  //   })
+
+  // });
 
   setValue(){
     this.registrationForm.patchValue({
