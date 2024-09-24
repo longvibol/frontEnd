@@ -54,6 +54,49 @@ registrationForm = this.fb.group({
 
 -----------------------
 
+3. display appropriate message : when user forget put something we show the messge 
+
+<div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" [class.is-invalid]="registrationForm.get('username')?.invalid &&
+      registrationForm.get('username')?.touched" 
+      formControlName="username">
+    <div *ngIf="registrationForm.get('username')?.touched">
+      <small class="text-danger" *ngIf="registrationForm.get('username')?.errors?.['required']">Username is requirement</small>
+      <small class="text-danger" *ngIf="registrationForm.get('username')?.errors?.['minlength']">Username is least than 3 charater</small>
+    </div>
+      
+    </div>
+
+------- where we show the message : 
+
+<div *ngIf="registrationForm.get('username')?.touched">
+      <small class="text-danger" *ngIf="registrationForm.get('username')?.errors?.['required']">Username is requirement</small>
+      <small class="text-danger" *ngIf="registrationForm.get('username')?.errors?.['minlength']">Username is least than 3 charater</small>
+    </div>
+
+
++ *ngIf="registrationForm.get('username')?.touched" = if someone touch the form it will apply this message 
++ class="text-danger" = text message to red color when error happend 
++ *ngIf="registrationForm.get('username')?.errors?.['required']" = username is required (? to protect null object)
+when it null it will error.
+
+-------------------- short form to reduce the same write many time : 
+
+In TS: we write in function 
+
+get username(){
+    return this.registrationForm.get('username');
+  }
+
+style microsofte they use get 
+
+
+In HTML :
+
+registrationForm.get('username') ==> username
+
+
 
 
 
