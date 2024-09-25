@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'customDirective';
 
+  show = true;
+
   doMouseEnter(element : HTMLDivElement){  
     element.style.color = "blue";
   }
