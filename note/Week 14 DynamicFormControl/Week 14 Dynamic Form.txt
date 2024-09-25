@@ -1,2 +1,323 @@
-Week 14 : Dynamic Form Control
+Week 14 : Dynamic Form Control:
+
+- Pattern with input parameter :
+
+1. IN Ts: username.validation.ts
+
+export function usernameValidator2 (pattern :RegExp) : ValidatorFn{
+  return (control :AbstractControl) : {[key:string] : any} | null => {
+    let resurlt = /admin/.test(control.value);
+  if(resurlt){
+    return {'forbiddenName': control.value};
+  }
+  return null;
+  }
+
+} 
+
+
+- We use (pattern :RegExp) : ValidatorFn យើងប្រើ RegExp ដែលមាន ValidatorFn is the high level function (function in function)
+it need retun Map =  Key : Value 
+
+2. In HTML ": app.component.ts
+
+ registrationForm = this.fb.group({
+    username : ['',[Validators.required, Validators.minLength(3), usernameValidator2(/admin/)]],
+    pwd : [''],
+    confirmPwd : [''],
+    address : this.fb.group({
+
+      province : [''],
+      district : [''],
+      commune  : ['']
+    })
+  });
+
+- usernameValidator2(/admin/)] = យើងអាចបោះ partern ចូលបានហើយ
+
+-------------------------------------------------------------------------------
+
+* Crose fiel validation * 
+
+យើងចង់ធ្វើ Validation from one controller to another controller 
+Ex: compare betten PWD and confirm password 
+
+==> we need to put it in the formGroup level so we can use the field from inside it!
+
+1. create new file : password.validator.ts 
+
+import { AbstractControl } from "@angular/forms";
+
+
+export function passwordValidator(control :AbstractControl) : {[key:string] : any} | null{
+  return null;
+}
+
+= We create on function passwordValidator ដែលយើងធ្វើការ control on file or controller. It have return type ជា Object  :
+{[key:string] : any} | null. 
+
+- [key:string] : any = have Key and Value 
+- it something not happen it return Null 
+
+គោលបំណង់យើងចង់បាន field  នឹងមកធ្វើការ ចឹងយើងត្រូវដាក់វានៅក្នុង Form level 
+
+2. In password.validator.ts 
+
+import { AbstractControl } from "@angular/forms";
+export function passwordValidator(control :AbstractControl) : {[key:string] : any} | null{
+
+  let pwd = control.get('pwd');
+  let confirmPwd = control.get('confirmPwd');
+
+  if(pwd?.value !== confirmPwd?.value){
+    return {'misMatch': "Password doesn't match"};
+  }
+  return null;
+}
+
+------------ Explain ---------------------------------
+
+import { AbstractControl } from "@angular/forms";
+export function passwordValidator(control :AbstractControl) : {[key:string] : any} | null{
+
+  let pwd = control.get('pwd');
+  let confirmPwd = control.get('confirmPwd');
+
+  if(pwd?.value !== confirmPwd?.value){
+    return {'misMatch': "Password doesn't match"};
+  }
+  return null;
+}
+
+- បើសិនជា តម្លៃ pwd?.value !== confirmPwd?.value មិនស្មើរគ្នាវា return object ( input pwd != confrimPwd) need the user input again. 
+
+3. How to use it in HTML. 
+
+return {'misMatch': "Password doesn't match"};
+
+We use : mismatch = is the key for the input in the TS: 
+
+
+<div class="form-group">
+      <label for="">Confirm Password</label>
+      <input [class.is-invalid]="registrationForm.errors?.['misMatch'] && confirmPwd?.touched" type="password" class="form-control" formControlName="confirmPwd">
+    </div>
+
+- [class.is-invalid]="registrationForm.errors?.['misMatch'] = we use mismatch : key word 
+
+4. in the app.component.ts 
+
+registrationForm = this.fb.group({
+    username : ['',[Validators.required, Validators.minLength(3), usernameValidator2(/admin/)]],
+    pwd : [''],
+    confirmPwd : [''],
+    address : this.fb.group({
+
+      province : [''],
+      district : [''],
+      commune  : ['']
+    })
+  },{validator: passwordValidator});
+
+
+- {validator: passwordValidator}); = we put it in the field level that it can get the control to compare. 
+
+=================================
+
+- Improvement on the error :
+
+EX: 
+[class.is-invalid]="registrationForm.errors?.['misMatch'] && confirmPwd?.touched"
+
+- confirmPwd?.touched ពេលយើងចឹងវាធ្វើអោយកូដយើង ពិបាក maintance 
+- We should put it in the function : 
+
+1.Importance : function is better:
+
++ keep code in one place, easy to maintain 
++ html more readable 
+
+==> 
+
+ if(confirmPwd?.pristine){
+    return null;
+  }
+
+- pristine មិនទាន់បានប៉ះពាល់ អោយវា return null; 
+
+2. Imporvment on the error 
+
+ពេលដែលយើង get controller មកខុស វាមិនចេញ Error 
+
+Ex:  let confirmPwd = control.get('confirmPwd2');
+
+- ចឹងវាអត់មាន confirmPwd2 ទេដូននេះយើងត្រូវ​បន្ថែម ថា បើសិនវាអត់ Null បើវាអត់មាន
+==> យើងចង់ដាក់ថាវាមិនស្មើរ Null :
+
+  if (pwd ===null || confirmPwd === null){
+    return null;
+  }
+
+ចឹងយើងអាចដាក់នៅក្នុង if the same :
+
+ if(pwd && confirmPwd && pwd?.value !== confirmPwd?.value){
+    return {'misMatch': "Password doesn't match"};
+  }
+
+- pwd && confirmPwd មានន័យថាវាមិនស្មើរ Null 
+==> if(pwd && confirmPwd && pwd?.value !== confirmPwd?.value) បញ្ចាក់ថាវាមានតម្លៃ ==> មានន័យថាបើគេមិនទាន់បាន ប៉ះពាល់វាទេ
+វា return null 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

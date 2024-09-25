@@ -1,0 +1,98 @@
+week 14.2 Dynamic Form Controls :
+
+EX: we want to add more phone when clicking 
+
+In HTML:
+
+<div class="form-group">
+      <label for="">Phone</label>
+      <button class="btn btn-secondary m-2" (click)="addPhone()">Add Phone</button>
+      <input type="text" class="form-control" formControlName="phone">
+      <div formArrayName="alternativePhones" *ngFor="let phone of alternativePhones.controls; let i=index">
+        <input type="text" class="form-control" [formControlName]="i">
+      </div>
+    </div>
+
+- formArrayName="alternativePhones" : binding from alternativePhones to template 
+- *ngFor="let phone of alternativePhones.controls; let i=index" យើងធ្វើការ Loop inside the Array and set Index = I 
+- <input type="text" class="form-control" [formControlName]="i"> = ពេលគេ Add we create new formControlName = index 
+ចឹងមានន័យថា ពេលវាបង្កើតវាដាក់ចូល ក្នុង Array តាម​ indext from 0 -> n
+
+
+IN TS:
+
+ngOnInit(): void {
+
+    this.registrationForm = this.fb.group({
+      username : ['',[Validators.required, Validators.minLength(3), usernameValidator2(/admin/)]],
+      pwd : [''],
+      confirmPwd : [''],
+      phone:[],
+      alternativePhones : this.fb.array([]),
+      address : this.fb.group({
+  
+        province : [''],
+        district : [''],
+        commune  : ['']
+      }),
+      email :[''],
+      subscribe : ['']
+    },{validator: passwordValidator});  
+
+    this.registrationForm.get('subscribe')?.valueChanges.subscribe(value =>{
+      console.log(value);
+      if(value){
+        this.email?.setValidators(Validators.required);      
+      }else{
+        this.email?.clearValidators();
+      }
+      this.email?.updateValueAndValidity;
+    });
+  }
+
+  addPhone(){
+    this.alternativePhones.push(this.fb.control(''));
+    console.log(this.alternativePhones);
+
+  }
+
+  get alternativePhones(){
+    return this.registrationForm.get('alternativePhones') as FormArray;
+  }
+
+--------------------- Explain: -----------
+
+-​ this.registrationForm.get('alternativePhones') as FormArray; = create FormArray = ចឹងយើងអាច Push ចូលក្នុង Array បាន​
+- alternativePhones : this.fb.array([]), បង្កើត Field ជា Array 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
