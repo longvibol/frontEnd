@@ -126,8 +126,52 @@ export class SetColorDirective {
 
 -------------------------------------------------------------------------------------
 
+1. In TS:
+
+import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+
+@Directive({
+  selector: '[appSetColor]'
+})
+export class SetColorDirective implements OnInit{
+  @Input() hcolor!: string;
+  @Input() oColor!:string;
+  @Input() defaultcolor!: string;
+
+  // we inject the element ElementRef
+  constructor(private element: ElementRef) { }
+
+  ngOnInit(): void {
+    this.element.nativeElement.style.color= this.defaultcolor;
+  }
+
+  @HostListener('mouseover')
+  doMouseEnter(){
+    this.element.nativeElement.style.color = this.hcolor; 
+  }
+
+  @HostListener('mouseout')
+  doMouseOut(){    
+    this.element.nativeElement.style.color = this.oColor;
+  }
+
+}
 
 
+2. In HTML: 
+
+<div #div1 
+  (mouseover)="doMouseEnter(div1)" 
+  (mouseout)="doMouseOut(div1)">  Hello Piseth Java School 
+</div>
+
+<h2 #h2 
+  (mouseover)="doMouseEnter(h2)" 
+  (mouseout)="doMouseOut(h2)">Hello Piseth From AppSetColor! 
+</h2>
+
+<div appSetColor defaultcolor="black" hcolor="blue" oColor="red">Using Directive</div>
+<h1 appSetColor defaultcolor="black" hcolor="red" oColor="blue">Testing from Directive</h1>
 
 
 
