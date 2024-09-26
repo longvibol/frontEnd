@@ -42,7 +42,9 @@ Solution :
 - student is the class name 
 
 
+---------------------- Create directive 
 
+>> ng g d "name of the file" 
 
 
 

@@ -1,0 +1,445 @@
+Week 15.1 Component communication or component interaction 
+
+- Review :
+
+
+
+Class and Template: 
+- Binding
+- Two-way binding split 
+- Getter and Setter
+- ViewChild 
+
+------------------------------------------
+I: On Binding :
+
+ទំនាក់ទំនងរវាង class & template: 
+
+- Class -> template : interpolation {{}}, property binding []
+- template -> class : event binding ()
+- template <-> class : two way binding [()] 
+
+
+-----------------------------
+
+1. From Class to Template : use interpolation {{}}
+
+in app.component.html 
+
+{{title}}
+
+==> componentinteraction
+
+
+2. Using property binding []:  
+
+in html: 
+
+<img [src]="imagePath" alt="Image not Found">
+
+3. From template to class : event binding binding ()
+
+1. in ts:
+
+export class AppComponent {
+  title = 'componentinteraction';
+  imagePath ='assets/images.jpeg';
+  count=0;
+
+  doCound(){
+    this.count++;
+  }
+}
+
+- count = increase one 
+
+2. in HTML 
+
+When click on the button then it show increase. 
+
+<button (click)="doCound()">Cound</button>
+<p>Count Click : {{count}}</p>
+
+
+----------------------------------------------------------------------
+3. Two way binding : [()]
+
++ In html 
+
+<input type="text" [(ngModel)]="name">
+
++ in TS:
+
+export class AppComponent {
+  title = 'componentinteraction';
+  imagePath ='assets/images.jpeg';
+  count=0;
+  name="";
+
+  doCound(){
+    this.count++;
+  }
+}
+
++ Error solve:
+
+error TS2322: Type 'Event' is not assignable to type 'string'.
+
+6 <input type="text" [(ngModel)]="name">
+                                  ~~~~~~
+
+==> Need to FormsModule ==> in app.module.ts ==>
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+  ],
+
+++ in html 
+
+<input type="text" [(ngModel)]="name">
+<p>display name: {{name}}</p>
+
+
+** first it transfer what we typing from template to Class then from Class to Template ** 
+
+
+====================================================================================
+
+
+II. Two-Way binding split 
+
+
+we want when we typing then have name "vibol" it will alter to the screen (use split logic) 
+
+- អោយតាឃើញ () គឺ Event ហើយក្នុង Angular 
+
+Ex: in html 
+
+<input type="text" [ngModel]="username" (ngModelChange)="username=$event">
+<p>display name: {{username}}</p>
+
+==> the result the same [()]
+
++ (ngModelChange)="doCheckname($event) = (ngModelChange)="username=$event" តែនៅក្នុង Ts យើងត្រូវដាក់ 
+
+doCheckname(value: string){
+    console.log("work correctly");
+    this.username = value;
+
+    if(value ==="vibol"){
+      alert("Hello"+value);
+    }
+  }
+
+==> then when we type "vibol" it will alert Hello vibol 
+
+---------------------------------------------------------------------------------------------
+
+Another Way : Using getter and setter :
+
+1. In TS: 
+ private _myname="";
+
+  get myname(){
+    return this._myname;
+  }
+
+  set myname(value :string){
+    this._myname = value;
+    if(this._myname ==="vibol"){
+      alert("Welcome Piseth");
+    }
+  }
+
+- private _myname=""; ដើម្បីប្រើ Setter បានយើងត្រូវដាក់វា private variable 
+- We use Set (for set the value from template input) 
+- We use Get (return _myname) to show value to the template
+
+2. IN HTML 
+
+<input type="text" [(ngModel)]="myname">
+<p>display name: {{myname}}</p>
+
+---------------------------------------------------------------------------------
+
+View Chill (select child from template) 
+
+គោលបំណង់ចង់ពេល បើក Page មកអោយវា dak' focus នៅលើ Element ណាមួយ
+
+- អីក៏ដោយអោយតានៅក្រោម Template វាជា Chile ទាំងអស់ 
+- ចឹងដើម្បីដឹងថាយើងចង់កំណត់ទៅលើ Child មួយណា ត្រូវធ្វើការ ដាក់ ID វាមក​
+
+1. In HTML:
+
+<input #usernameRef type="text" [ngModel]="username" (ngModelChange)="doCheckname($event)">
+<p>display name: {{username}}</p>
+
+- #usernameRef = is the child reference 
+
+2. In Ts: 
+
+export class AppComponent implements AfterViewInit{
+
+  @ViewChild('usernameRef') usernameTextField!: ElementRef;
+
+  ngAfterViewInit(): void {
+    this.usernameTextField.nativeElement.focus();
+  }
+
+- implements AfterViewInit = when start web page it will put the focus where we put the reference to the Child 
+
+---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

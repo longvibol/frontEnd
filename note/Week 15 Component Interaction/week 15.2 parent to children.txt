@@ -1,0 +1,281 @@
+week 15 : interative 
+
+Relationship from parent to child ! 
+
+Gold: when loin already ==> welcome Vibol if not Page Login 
+
+Note: 
+
+in app.component.html បាន Called app-home ==> មានន័យថា app.component.html is Parent and app-home is children 
+
+Step to call from Parent to Child: 
+
+1. In app.component.html 
+
+<h1>Parent component </h1>
+<app-home [isLogin]="login"></app-home>
+
+- [isLogin]="login" = we create property input that get the value from login 
+
+2. In TS component 
+
+export class AppComponent implements AfterViewInit{
+
+  login=true;
+
+--------Chidren 
+
+3. TS home
+
+export class HomeComponent implements OnInit {
+
+  @Input() isLogin!: boolean;
+
+
+-   @Input() isLogin!: boolean; we put @input to get the isLogin Boolen value from Parent TS
+
+4. home HTML 
+
+
+<h3>child component </h3>
+
+<p *ngIf="isLogin">Welcome to Piseth!</p>
+<p *ngIf="!isLogin">Please Login!</p>
+
+------------------------------------------------------------------------------
+
+2. want have two button to click on log in an log out:
+
+
+<h1>Parent component </h1>
+
+<button (click)="login=true">Log In</button>
+<button (click)="login=false">Log Out</button>
+
+<app-home [isLogin]="login"></app-home>
+
+-------------------------------------------------------- Using Get and Set We can custome our message 
+
+1.in home.html
+
+<p>{{message}}</p>
+
+
+- binding : message from Ts home
+
+2. home Ts
+
+export class HomeComponent implements OnInit {
+
+  private _loggedIn!: boolean;
+  message ="";
+
+  get isLogin(){
+    return this._loggedIn;
+  }
+
+  @Input()
+  set isLogin(value: boolean){
+    if(value){
+      this.message ="Hello Vibol";
+    }else{
+      this.message ="Please Login";
+    }
+  }
+
+- _loggedIn = we get the input from Parent app.component.ts 
+- check the input values : True or False 
+
+3. in HTML app.component 
+
+<h1>Parent component </h1>
+
+<button (click)="login=true">Log In</button>
+<button (click)="login=false">Log Out</button>
+
+<app-home [isLogin]="login"></app-home>
+
+- [isLogin]="login" តម្លៃ isLogin get from login page by click : <button (click)="login=true">Log In</button>
+
+
+----------------------------------- We use another option : onChange 
+
+1. in home.component.ts
+
+export class HomeComponent implements OnChanges {
+
+  message!:string;
+  @Input() isLogin!: boolean;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
+-  @Input() isLogin!: boolean; = first this isLogin we get the value from Parent page : <app-home [isLogin]="login"></app-home> 
+- ngOnChanges propter វាពិនិត្យទាំងអស់ every proptery 
+
+*** Property in ngOnChange ***
+
+SimpleChange {
+previousValue: undefined, 
+currentValue: true, 
+firstChange: true}
+
+
+យើងអាចយកតម្លៃ វាមកធ្វើការកំណត់ទៅលើ View when it change or something first login or something else 
+
+=========================== Summary Code ===================================
+
+
+1. In app.component.ts
+
+export class AppComponent implements AfterViewInit{
+
+  login=false;
+
+2. In app.component.html
+
+<h1>Parent component </h1>
+
+<button (click)="login=true">Log In</button>
+<button (click)="login=false">Log Out</button>
+
+<app-home [isLogin]="login"></app-home>
+
+3. home.html 
+
+<p>{{message}}</p>
+
+4. home.ts (use ngOnchange) 
+
+export class HomeComponent implements OnChanges {
+
+  message!:string;
+  @Input() isLogin!: boolean;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    let logInChange = changes['isLogin'];
+    if (logInChange.currentValue){
+      this.message = "Welcome Vibol";
+    }else{
+      this.message ="Please Log In"
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
