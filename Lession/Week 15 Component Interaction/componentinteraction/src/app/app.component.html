@@ -11,11 +11,16 @@
 <p>display name: {{username}}</p>
 
 <input type="text" [(ngModel)]="myname">
-<p>display name: {{myname}}</p> -->
+<p>display name: {{myname}}</p> 
 
 <h1>Parent component </h1>
 
 <button (click)="login=true">Log In</button>
 <button (click)="login=false">Log Out</button>
 
-<app-home [isLogin]="login"></app-home>
+<app-home [isLogin]="login"></app-home> -->
+
+<h1>Parent Component</h1>
+<app-child></app-child>
+
+
