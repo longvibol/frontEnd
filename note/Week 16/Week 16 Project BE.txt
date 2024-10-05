@@ -13,3 +13,158 @@ In folder server:
 
 >> npm install express body-parser --save
 
+It will put the dependency to the package.json and create node_modules folder 
+
+==> 
+
+const express = require('express')
+const bodyParser = require('body-parser')
+const PORT = 3000
+
+const app = express(); // create instance from express 
+app.use(bodyParser.json());
+
+app.get('/',function(req, res){
+    res.send('Response from server')
+})
+
+
+app.listen(PORT, function(){
+    console.log("Server is running with port: " + PORT)
+})
+
+==> testing run server.js 
+
+>>node server.js 
+
+==> Server is running with port: 3000
+
+---------- Create api.js ------------------
+
+1. Create folder name : route ( this folder we keep all our API in here ) 
+
+inside we create file : api.js 
+
+--------------
+
+const express = require('express')
+const router = express.Router()
+
+router.get('/',(req, res) =>{
+    res.send('Response from API route')
+})
+
+module.exports = router
+
+
+----------------
+
+2. Add api.js to server.js 
+
+const api = require('./routes/api')
+app.use('/api' ,api)
+
+
+Whole code :
+
+const express = require('express')
+const bodyParser = require('body-parser')
+const api = require('./routes/api')
+const PORT = 3000
+
+const app = express(); // create instance from express 
+
+app.use(bodyParser.json());
+app.use('/api' ,api)
+
+
+app.get('/',function(req, res){
+    res.send('Response from server')
+})
+
+
+app.listen(PORT, function(){
+    console.log("Server is running with port: " + PORT)
+})
+
+
+==> test >> node server.js ==> localhost:3000/api >> Response from API route
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
