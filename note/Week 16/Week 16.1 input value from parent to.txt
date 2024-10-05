@@ -1,0 +1,235 @@
+Week 16 input value from parent to childrend 
+
+1. chatch the element from child (in app.component.ts)
+
+@ViewChild (ChildComponent) childRef!: ChildComponent;
+
+- @ViewChild : it is like autowire jing we inject and get the element from child name "ChildComponent"
+
+ngAfterViewInit(): void {
+    this.childRef.name = "Tola";
+  }
+
+when childRef. then we can see the variable, method .... 
+
+2. Create element in the parent then we can all to use in the children (បង្កើត Element in parent then we can call to use in 
+every children. 
+
+- Call method in parent 
+
++ In Child Html
+
+<button (click)="callParent()">Call from Parent</button>
+
+We have one Method callParent()
+
++ In child Ts.
+
+We method callParent() that inside we create custom even from EventEmitter( អ្នកផ្សាយ)
+
+@Output() childEvent = new EventEmitter;
+callParent(){
+    this.childEvent.emit();// our custome event 
+  } 
+
++ in Parent app.compoent 
+
+- In Ts : we have our own Method name: greeting()
+
+greeting(){
+    console.log("Hello from Parent Method");
+  }
+
+- Html parent (we put the event inside the tap : app-child 
+
+<app-child (childEvent)="greeting()"></app-child>
+
+We use childEvent method to call the method from parent 
+
+==> Hello from Parent Method
+
+this result get from clicking the button in child component. 
+
+
+------------------------
+
+3. Input parameter from Template ( input from child component show in parent component) 
+
+- In Child.Ts
+name ="vibol";
+
+  callParent(){
+    this.childEvent.emit(this.name);
+  }
+
+យើង Emit this.name ទៅអោយ Parent អ្នកទទួល
+
+- In parent.html
+
+<app-child (childEvent)="greeting($event)"></app-child>
+
+$event = is what the Emit from Child component. 
+
+- In parant Ts.
+
+greeting(childName:string){
+    console.log("Hello from child name =" + childName);
+  }
+
+==> hello from Vibol 
+
+================================================================================
+
+Respone message from Service: 
+
+- In Child TS:
+
+export class ChildComponent implements OnInit {
+  question!: string;
+
+  constructor(private messageService: MessageService){
+
+  }
+  ngOnInit(): void {
+    this.messageService.message$.subscribe(text=>{
+      if(text === "Hello Friend"){
+        this.question = "Hi Firend!"
+      }
+      if(text === "Where are you?"){
+        this.question = "I am from Cambodia"
+      }
+    })
+  }
+
+}
+
+- In app.component.ts
+
+export class AppComponent{
+
+  constructor(private messageService : MessageService){
+
+  }
+greeting(){
+  this.messageService.sendMessage("Hello Friend")
+}
+askForLocation(){
+  this.messageService.sendMessage("Where are you?")
+}
+
+}
+
+- In app.component.html 
+
+<button (click)="greeting()">Greeting</button>
+<button (click)="askForLocation()">Ask For Location</button>
+<app-child></app-child>
+
+
+- In app.component.TS
+
+export class AppComponent{
+
+  constructor(private messageService : MessageService){
+
+  }
+greeting(){
+  this.messageService.sendMessage("Hello Friend")
+}
+askForLocation(){
+  this.messageService.sendMessage("Where are you?")
+}
+
+}
+
+
+==>
+
+Parent component
+GreetingAsk For Location
+child component
+
+I am from Cambodia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

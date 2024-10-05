@@ -2,6 +2,8 @@ Week 16: Component Interaction by Service
 
 1. Display from child component via Template variable # 
 
+Want in Chile : we create One variable name and One Method 
+
 - In Chile Ts: 
 
 name ="Dara";
@@ -10,24 +12,32 @@ name ="Dara";
     console.log("Hello From Child Component")
   }
 
-- In app.component.ts 
-
-<app-child #myChild></app-child>
+- In app.component.html
 
 {{myChild.name}}
 {{myChild.showGreeting()}}
+
+Or in the app.component.html : We want to interaction from child Variable and Method 
+so we use # in the tag :<app-child> to connect to the Child component.
 
 - In app.component.html 
 
 <app-child #myChild></app-child>
 <button (click)="myChild.showGreeting()">Show Greeting</button>
 
+==> Will show one button and display name
+
+child works!
+
+<Show Greeting> vibol
+
 Note:
 
 - Template reference can : Read Only 
 
 ------------------------------------------------------------------
-* ប្រើពេលយើងចង់ Set តម្លៃ លើ child property we use Child Decorator 
+
+* ប្រើពេលយើងចង់ Set តម្លៃ លើ child property we use "Child Decorator" 
 
 2. View Child Decorator:  
 

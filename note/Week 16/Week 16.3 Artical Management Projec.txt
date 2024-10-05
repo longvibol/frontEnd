@@ -1,0 +1,105 @@
+Week 16.3 Artical Management Project 
+
+* Http Interception​(ការកាកយក)​​ ពេលដែល Server send respond to the template we create one Interception that we can add 
+information or modify before we sent to output. 
+- interceptor : អ្នកកាក Request 
+
+Ex: get the input from Template Name then in the server we add Id 
+
+* Route Guard : អ្នកការពារ ដូចជា ទាល់តែយើងធ្វើការ Login sin then we can view
+
+---------------------------------------------
+
+Authentication :
+Create project example on :
+Project : Article Management
+
+Article : (title, description, date, type)
+
+- title : name of the article 
+- description : Information show in the article 
+- date : when public the article 
+- type : Free or Payment 
+
+-------------Example on Article
+
+Java OOP 
+There are 4 concept in OPP: Java encapsulation, inheritance, polymorphism, and abstraction.
+2023-8-13
+free
+
+Java If
+How to use if, ect
+2023-8-13
+
+Java Stream API
+How to use stream, ....
+2023-8-13
+paid 
+
+---------------------------------------------------------
+Step to build project 
+
+BE: node Js, Express server, MongoDb
+FE: angular 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
