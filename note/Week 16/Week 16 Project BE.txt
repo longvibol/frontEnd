@@ -1,3 +1,15 @@
 Week 16 Project BE
 
-Create folder : article_management -> server
+---- Set up Express Server ----
+
+Create folder : article_management -> server:
+
+In folder server:
+
+>> npm init --yess = create json package 
+
+
+2. create server.js 
+
+>> npm install express body-parser --save
+
