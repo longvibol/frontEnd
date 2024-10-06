@@ -1,0 +1,12 @@
+Week 17 Route Guard 
+
+Content :
+
+1. generate new app using cli >> ng new fe
+2. add components and routing (register, login, article, paid_article)
+3. develop registration UI and service 
+4. Develop articles UI and service
+5. Add authentication 
+6. Login/Logout button UI logic 
+
+ 
