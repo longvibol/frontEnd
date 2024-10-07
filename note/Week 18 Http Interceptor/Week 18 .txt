@@ -1,0 +1,80 @@
+Week 18 Http Interceptor 
+
+* Add Authorization request header 
+
+- we create middleware :
+
+GET localhost:3000/api/articles
+request  body: No case we use get
+so we us can check the Token on the request header :
+
+Authorization : Bearer token 
+
+Bearer eyJh...............
+
+req -> verifyToken -> api 
+
+
+--------------------------- How to create Middleware VerifyToken -------------
+
+
+error : it is not correct form in JWT. it have XXX.YYY.ZZZ
+
+jwt malformed<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
