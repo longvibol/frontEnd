@@ -1,4 +1,4 @@
-Week 2: CSS 
+qWeek 2: CSS 
 
 Selector : how can we select element to make the style 
 
@@ -214,9 +214,137 @@ Padding : គឺគម្លេតពីកាន់ border មកកាន់ c
 
 
 ដូចនេះសម្រាប់កំពស់សរុប និង ប្រវែងសរុបត្រូវបូកចូលទាំងអស់ = 2 Margin + 2 border + 2 Padding +
-
 width = 300 + 30 + 100 + 40 = 470px
-height = 
+
+--------------------------------------------------- 
+**CSS Layout - The position Property**
+
+The position property specifies the type of positioning method used for an element (static, relative, fixed, absolute or sticky).
+
+យើងប្រើដើម្បីកំណត់ទីតាំងរបស់ element (ដោយយើងអាចកំណត់វាបានជា)​
+
+1. static = default 
+2. relative
+3. fixed
+4. sticky
+
+
+Example: 
+
+1. static = default 
+
+ #b1{
+        position: static;
+        left: 20%;
+        height: 200px;
+        width: 50%;
+        background-color: powderblue;
+    }
+
+==> ជា default យើងមិនអាចរំកិលវាពីឆ្វេងទៅស្តាំបានទេ ព្រោះយើងដាក់វាជា static (left: 20%) 
+
+2. relative យើងអាចកំណត់ទៅតាមទីតាំងដែលយើងចង់បាន​
+
+#b1{
+        position: relative;
+        left: 20%;
+        height: 200px;
+        width: 50%;
+        background-color: powderblue;
+    }
+
+3.fixed: is positioned relative to the viewport which means it always stays in the same place even if the page is scrolled. The top, right, bottom, and left properties are used to position the element.
+
+យើងកំណត់ទីតាំង element នឹងនៅមួយកន្លែង ទៅយើងធ្វើការផ្លាង់ប្តូរ viewport ក៏ដោយ ភាគច្រើគេប្រើសម្រាប់ chat message 
+
+div.fixed {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  border: 3px solid #73AD21;
+}
+
+
+4. position: absolute :  is positioned relative to the nearest positioned ancestor(បុព្វបុរស) 
+
+យើងមានទី element ហើយយើងចង់អោយ element ទាំងពីរនឹង វាមានទីតាំងអាស្រ័យជាមួយគ្នា ចឹងយើងត្រូវប្រើ absolute 
+
+div.relative {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  border: 3px solid #73AD21;
+}
+
+div.absolute {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 200px;
+  height: 100px;
+  border: 3px solid #73AD21;
+}
+
+====================================
+
+CSS Layout - The display Property:​ ប្រើសម្រាប់ធ្វើការផ្លាស់ប្តូរទំរង់របស់ element នីមួយៗ
+
+1. Inline display : អោយវាបង្ហាញតែមួយបន្ទាត់វិញ 
+
+<style>
+
+ li {
+        display: inline;
+    }
+
+</style>
+
+---------------------------
+
+
+ <ul>
+        <li>hello 1</li>
+        <li>hello 2</li>
+        <li>hello 3</li>
+ </ul>
+
+
+==================================
+
+2. Hide and Element : យើងលាក់ ធាតុវា
+
+h1.hidden {
+  display: none;
+}
+
+-----------------------------------------------------
+
+<h1>This is a visible heading</h1>
+<h1 class="hidden">This is a hidden heading</h1>
+<p>Notice that the h1 element with display: none; does not take up any space.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

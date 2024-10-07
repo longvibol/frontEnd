@@ -1,0 +1,76 @@
+Week 5 install typescript:
+
+https://www.typescripttutorial.net/
+
+
+1. install node 
+>> npm install typescript --save-dev
+
+or 
+
+>> npm install -g typescript
+
+-----------------------------------------------------------------
+
+install : npm install typescript --save-dev
+Check version typescript: tsc -v
+compile:tsc filename.js
+
+-------------------
+
+TypeScript is JavaScript with added syntax for types.
+
+There are three main primitives in JavaScript and TypeScript. 
+
+---------------- Simple type ------------------------------------
+
+Boolean
+number
+string
+
+-----------------------------------------------------------------
+
+Type Assignment:
+
+When creating a variable, there are two main ways TypeScript assigns a type:
+
+- Explicit : 
+- Implicit : 
+
+let firstName: string = "Dara"
+let firstName: "Dara"; 
+
+Error in type Assignment 
+TypeScript will throw an error if data types do not math.
+
+--------------------------------------------------------------
+
+** typescript ** extension vir is ".ts" 
+
+- វាជួយ Check type អោយយើង
+- វាជា customize from javascrip យើងអ្វីដែលមាននៅក្នុង JS , tsc អាចប្រើប្រាស់បាន
+
+* we can not run typescrip we need to run from JS instead 
+
+
+How to run ts :
+
+>> tsc "typescrip file" 
+
+>> tsc .\test.ts 
+then it will create test.js 
+
+How to run js :
+
+>> node test.js
+
+node test.js
+Thida
+
+-------------------------------------------------------------------------
+
+1. TypeScrip > javascrip 
+
+Ex: 
+
+TS like House and JS like room 

@@ -1,0 +1,245 @@
+Week 10.1 Navigation Next and Previous
+
+1. want to click on Button Next or Previous it will change the route url 
+
+export class StudentDetailComponent implements OnInit {
+
+  studentId! :number;
+
+  constructor(private activateRoute : ActivatedRoute, private router:Router) { }
+
+  ngOnInit(): void {
+    let id = this.activateRoute.snapshot.paramMap.get("id");
+    this.studentId = parseInt(id || "-1");
+  }
+
+  goNext(){
+    let nextId = this.studentId + 1;
+    this.router.navigate(["/detail", nextId]);
+  }
+
+  goPrevious(){
+    let previousId = this.studentId -1;
+    this.router.navigate(["/detail", previousId]);
+  }
+
+}
+
+--------------------- In the OnInit (in angular it create only one value not refress
+ពេលវា call one time the function snapshot only remember first time call 
+- in angular វាយកតម្លៃ reduce one time neng te 
+
+
+==> we can see that it called only one time and Angular use this variable again: 
+let id = this.activateRoute.snapshot.paramMap.get("id");
+
+- We use paraMap (the same as Map : have Key :value) ==> use method GET 
+
+ngOnInit(): void {
+    // let id = this.activateRoute.snapshot.paramMap.get("id");
+    // this.studentId = parseInt(id || "-1");
+
+    this.activateRoute.paramMap.subscribe((paramMap:ParamMap) =>{
+
+      this.studentId = parseInt(paramMap.get("id") || "-1");
+
+    });
+  }
+
+ចឹងយើងអាចធ្វើការចាប់យកតម្លៃវាបានហើយ
+====================================
+
+
+** Optional Route Parameter មានក៏បានអត់ក៏បាន
+ពេលយើងចុចហើយ យើងចង់ Goback អោយវា Hightlight កន្លែងដែលយើងចូលមើលហើយ​
+
+ត្រូវចាំ 
+
+* អោយតា ឆ្លង Page យើងត្រូវ ប្រើ Router.naviation 
+ពេលយើងចង់បាន Parameter ពីវាយើងប្រើ activateRoute
+
+Ex:
+
+* constructor(private activateRoute : ActivatedRoute, private router:Router) { }
+
+- private activateRoute : ActivatedRout = ចាប់យកទិន្នន័យបោះមក
+
+- private router:Router ឆ្ពោះទៅកាន់ Page 
+
+
+Ex for optional route:
+
+http://localhost:4200/list;myId=2
+
+list;myId=2 មានន័យថា Prevoue infor is myId=2
+
+{myId : this.studentId} ជាកន្លែងដែលយើធ្វើការចាប់ Optional id 
+
+==> then after we get this optional id we use it to do hightlight in student list 
+
+
+Follow step :
+
+1. In student.list 
+
+<p *ngFor="let st of students">
+    <button (click)="goToDetail(st.id)" [class.highLight] = "checkHightlight(st.id)">{{st.name}}</button>
+</p>
+
+- [class.highLight] = "checkHightlight(st.id)
+
+create one function in TS:
+
+ checkHightlight(studentId :number){
+    return studentId === this.lastVisitedId;
+  }
+
+lastVisitedId = 0;
+
+  ngOnInit(): void {
+    this.activatRouter.paramMap.subscribe((paramMap: ParamMap) =>{
+      this.lastVisitedId = parseInt(paramMap.get("myId") || "0");
+    });
+  }
+
+We use activatRouter to get the values from "myId"
+
+--------------------------
+
+export class StudentListComponent implements OnInit {
+
+  students =[
+
+    {id:1, name:"Dara", gender:"Male"},
+    {id:2, name:"Thida", gender:"Female"},
+    {id:3, name:"Seyha", gender:"Male"}
+
+  ];
+
+  constructor(private router: Router, private activatRouter: ActivatedRoute) { }
+
+  lastVisitedId = 0;
+
+  ngOnInit(): void {
+    this.activatRouter.paramMap.subscribe((paramMap: ParamMap) =>{
+      this.lastVisitedId = parseInt(paramMap.get("myId") || "0");
+    });
+  }
+
+  goToDetail(studentId :number){
+    // alert(studentId);
+    this.router.navigate(["/detail", studentId]);
+    
+  }
+
+  checkHightlight(studentId :number){
+    return studentId === this.lastVisitedId;
+  }
+  
+
+}
+
+
+--------------------------------------------------------------
+
+In HTML :
+
+<button (click)="goBack()">Back To List</button>
+
+
+
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

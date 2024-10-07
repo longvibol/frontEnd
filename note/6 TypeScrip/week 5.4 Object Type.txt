@@ -1,0 +1,132 @@
+week 5.4 Object Type:  
+
+Use to create object 
+
+Syntax : 
+
+let students : {id:number, name:string, gender:string};
+students ={id:1, name: "Dara", gender:"Male"};
+
+console.log(students.name);
+
+==> Dara
+
+2. Type Inference (យើងប្រើសញ្ញា " = " to assign value) 
+
+const car = {model:"Toyota"};
+console.log(car.model);
+
+
+==> Toyota
+
+3. Optional Propoerty (?) 
+
+Error : " Property 'gender' is missing in type '{ id: number; name: string; }' but required in type '{ id: number; name: string; gender: string; }'.ts(2741)
+4_objectType.ts(1, 41): 'gender' is declared here."
+
+let students : {id:number, name:string, gender:string};
+students ={id:1, name:"Dara"};
+
+យើង Over right object " students " but we don't put gender so it will error. to fix this problem we add
+Optional on the property in the object we decleartion: 
+
+let students : {id:number, name:string, gender?:string};
+students ={id:1, name: "Dara"};
+
+==>
+
+{ id: 1, name: 'Dara' }
+
+
+--------------------------------------------------  
+
+
+4. Create Object by Singature : it can have only one type = dynamic we no need to defind the type first. 
+
+Example: 
+
+let ob : {[index:string]:string} = {};
+
+//key = name, gender
+//value = Dara, Male 
+// we can add many as we can 
+
+ob.name = "Dara";
+ob.gender = "Male";
+
+console.log(ob);
+
+==>
+
+{ name: 'Dara', gender: 'Male' }
+
+It is like Generic : we can add what we want 
+
+
+Ex2:
+
+let ob : {[x:string]:number} = {};
+
+ob.name = 1;
+ob.gender = 2;
+ob.class = 3;
+
+console.log(ob);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

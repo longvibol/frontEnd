@@ -1,0 +1,128 @@
+Week 5.6 : Aliases​ & Interface  ប្រើថ្មី
+
+យើងបង្កើត Type ថ្មីដោយខ្លួនឯង 
+
+1. Aliases 
+
+type Vibol = string;
+let n:Vibol = "Vibol";
+
+console.log(n);
+
+==> Vibol
+
+2. Interface: គោលដៅគេប្រើ Interface ដើម្បី extend from another interface 
+
+- យើងបង្កើតវានៅក្នុង Class មួយដាច់ដោយឯង
+
+Interface are similar to type aliases, except they only apply to object types. 
+
+interface Rectangle{
+    width: number,
+    height: number
+};
+
+
+let rec1:Rectangle = {width:20,height:30};
+
+console.log(rec1);
+
+==> { width: 20, height: 30 }
+
+
+3. Extend interface 
+
+//-- extends interace mean we can get all the fiele from extend interface 
+
+interface ColorRectangle extends Rectangle{color:String};
+let rec2:ColorRectangle ={
+    width:20,height:30,color:"Red"
+}
+console.log(rec2);
+
+==> { width: 20, height: 30, color: 'Red' }
+
+
+---------------------------------------------------------- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,734 @@
+Week 7.1 Contiun 
+- Class : support view : Typescript: Data, Method (control logic of view)
+- នុង​ class វាមាន Metadata ដែលវាប្រាប់ទៅ ថាជា Class data or component class 
+
+Ex:
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'FRONTEMD_DEMO';
+}
+
+----explain 
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+
+
+==> it call decoreator and it have @omponent mean it is not a simple class.
+
+================================================================================
+
+Create new component 
+
+Syntax: ng g c "component name"
+
+1. ng - command create angular 
+2. g - generate 
+3. c - component 
+
+Ex:
+
+CREATE src/app/test/test.component.html (20 bytes)
+CREATE src/app/test/test.component.spec.ts (605 bytes)
+CREATE src/app/test/test.component.ts (238 bytes)
+CREATE src/app/test/test.component.css (0 bytes)
+
+==> it will create 4 file 
+
+
+==============================
+
+How to use it : 
+
+We check inside : test.component.ts
+
+@Component({
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css']
+})
+export class TestComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+==> it create : selector: 'app-test',
+
+we use :app-test to put in the " app.component.html "
+
+<h1>Welcome to Angular</h1>
+<app-test></app-test>
+
+noted:
+
+" app.module.ts"  
+
+it will add the new component " app-test "
+
+======================================================================
+
+app.component.html is the root component 
+
+ចឹងពេលដែលយើងបង្កើត component ក្នុងនឹងវានឹងបង្កើត Page ory yerng 
+
+
+=======================================
+
+We can three method to call (view the page component)
+
+1.Custom tag:
+
+<app-test></app-test>
+
+
+2. Call from class : 
+
+test.component.ts: change the @Component({
+  selector: 'app-test',
+
+to : selector: '.app-test'
+Then :
+
+in the app.component.html 
+<h1>Welcome to Angular</h1>
+<div class="app-test"></div>
+
+
+==================================================
+
+3. call from Tag
+
+
+@Component({
+  selector: '[app-test]',
+
+----------------------------- Called 
+
+in the app.component.html 
+ <div app-test></div>
+
+
+========================================================
+
+*** 3 Way to specify selector ***
+
+- app-test => <app-test>
+- .app-test => <div class="app-test">
+- [app-test] => <div app-test>
+
+
+================================================
+
+Templete in the app.components 
+
+1. single line 
+
+@Component({
+  selector: 'app-root',
+  // templateUrl: './app.component.html',
+  template: '<h2>Hello Angular!</h2>',
+  styleUrls: ['./app.component.css'],
+  styles: ['h2{color:red}']
+})
+
+==> can use our custom templete:  template: '<h2>Hello Angular!</h2>', styles: ['h2{color:red}']
+
+it mean we can customer by ourselves 
+
+2. Multiple line : use ``
+
+ template: `
+  
+    <h2>Hello Angular!</h2>
+    <p>This Angular Class Frist Tutorial</p> 
+  
+  `,
+
+------------------------
+
+styles: [`
+  
+  h2{color:red}
+  p{font-style: italic}`
+]
+
+===========================================================
+
+5. Interpolation : bind data from class to template (យើងយក class ធ្វើជា Template)
+
+private varName = "someTest"
+
+{{varName}} in the view template 
+
+
+example: 
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-test',
+  template: `
+  
+    <h2>Hello Angular!</h2>
+    <p>This Angular Class Frist Tutorial</p> 
+  
+    Hello from Interpolation : {{name}};
+  `, 
+  styles: [`
+  
+  h2{color:red}
+  p{font-style: italic}`
+]
+})
+
+export class TestComponent implements OnInit {
+
+  public name:string ="Vibol";
+
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+----------------------------------------------------------------
+
+Interpolation Can do 
+
+- Calculation 
+
+template: `
+  
+    <h2>Hello Angular!</h2>
+    <p>This Angular Class Frist Tutorial</p> 
+  
+    Hello from Interpolation : {{name}}
+
+    <p>{{5*4}}</p>
+    
+  `, 
+
+- String concat 
+
+ {{'this is '+ name}}
+
+- Call function 
+
+ {{name.length}}
+
+- Using Method java scrip 
+
+{{name.toUpperCase()}}
+
+
+- call method from class :
+
+export class TestComponent implements OnInit {
+
+  public name:string ="Vibol";
+
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  test(){
+    console.log("Test from method call")
+  }
+
+}
+
+------------- in the template call 
+
+{{test()}}
+
+*** មិនអាចធ្វើបាន​ ***
+
+1. Assingment 
+
+{{name = 2}} 
+
+Error !!
+
+
+2. display : globale javascrip 
+
+{{window.location.href}}
+
+
+example 
+
+'https://www.google.com/'
+
+We can put it into variable : 
+
+export class TestComponent implements OnInit {
+
+  public name:string ="Vibol";
+
+  public locationInfor = window.location.href;
+
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  test(){
+    console.log("Test from method call")
+  }
+
+}
+
+-------------------------
+
+
+{{locationInfor}}
+
+
+>> http://localhost:4200/
+
+
+=====================================================================
+
+6. Property Binding 
+
+យើងចង់កំណត់ទៅលើ Id ដើម្បីធ្វើការ Input 
+have two way 
+
+1. using Interpolation 
+
+export class TestComponent implements OnInit {
+
+  public name:string ="Dara";
+
+--> in the html 
+
+<input type="text" id="{{name}}"> (កន្លែង id = {{name}} its call interpolation) 
+
+we can check in the console we will see the id = Dara
+
+2. using property binding 
+
+<input type="text" [id]="myId">
+
++ ដោយសារតែ interpolation នឹងវាប្រើបានតែលើ String និង Value តែសម្រាប់ Boolean, Interger can not use with it
+
+*** we when want to work with Boolean we use property binding [] *** 
+
+<input type="text" [disabled] = "true" >
+
+Note : 
+
+<input type="text" disabled = "{{true}}">  :យើងធ្វើយ៉ាងម្តេចក៏មិនអាចដាក់តម្លៃបានដែល
+ 
+<input type="text" disabled = "{{false}}"> :យើងធ្វើយ៉ាងម្តេចក៏មិនអាចដាក់តម្លៃបានដែល
+​
+សម្រាប់ Interpolation 
+
+===============================
+
+ពេលយើងប្រើ វា Property binding តម្លៃវា expect ជា Variabl 
+
+<h2 [class]="successClass">Sea game 2023</h2>
+
+
+Ex:  
+
+template: `
+  
+    <h2 class="success">Welcome to Cambodia</h2>
+    <h2 [class]="successClass">Sea game 2023</h2>
+    
+  `, 
+   
+  styles: [`
+  .success {color:green}
+  p{font-style: italic}`
+]
+ 
+})
+
+export class TestComponent implements OnInit {
+  successClass = "success";
+
+
+=================
+
+
+2. Apply class base on condition: (single class)
+
+In css :
+
+.danger {
+    background-color: red;
+}
+
+In html: property class
+
+<h1 [class.danger] ="hasError">Info Erro</h1>
+
+In TS
+
+export class ViewComponent implements OnInit {
+
+  hasError = false;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+we assign the hasError = false ==> h1 will use the css file 
+
+=======================================================
+
+****
+3. ngClass directive (multiple class)
+
+directive is custom html attribute provide by angular 
+
+
+- In CSS:
+
+
+.danger {
+    background-color: red;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.text-success{
+    color: gre
+
+en;
+}
+
+
+- In html 
+
+<h2 [ngClass]="myClass">Uning Multiple Style from ngClass</h2>
+
+- In TS : we create class : myClass
+
+
+export class ViewComponent implements OnInit {
+
+  hasError = false;
+  isItalic = true;
+
+  myClass = {
+    "danger":this.hasError,
+    "italic":this.isItalic,
+    "text-success": !this.hasError
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+=========================================
+
+- For inline Style 
+
+1. single css prop 
+
+*** Appliy Style in and condition ***
+
+<h2 [style.color]="'green'">Test Color</h2>
+<h2 [style.color]="hasError? 'blue' : 'red'">condition appliy with style</h2>
+<h2 [style.font-style]="'italic'">change font style inline prop</h2>
+
+
+condition from Ts
+
+export class ViewComponent implements OnInit {
+
+  hasError = true;
+  isItalic = true;
+
+  myClass = {
+    "danger":this.hasError,
+    "italic":this.isItalic,
+    "text-success": !this.hasError
+  }
+
+
+2. Multiple css prop : [ngStyle] : "object"
+
+export class ViewComponent implements OnInit {
+
+  myStyle={
+    color: 'black',
+    fontStyle: 'italic' // use Camel case
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+----------in html : myStyle is the object 
+
+<h1 [ngStyle]="myStyle">Multiple Style </h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

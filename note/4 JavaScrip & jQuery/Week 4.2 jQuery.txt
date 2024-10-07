@@ -1,0 +1,186 @@
+Week 4 jQuery
+
+
+- jQuery is a JavaScript Library.
+- jQuery greatly simplifies JavaScript programming. សំរួលឬធ្វើអោយប្រសើរ
+
+
+Exaple : hide paragram when click 
+
+1. download JQurery 
+
+https://jquery.com/download/
+
+right click then save as: " jquery-3.7.1.min.js "
+
+2. Add this jquery to what you want to us : put the scrip above body 
+
+- Option One:  create hide tag P from JS
+
+<script>
+
+         function doHide(ob){
+             ob.style.display = "none";
+         }    
+
+          </script>
+</head>
+<body>
+
+    <p onclick="doHide(this)" id="p1">Welcom to Cambodia</p>
+    <p onclick="doHide(this)" id="p2">Sea Game 2023</p>
+    <p onclick="doHide(this)" id="p3">Phnom Penh</p>
+</body>
+</html> 
+
+- Option 2 : JS : put the scrip below body 
+
+Think we create scrip below Body : 
+
+
+<body>
+    <p>Welcom to Cambodia</p>
+    <p>Sea Game 2023</p>
+    <p>Phnom Penh</p>
+</body>
+
+<script>
+    var ps = document.getElementsByTagName("p")
+    console.log(ps)
+    for (var i =0; i < ps.length ; i++ ){
+
+        ps[i].onclick = function(){
+            this.style.display = "none";
+            console.log(ps[1]);
+        }
+
+    };
+
+</script>
+
+----------------------------------------------------------------------------------------
+
+* Use JQ for best option 
+- First it need to define that the body is loading, we no need to think where to put the scrip first 
+
+ពេលយើងចង់ធ្វើអី យើងបង្កើត Function មកបានហើយ
+
+- this mean : Object ផ្ទាល់ បើវាជាប្រភេទ P , p = this ; Div = this 
+
+<script>
+
+        $(document).ready(function(){
+            // select the tap 
+            $("p").click(function(){
+                $(this).hide();
+                console.log(this);
+            });
+        });
+
+    </script>
+
+Note : this = own object ! 
+
+----------------------------------------------------------------------------------------
+
+- Call back function : ពេលវាដំណើរការអីចប់វាដំណើរការ Function នឹង
+
+
+<script>
+        $(document).ready(function(){
+
+            $("button").click(function(){
+                $("p").show(1500,function(){ 
+                    alert("Ok Thanks!")
+                });
+            });
+
+        });
+
+    </script>
+
+    <style>
+
+        p {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+ 
+    <button id="b1">Show Button</button>
+    <p>Welcome to Cambodia</p>
+    <p>Sea Game 2023</p>
+    <p>Phnom Penh</p>
+</body>
+
+
+Explan:
+
+$("button").click(function(){
+                $("p").show(1500,function(){ 
+                    alert("Ok Thanks!")
+                });
+            });
+
+
+- 1500 inside show = delay 
+- function(){alert("Ok Thanks!")}); Called back function 
+
+-------------------------------------------------------------------------------------------
+
+USE : JQ cdn : https://releases.jquery.com/ មាន internet បានដើរ
+
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+Select with JQuer :
+
+1. select element 
+
+ $("button").click(function(){
+                $(".pe").show(2000);
+            });
+
+===============
+<style>
+        .pe {
+            display: none;
+        }
+    </style>
+
+----------------------------
+
+<body> 
+    <button>Show Button</button>
+    <p​ id="p1">Welcome to Cambodia</p>
+    <p class="pe">Sea Game 2023</p>
+    <p class="pe">Phnom Penh</p>
+    <div class="pe">Test</div>
+</body>
+
+2. select element with class : 
+
+- <p id ="p1" > id mean unite 
+- <p class="pe" > class mean can have the same 
+
++ សម្រាប់ខាងលើយើងចង់បាន ពេល click ory ta class = pe ban hery but element div with calss pe no need to show 
+
+
+ <script>
+        $(document).ready(function(){
+
+            $("button").click(function(){
+                $("p.pe").show(1500);
+            });
+
+        });
+
+    </script>
+
+យើងដាក់តា  elecment Infront of id tov ban hery : $("p.pe").show(1500);
+
+
+=====================================================
+
+​ចាំ # គឺប្រើសម្រាប់ id :

@@ -1,0 +1,390 @@
+Week 5.9 Class
+
+1. Create class 
+
+class Student{
+    name:String;
+}
+
+let st = new Student();
+st.name ="Vibol";
+
+console.log(st);
+
+==> Student { name: 'Vibol' } 
+
+============================================================
+
+Members : Visibility 
+Class members also be given special modifiers which affect visibility. 
+
+There are three main visibility modifiers in TypeScript. 
+
+1-public - (default) allows access to the class member from anywhere ប្រើបានគ្រប់ទាំងអស់
+2-private - only allows access to the class member from within the class បានតែ Class ខ្លួនឯង
+3-protected - allow access to the class member from itself and classes that inherit it, 
+which is covered in the inherit. បានតែ Class កូន និង class ខ្លួនឯង
+
+
+=============================================================
+
+2. using Visibility 
+
+
+class Student{
+    private name:String;
+}
+
+let st = new Student();
+st.name ="Vibol";
+
+==> when we put private name:String : it will error on st.name because we can not create new object with 
+private 
+
+3. Constructor 
+
+class Student{
+    name:String;
+
+    constructor(n :string){
+        this.name =n;
+    }
+}
+
+- this.name យើងចាប់តម្លៃទី Field name យកមកប្រើក្នុង Constructor ជាទូទៅគេដាក់ឈ្មោះដូចគ្នា
+this.name វាជា property របស់ Class 
+
+=================================================
+
+4. Parameter properties 
+ 
+យើងខ្ជិលបង្កើត field in the class 
+
+class Student{
+
+    public constructor(private name :string){
+        this.name =name;
+    }
+}
+
+let st = new Student("thida")
+console.log(st);
+
+==> 
+
+Student { name: 'thida' }
+
+មានន័យតាពេលដែលយើងបង្កើត Object ថ្មីត្រូវតែអោយវាដាក់ parameter ory hery 
+
+ចឹងយើងមានបញ្ហា មិនអាចកំណត់ Name ដោយខ្លួលឯងបានពេលបង្កើត object ថ្មី ព្រោះយើងដាក់វាជា private 
+
+
+5. ចឹងយើងបង្កើត Accessor ជំនួនគឺ insdie Class (វាស្រដៀងទៅនឹង setter and getter del )
+
+class Student{
+    public constructor(private name :string){
+        this.name =name;
+    }
+
+    setName(n : string){
+        this.name =n;
+    }
+}
+
+let st = new Student("thida")
+st.setName("Dara")
+
+console.log(st);
+
+==>
+
+Student { name: 'Dara' }
+
+
+==============================================
+
+6. Readonly គឺយើងមិនអាច set តម្លៃថ្មីអីបានទេ 
+
+class Student{
+    private readonly name: string;
+
+    public constructor(name :string){
+        this.name =name;
+    }
+}
+
+let st = new Student("thida")
+st.name ="dara";
+
+console.log(st);
+
+==> st.name ="dara"; វា Error cause we can not assign new name 
+message:
+
+Property 'name' is private and only accessible within class 'Student'.ts(2341)
+Cannot assign to 'name' because it is a read-only property.ts(2540)
+
+===================================================
+7 - 
+*** Interface ***
+
+Inheritance: Implements 
+Interfaces can be used to define the type a class must follow through the impelments keyword.
+
+Ex:
+
+interface Shape {
+    getArea: () => number;
+}
+
+class Rectangle implements Shape{
+    public constructor(protected readonly width: number, protected readonly height: number){
+        
+    }    
+    public getArea(){
+        return this.width * this.height;
+    }
+
+}
+
+let are = new Rectangle (10,20);
+console.log(are.getArea());
+
+
+==> 200
+
+====================================================
+
+8 - Abstract classes : classes that cannot be directly instantiated and serve as a blueprint for derived classes. They are designed to be extended by other classes, providing a common set of properties, methods, and behavior that can be inherited and implemented by subclasses.
+
+- Classes can be written in a way that allows them to be used as a base class for other classe without having to implement:
+
+Example:
+
+abstract class Polygon {
+    public abstract getArea():number;
+
+    public toString() : string{
+        return `Polygon[area=${this.getArea()}]`;
+    }
+}
+
+
+class Rectangle extends Polygon{
+    public constructor(protected readonly width: number, protected readonly height:number){
+        super();
+    }
+
+    public getArea(){
+        return this.width * this.height;
+    }
+}
+
+let are2 = new Rectangle(10,20);
+console.log(are2.toString())
+
+==> 200
+
+Abstract គឺមិនអាចធ្វើការបង្កើត class បានទេ គឺជា Property, methods and behavior ដែលអាចអោយនាក់បន្តវេន របស់វា Implement 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

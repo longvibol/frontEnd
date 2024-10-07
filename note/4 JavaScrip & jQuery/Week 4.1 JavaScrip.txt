@@ -1,0 +1,316 @@
+Week 4 : JavaScrip វាជាខួរក្បាលដូច HTML
+
+To study web : HTML, CSS, JavaScrip is mandatory(ចំបាច់ត្រូវតែចេះ) 
+
+* JS is the programming language so need know in general programing language concept as below: 
+
+- Variable declaration 
+- Data Type
+- Condition 
+- Loop 
+- function 
+- Class
+- OOP 
+
+------------------------------------------------
+
+Update content
+hide element 
+change attribute (image src) 
+
+change font 
+hide element 
+show element 
+
+
+---------------place to put script--------------
+
+head 
+body 
+external 
+
+
+-------------- output --------------------------
+
+innerHTML
+document.write()
+
+======================================================================
+
+1. change element in HTML 
+- we use function to change the elment in HTML 
+
+
+<body>
+
+  <p id="p1">Welcome to Cambodia</p>
+  <button onclick="show()" >Change</button>
+
+</body>
+
+
+-------------
+
+សំខាន់យើងត្រូវធ្វើការ Select វាអោយបានសិន បានចាប់ផ្តើមធ្វើអីផ្សេងកើត
+
+<script>
+
+function show(){
+  // alert("Hello Vibol");
+  // DOM doucment Object
+  document.getElementById("p1").innerHTML="Sea Game 2024!";
+}
+
+
+* Note:  document.getElementById វា Return មកវិញតែមួយធាតុទេ យើងសង្កេតមើលកន្លែង getElement មិនមាន s នោះទេ បើវាមាន អាវា Return មកវិញជា list 
+
+
+2. Hide element :
+
+  document.getElementById("p1").style.display = "none";
+
+
+យើងជ្រើសរើសយក .style.display = "none"; ព្រោះយើងត្រូវចាំថា សម្រាក់ការលាក់ Elelment យើងប្រើ Style CSS មកប្រើ
+
+3. change image
+
+document.getElementById("image1").src = "../Week 3 JavaScrip/image/css.png";
+
+
+------------
+
+<img id="image1" src="../Week 3 JavaScrip/image/java.png">
+
+
+4. change fond size
+
+document.getElementById("p1").style.fontSize = "40px";
+
+
+-----------------
+
+ <p id="p1">Welcome to Cambodia</p>
+
+==========================================================================================
+
+**** Start Programming Concept in JS ***
+
+1. Variable declaration 
+
+var
+let
+const
+
+2. data type
+
+1- string
+2- Number
+3- Bigint
+4- Boolean
+5- Undefined
+6- Null
+7- Symbol
+8- Object (Object, array, date)
+
+
+3. Function 
+
+
+------------------------------
+
+1. Variable declaration 
+
+Syntax :
+
+1. Var គឺប្រើបានក្នុង Function ទាំងមូល
+var name = 'James Bond';
+
+- we need to start with : var
+- varible indentifier : name
+- = assignment operator 
+- James Bond is the value 
+- ; End of the statement 
+
+Example :
+
+var age; មានន័យថា age វាជា អញ្ញាត្តិ ហើយ var គ្រាន់តែចាវិធីនៃការបង្កើត variable ប៉ុន្នោះ ចឹងវាមិនទាន់បានប្រាប់ថា 
+វាជាប្រទេស variable អីនោះទេ
+
+var age = 20;
+  var name = 'Dara';
+  document.getElementById("p1").innerHTML= name;
+
+-- when we click on the button it will display name = Dara
+
+
+2. Let ប្រើបានក្នុង Block 
+
+3. Const គឺសម្រាប់តម្លៃមិនប្រែប្រួល
+
+const l = 20;
+  l = 30;
+  document.getElementById("p1").innerHTML= l;
+
+--------- in the error show : 
+
+Uncaught TypeError: Assignment to constant variable.
+    at show (index.html:24:5)
+    at HTMLButtonElement.onclick (index.html:35:29)
+ 
+Note :  console.log(typeof name); we use typeof = check the variable type. 
+
+4. create object {}
+
+ var st1 = {name:"dara",age:20,gender:"Male"}
+
+  console.log(st1);
+  console.log(st1.name);
+  console.log(st1["gender"]);
+
+5. crate array []
+
+var names = ["Dara","Thida","Seyha"];
+
+========================================================
+
+**** Looping ******
+
+1. for loop : with Array (data-type) 
+
+var names = ["Dara","Thida","Seyha"];
+
+------------------------------
+
+var text ="";
+  for(let n in names){
+    text+=names[n] + "<br>"
+    
+  }
+
+  document.getElementById("p1").innerHTML = text;
+
+2. for in : with Object : Key: value 
+
+var st1 = {name:"dara",age:20,gender:"Male"}
+
+-------------------------------
+
+for (key in st1){
+    console.log(key + ":" + st1[key])
+  }
+
+
+name:dara
+age:20
+gender:Male
+
+
+============================ Function in JS 
+
+1. function no return 
+
+function display(text){
+    console.log("======================");
+    console.log(text);
+    console.log("======================");
+  }
+
+
+---------
+
+ <button onclick="display('Hello Vibol')">Display</button>
+
+2. function with return 
+
+function sum(a,b){
+    return a+b;
+  }
+
+  function sumCall(){
+    var number = sum(3,4);
+    document.write(number);
+  }
+
+-----------
+
+ <button onclick="sumCall()" >Change</button>
+
+Note: 
+
+ document.write(number); it will over write all display 
+
+
+យើងបង្កើញលើ View តែម្តង
+
+-----------------------------------------------------------------
+
+
+Add up in function display :
+
+function sumCall(){
+    var number = sum(3,4);   
+    var p1 = document.getElementById("p1");
+
+    p1.innerHTML = number;
+
+  }
+
+-----------
+
+<button onclick="sumCall()" >Change</button>
+
+var p1 = document.getElementById("p1") សម្រាប់ដាក់តែ ជាប្រភេទ ​<p> ទេ
+
+
+Note: when we create Variable that we want to use all the function we need to put the <scrip> in side <body>
+and below all of the element 
+
+
+------------------------------
+
+**** Create Class **** 
+
+
+class student{
+
+    constructor(name,age){
+        this.name = name;
+        this.age = age;
+    }
+
+    info(){
+        return "this is my students class"
+    }
+
+    setAge(a){
+        if(a > 18){
+            this.age= a;
+        }
+        this.age = 10;
+    }
+
+}
+
+
+in side class we can crate : constructor , function, method 
+
+How to link to the index: 
+
+ <script src="Student.js"></script>
+  <script src="myscrip.js"></script>
+
+in side the : myscrip.js យើងអាចបង្កើត Class ចេញពី Student ban 
+
+function sumCall(){
+    var number = sum(3,4);
+    // document.write(number);
+    p1.innerHTML = number;
+
+    var st = new student("vibol",25);
+
+    st.setAge(11);
+    console.log(st.name + " " + st.age);
+
+  }
+
+-------------------------------------------------

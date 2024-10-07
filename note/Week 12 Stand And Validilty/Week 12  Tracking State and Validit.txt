@@ -1,0 +1,220 @@
+Week 12 : Tracking State and Validity 
+
+1. NG-Class: #txtName => {{txtName.className}}
+
+visited ? ng-touch : ng-untouched
+value changed? ng-dirty : ng-pristine
+valid? ng-valid : ng-invalid 
+
+Ex: 
+
+1. In Html 
+
+<div class="form-group">
+      <label for="">Name</label>
+      <input type="text" required="" #txtName class="form-control" name="name" [(ngModel)]="student.name" >
+    </div>
+
+- #txtName : is the variable we put in the form 
+
+to show start we use {{}}
+
+{{txtName.className}} : put it in the same HTML file 
+
+In view : 
+
+form-control ng-untouched ng-pristine ng-valid
+
+- ng-untouched : មិនទាន់បានប៉ះវា ពេលប៉ះហើយវាចេញ => ng-touched (visited) 
+- ng-pristine : មិនទាន់បានកែ => ពេលធ្វើការកែហើយ ng-dirty (Value changed) 
+- ng-valid : (we put validation : required ) when we remove all the txt it will change to in valide => ng-invalid
+
+: ng = angular 
+
+
+2. NG : Property 
+
+** ngModel property:
+*class => property 
+ng-touched => touched
+ng-untouched => untouched
+ng-dirty => dirty 
+
+* How to get access to ngModel properties? 
+
+Example:
+
+<br>
+    <h3>{{txtName.valid}}</h3>
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" required="" #txtName="ngModel" class="form-control" name="name" [(ngModel)]="student.name" >
+    </div>
+
+ចឹងពេល វាចេញមកដំបូង វា check valide on the Name : so it will say : Ture after we remove the txt name = 0 ==> false 
+
+
+3. Validation with visual feedback
+
+bootstrap class : is-invalid ( check the form validation)
+
+To access and show in the template Form in Angular we create variable #txtName 
+
+==> to display :
+Ex: we put in the Email to vailidate: 
+
+1. in email form :
+
+<div class="form-group">
+      <label for="">Email</label>
+      <input type="email" #emailControl class="form-control" name="email" [(ngModel)]="student.email" />
+    </div>
+
+2. User Interpolation : {{emailControl.className}}
+
+2.1 - validate to input from by using : is-invalid
+
+in bootstrap : have class called : is-invalid that can validate the form:
+
+==> It will show red color where we put the is-invalide 
+
+<input type="text" required #txtName="ngModel" class="form-control is-invalid" [(ngModel)]="title" >
+
+តែពេលវាបង្ហាញមកវាចេញ validate neng but we want when it have error on validate then it show : 
+
+We need to apply: ចឹងយើងប្រើ form control from NG property to set : when it invalte then can use this class: is-invalide
+
+Ex: 
+
+[class.is-invalid] = "txtName.invalid" មានន័យថា យើង apply calss is-invalid when property formControl is invalid 
+
+តែពេលយើងធ្វើចឹងពេលបើ Form មកវាចេញ error ចឹងយើងត្រូវប្រើលក្ខខណ ផ្គាប់គ្នា
+
+==> [class.is-invalid] = "txtName.invalid && txtName.touched" ចឹងចាំយើងប៉ះពាល់វាសិន ចាំ Apply class is-invalid នឹង
+
+2.2 Apply pattern : at least 10 charator :
+
+>> pattern="^[a-zA-Z0-9]{10,}$"
+
+show we need to write more than 10 ban vir valide. 
+
+2.3 : show more information : when have error it will show the message to template:
+
+We use : *ngIf ចឹងវាមានលក្ខណៈពិសេស ពេលវាអត់មានលក្ខខណ្ឌត្រូវវាទេ វាមិនបង្ហាញក្នុង Form ទេ
+
+Ex: 
+
+ <div *ngIf="txtName.invalid && txtName.touched">
+        <small *ngIf="txtName.errors?.['required']">Name is required</small>
+        <small *ngIf="txtName.errors?.['pattern']">Name is at least 10 charaters !</small>
+ </div>
+
+*ngIf="txtName.invalid && txtName.touched" = បើសិនជា មិបានវាយបញ្ចូល និង អត់បានប៉ះចាំវា ធ្វើការ
+វាធ្វើការអីខ្លះ 
+
+- <small *ngIf="txtName.errors?.['required']"> Name is required</small> នៅក្នុង form Control it have error collection 
+if have anything error it will show up : ==> ?.['required']" សញ្ញា ? គឺវាធ្វើការសិនជាអត់មានកុំទាន់អោយធ្វើការ ? = null 
+
+
+-------------------
+
+<label>Name</label>
+      <input type="text" [class.is-invalid] = "txtName.invalid && txtName.touched" name="name" 
+      required #txtName="ngModel" class="form-control" pattern="^[a-zA-Z0-9]{10,}$" 
+      [(ngModel)]="title" >
+
+      <div *ngIf="txtName.invalid && txtName.touched">
+        <small *ngIf="txtName.errors?.['required']">Name is required</small>
+        <small *ngIf="txtName.errors?.['pattern']">Name is at least 10 charaters !</small>
+      </div>
+
+    </div>   
+
+
+--------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+Week 12.3 : TEmplate Driven Form 
+
+See NgForm : 
+
+1. In app.component.html :
+
+<form #studentForm="ngForm" (ngSubmit)="doSubmit(studentForm)" novalidate>
+
+2. app.components.ts
+
+doSubmit(studentForm : any){
+    this.isSubmitted =true;
+    console.log("submit work")
+    this.studentService.saveStudent(this.student).subscribe(data =>{
+      console.log(data);
+    }, error => {
+      console.log("Something Error")
+      console.log(error);
+    });
+
+    console.log(studentForm);
+  }
+
+==> Result : NgForm it create from FormControl: 
+
+NgForm {_rawValidators: Array(0), _rawAsyncValidators: Array(0), _onDestroyCallbacks: Array(0), submitted: true, _directives: Array(5), …}
+
+===> We want to use reacitve Form Then we build  by ourselve ! 

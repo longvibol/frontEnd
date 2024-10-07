@@ -1,0 +1,440 @@
+Week 10 Routing 
+
+Create new app with routing : 
+
+>> ng new week10routing --routing
+
+It will create routing module អោយហើយ ក្នុង app:
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+Then it will add " AppRoutingModule " in the app.moduls.ts
+
+
+--------------------------------------------
+
+1. Define route in app-routing.module.ts
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { StudentListComponent } from './student-list/student-list.component';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
+
+const routes: Routes = [
+
+  {path: "list", component: StudentListComponent},
+  {path: "detail", component: StudentDetailComponent}
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+------------Note---------
+
+{path: "list", component: StudentListComponent},
+{path: "detail", component: StudentDetailComponent}
+
+Where we define the routning url : by put list or detail
+
+
+2. app.component.html
+
+
+<router-outlet></router-outlet>
+
+
+3. routing url : 
+
+http://localhost:4200/detail
+http://localhost:4200/list
+
+==========================================================
+
+In app-routing.module.ts : in case it have many routing show we can 
+shorter for routing to app.modults.ts
+
+1. create const to export components:  
+
+export const routeComponents = [StudentListComponent, StudentDetailComponent];
+
+2. in the app.module.ts 
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    routeComponents
+    
+  ],
+
+is the dearlaration we add from routing.module
+routeComponents
+
+
+==========================================================================================
+
+Add link to click then naviagete to the URL:
+
+
+1. routerLink="ur" = go to link 
+
+In app.component.html:
+
+<br>
+<a routerLink="list">Student list</a> &nbsp;
+<a routerLink="detail">Student detail</a>
+
+<router-outlet></router-outlet>
+
+routerLink : in Angular we use this : routerLink
+
+==> 
+
+Student list   Student detail
+
+student-detail works!
+
+
+----------------------------
+
+2. routerLinkActive="apply CSS" : 
+
+<a routerLink="list" routerLinkActive="active-link">Student list</a> &nbsp;
+
+in CSS:
+
+.active-link{
+    background-color: yellow;
+}
+
+show when click on the link : it will apply css style 
+
+------------------------------
+
+*** Widcard Route *** ពេលដែលយើងវាយ Url kos អោយវាទៅ Page ណាមួយ
+
+in app-routing.module.ts : 
+
+{path: "**", component:PageNotFoundComponent}
+
+** នឹងគេហៅថា Widcard 
+
+-----------------------------------
+
+*** Home Page :
+
+{path: "", redirectTo:"/list", pathMatch: "full"}, Where we add the home page 
+
+{path:"hello", redirectTo:"/detail", pathMatch: "prefix"}, 
+
+- prefix នឹងហើយនៅក្នុង "hello" នឹងវាមានអីដូចគ្នាអោយវាចូល page ឹននង​
+
+Ex: http://localhost:4200/de 
+==> it will go to detail page 
+
+
+===============================================
+បន្ទាប់ពីបាន ដាក់ deaful hery we want to navigate to url in detail 
+
+- When we click on the name list then it will go to detail for each item: 
+
+1. In student.component.html 
+
+We crete buttone then when we click on the button it will navigate to the deatil :
+
+<p *ngFor="let st of students">
+    <button (click)="goToDetail(st.id)">{{st.name}}</button>
+</p>
+
+In TS:
+
+goToDetail(studentId :number){
+    // alert(studentId);
+
+    this.router.navigate(["/detail", studentId]);
+    
+  }
+
+
+Now we can get the URL : http://localhost:4200/detail/1
+
+2. Now we want to show the detail after we click mean we need to do in the student-detail.component.ts 
+
+- inject activeRoute 
+
+In student-detail.component.Ts
+
+export class StudentDetailComponent implements OnInit {
+
+  studentId! :number;
+  constructor(private activateRoute : ActivatedRoute) { }
+
+  ngOnInit(): void {
+    let id = this.activateRoute.snapshot.paramMap.get("id");
+    this.studentId = parseInt(id || "-1");
+  }
+
+}
+
+- studentId! :number; យើងបង្កើត Variable type number, ! is mean not null
+- constructor(private activateRoute : ActivatedRoute) យើង Inject activateRoute វាមានតួនាទីដើម្បីធ្វើការផ្លាស់ប្តូរ ពីរ route moy to moy 
+- let id = this.activateRoute.snapshot.paramMap.get("id") : យើងប្រើ snapshot to store temperatry 
+- parseInt(id || "-1") = convet from String to id 
+
+3. View in html 
+
+<p>Student id = {{studentId}}</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

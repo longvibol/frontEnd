@@ -1,0 +1,28 @@
+<p>structural-directive works!</p>
+
+<button (click)="showText()" >Show Welcom</button>
+
+<!-- <h2 *ngIf="isCambodia ; else notCambodia">Welcome to Cambodia!</h2> -->
+<div *ngIf="isCambodia; then cambodia;else ortherCountry"> ngIf black</div>
+
+<ng-template #cambodia>
+    <h3>Cambodia Block !</h3>
+</ng-template>
+
+<ng-template #ortherCountry>
+    <h3>Other Country Block !</h3>
+</ng-template>
+
+<div [ngSwitch] ="color">
+    <div *ngSwitchCase = "'yellow'" style="color: yellow;"> this is yellow</div>
+    <div *ngSwitchCase = "'blac'"> this is blac</div>
+    <div *ngSwitchDefault> Wrong Color!</div>
+</div>
+
+<div *ngFor = "let c of colors; even as e">
+    <h3>{{e}}-{{c}}</h3>
+</div>
+
+<!-- <ul *ngFor = "let c of colors">
+    <li>{{c}}</li>
+</ul> -->

@@ -1,0 +1,252 @@
+Week 12 : Connect FE To BE
+
+** we create express server to do testing from FE ** 
+
+
+1. Create package.js
+
+Create New folder : server
+
+>> npm init --yes 
+
+2. create server.js 
+
+>> npm install --save express body-parser cors
+
+- express = is the server name express 
+- body-parser = is middleware to handle form data 
+- cors = differnct port need have cors config 
+
+Then the result in Package.json :
+
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}
+
+4. Create server.js 
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
+
+const PORT = 3000;
+const app = express(); // instant of express
+app.use(bodyParser.json());
+app.use(cors());
+
+app.get("/", function(req,res){
+    res.send("Hello from server");
+});
+
+app.post("/registerStudent",function(req,res){
+    console.log(req.body);
+    res.status(200).send({"message":"Data Received"});
+});
+
+app.listen(PORT, function(){
+    console.log("server running on localhost port: " + PORT);
+});
+
+
+===========================================================
+
+run server:
+
+>> node server.js
+
+Testing: in postman 
+
+POST: http://localhost:3000/registerStudent
+
+{
+    "name" : "Vibol",
+    "gender": "Male"
+}
+
+==> 
+
+{
+    "message": "Data Received"
+}
+
+-----------------------------------
+
+It get respond from : 
+
+app.post("/registerStudent",function(req,res){
+    console.log(req.body);
+    res.status(200).send({"message":"Data Received"});
+});
+
+
+---------------------------- Testing sending with from From submit 
+
+Angular
+
+saveStudent(student: Student){
+    return this.http.post(this.url, student).subscribe(data =>{
+      console.log(data);
+    });
+  }
+}
+
+
+Server 
+
+
+return this.http.post(this.url, student).subscribe(data =>{
+      console.log(data);
+
+
+=>
+
+{ name: 'Thosa', email: 'sdfwer', subject: 'Java', gender: 'Male' }
+
+
+
+*** Disable Button after Submit ***
+
+1. in app.components.ts :
+
+isSubmitted = false;
+
+doSubmit(){
+    this.isSubmitted =true;
+    console.log("submit work")
+    this.studentService.saveStudent(this.student);
+  }
+
+ដំបូងយើងអោយ isSubmitted is false = 0 then when click = 1
+
+2. app.component.html 
+
+<div>
+      <button class="btn btn-primary" [disabled]="!studentForm.form.valid || isSubmitted">Save</button>
+    </div>
+
+ចឹងពេលយើង submit Form hery we disable button! 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

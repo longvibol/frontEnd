@@ -1,0 +1,79 @@
+Week 21 Spring Security User from DB:
+
+- role and permission from db
+- token expired
+
+---------------
+
+Search class in Eclip : Ctrl + R = Search 
+
+- GrantedAuthority : User នឹងធ្វើអ្វីបានខ្លះ
+
+Will create by two style: 
+
+1. FakeService : ដាក់ data ខ្លួនឯងដដែលដោយប្រើ Service 
+2. real db
+
+==========================
+
+private String username;
+	private String password;
+	private Set<? extends GrantedAuthority> authorities; // Role 
+	private boolean accountNonExpired; // check Expired 
+	private boolean accountNonLocked; // how many time it can try login 
+	private boolean credentialsNonExpired;
+	private boolean enabled; // when register we set it first to false after verify we trun it into True 
+
+-------------------------
+
+Note:
+
+1 class AuthUser implements UserDetails : ដើម្បីបង្កើត Authuser ហើយយើងយកតាម Implementat from UserDetails
+2 បង្កើត our own fake service to get the user from our assign :
+public interface UserService{
+  Optional<AuthUser> findUserByUsername(String username);
+
+}
+
+3.public class UserServiceImpl implements UserService : ដើម្បី Add user ចូល ដោយយើងដាក់វាជា Set List<AuthUser> users = List.of(…..)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,226 @@
+Week 15 Structural Directive 
+
+- Add and remove Element 
+
+>> g g d myif = create new file directive (myif.directive.ts) 
+
+CREATE src/app/myif.directive.spec.ts (216 bytes)
+CREATE src/app/myif.directive.ts (137 bytes)
+UPDATE src/app/app.module.ts (468 bytes)
+
+---------------------------------------------
+
+We need to know in Structural have two - template ref and container view 
+
+Ex:
+
+<div> <!--  View Container -->
+    <h2 *ngIf="show">Hello Dara</h2> <!--template reference-->
+</div>
+
+- <h2 *ngIf="show">Hello Dara</h2> របស់ដែលត្រូវការ View 
+- ហើយ view នៅកន្លែងណា គឺនៅក្នុង Div 
+
+---------------------- How to create Display and hide with : Structural directive (*) 
+
+in directive : myif.directive
+
+1. @Input() appMyif!: boolean; យើងដាក់ Input and put the "appMyif" អោយដូចទៅនឹង tag that we put in the :
+
+<h2 *ngIf="show">Hello Dara</h2>
+
+2. Then we inject the view container and template ref 
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+
+
+constructor(private vc:ViewContainerRef, private template: TemplateRef<string>) { }
+
+- TemplateRef<string> : វាអាចមានជា String , span , h2 … ចឹងបាន Type វាជា Generic (element) 
+
+3. In myif.directive.ts  
+
+* Note:
+the parameter ជា Field Member យើងត្រូវប្រើ This ពីមុខ​(Ctrl + space) 
+
+- យើងត្រូវ Implement Onchange (ព្រោះ parameter យើងវាប្រែប្រួលទៅតាម Input មក )​
+
+ngOnChanges(changes: SimpleChanges): void {
+    if(this.appMyif){
+      this.vc.createEmbeddedView(this.template);
+    }else{
+      this.vc.clear();
+    }
+  }
+
+
+4. In app.component.ts 
+
+isVisible=false; 
+
+5. in app.component.html
+
+<p *appMyif="isVisible">Display My If</p>
+
+---------------- Customize our directive 
+
+constructor(private vc:ViewContainerRef, private template: TemplateRef<any>) { }
+
+  @Input() appMyif!: number;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.appMyif %2 == 0){
+      this.vc.createEmbeddedView(this.template);
+    }else{
+      this.vc.clear();
+    }
+  }
+
+- អោយលេខ នឹងចែកដាច់នឹង ២ បានអោយវាបង្ហាញ this.appMyif %2 == 0
+- isVisible=4;
+
+
+សរុបមកយើងអាច customer director របស់យើងតាមអ្វីដែលយើងចង់បាន ដូចជា object student or age or something else to show or remove object. 
+
+
+============================= Create another style on Hide and Remove element ---- Using Set and Not implement from on change 
+
+>> ng g d myifv3
+
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+
+1. in directive.ts
+
+@Directive({
+  selector: '[appMyifv3]'
+})
+export class Myifv3Directive {
+
+  constructor(private vc:ViewContainerRef, private template:TemplateRef<any>) { }
+
+  @Input() set appMyifv3(value:boolean){
+  
+    if(value){
+      this.vc.createEmbeddedView(this.template);
+    }else{
+      this.vc.clear();
+    }
+  }
+
+}
+
+
+*** Noted ***
+
+in the directive we need to use : 
+
+@Input() set appMyifv3(value:boolean} :::: selector: '[appMyifv3]'
+ 
+this name need the same name. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

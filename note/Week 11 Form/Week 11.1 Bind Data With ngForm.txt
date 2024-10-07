@@ -1,0 +1,349 @@
+Week 11.1 Bind Data With ngForm:
+
+How to use ngForm for tracking input: 
+
+1. Import ngForm from FormsModule 
+
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+  ],
+
+Add : FormsModule 
+
+2. in the form where we want to use Form tracking : 
+
+ <form #studentForm="ngForm">
+
+
+-------------------------
+
+<div class="container-fluid">
+  <form #studentForm="ngForm">
+    <h2>Student Form</h2>
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="">Email</label>
+      <input type="email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        
+      <label for="inlineCheckbox1">Gender</label> &nbsp;
+        <input class="form-check-input" type="radio" name="rdGender" >
+        <label class="form-check-label" >Male</label>&nbsp;
+
+        <input class="form-check-input" type="radio" name="rdGender" >
+        <label class="form-check-label" >Female</label>&nbsp;
+
+    </div>
+    <div class="form-group">
+      <label for="">Subject</label>
+        <select class="form-control">
+
+            <option value="">Select your subject</option>
+            <!-- <option value="java">Java</option>
+            <option value="php">PHP</option>
+            <option value="cs">C#</option> -->
+
+            <option *ngFor="let s of subjects">{{s}}</option>
+            
+        </select>
+    </div>
+
+    <div>
+      <button class="btn btn-primary" >Save</button>
+    </div>
+  </form>
+  <div></div>
+</div>
+
+-----------------------------------------------------------------------------------------
+
+How to use ngForm : យើងចង់ ចាប់តម្លៃក្នុង form នឹង
+
+1. in html form 
+
+{{studentForm.value | json}}
+
+
+EX: 
+
+<div class="container-fluid">
+  <form #studentForm="ngForm">
+    <h2>Student Form</h2>
+    {{ studentForm.value | json }}
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" ngModel />
+    </div>
+
+    <div class="form-group">
+      <label for="">Email</label>
+      <input type="email" class="form-control" ngModel />
+    </div>
+
+
+ពេលយើង ដាក់ ngModel ទៅកន្លែង  {{ studentForm.value | json }} វានឹងបង្ហាញ ទំរង់ JSON ដែលវាបានចាប់
+
+តែវាមាន Error : 
+
+core.mjs:6484 ERROR Error: If ngModel is used within a form tag, either the name attribute must be set or the form
+    control must be defined as 'standalone' in ngModelOptions.
+
+វាប្រាប់ថាត្រូវដាក់ name អោយវាទៀត
+
+----------------------- Group Element --------------- Ex address, 
+
+
+<div ngModelGroup="address">
+
+      <div class="form-group">
+        <label for="">Provice</label>
+        <input type="text" name="province" class="form-control" ngModel>
+      </div>
+
+      <div class="form-group">
+        <label for="">Distric</label>
+        <input type="text" name="district" class="form-control" ngModel>
+      </div>
+
+
+    </div>
+
+- <div ngModelGroup="address"> We group the province and district
+
+Hold :
+
+{ "name": "", "email": "", "subject": "", "rdGender": "", "address": { "province": "Phnom Penh", "district": "Cambodia " } }
+
+==>
+
+"address": { "province": "Phnom Penh", "district": "Cambodia " }
+
+
+
+---------------------- Bind Form Data To Model ( o class) ------------------------  
+យើងចង់បង្ហាញ ទិន្នន័យ From class student To Template :
+
+1. Create class: 
+
+>> ng generate class model/student
+
+export class Student {
+
+    // private name: string;
+    // private gender: string;
+    // private subject: string;
+    // private course: string;
+
+    public constructor(
+        public name: string,
+        public gender: string,
+        public email: string,
+        public course: string
+    ){
+
+    }
+
+}
+
+in javascrip : we no need to crate flild one by one : we can create constructor then put the field inside! then it will create setter and setter ory yerng. 
+
+2. in the app.component. ts : we crate object student
+
+export class AppComponent {
+  title = 'angular-form';
+
+  subjects = ["Java","PHP","C#","Pyton"];
+
+  student = new Student("Dara","Male","dara@gmail.com","Java");
+}
+
+-----------------------------------------------------------------
+
+3. in the HTML we want to Bind from class to template:
+
+<div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" name="name" [ngModel]="student.name" >
+    </div>
+
+==> we use [ngModel]="student.name" to bind from class to template: 
+
+{ "name": "Dara", "email": "dara@gmail.com", "subject": "Java", "rdGender": "Male" }
+
+
+ចំណាំ 
+[ngModel]="student.name" = Flow from class to template (view) 
+
+
+--------------------- Two way bind from class to template from template to class 
+មានន័យថាពេលដែលយើង ផ្លាស់ប្តូរទិន្នន័យថាធ្វើការ ប្តូរទិន្នន័យ Object del 
+
+EX: 
+
+{ "name": "Dara 123", "email": "dara@gmail.com", "subject": "Java", "rdGender": "Male" } - from #studentForm="ngForm"
+{ "name": "Dara", "gender": "Male", "email": "dara@gmail.com", "course": "Java" } - from class 
+
+
+solution we use Banana in the box [()] in the [(ngModel)]="student.name"
+
+==> 
+
+{ "name": "Dara 123", "email": "dara@gmail.com", "subject": "Java", "gender": "Male" }
+{ "name": "Dara 123", "email": "dara@gmail.com", "subject": "Java", "gender": "Male" }
+
+
+============== Radio form Male and Female
+
+<div class="form-group">
+      <label for="">Gender</label> &nbsp;
+      <input class="form-check-input" type="radio" name="gender" [checked]="true" value="Male" value="Male" [(ngModel)]="student.gender">
+      <label class="form-check-label">Male</label>&nbsp;
+
+      <input class="form-check-input" type="radio" name="gender" [checked]="false" value="Female" [(ngModel)]="student.gender">
+      <label class="form-check-label">Female</label>&nbsp;
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

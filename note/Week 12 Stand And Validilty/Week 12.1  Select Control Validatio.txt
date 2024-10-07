@@ -1,0 +1,119 @@
+Week 12.1 : Select Control Validation:
+
++ select form validate:
+
+<div class="form-group">
+      <label for="subject" name="subject">Subject</label>
+      <select [class.is-invalid] = "cboSubject.invalid && cboSubject.touched" class="form-control" required="" #cboSubject="ngModel" name="subjects" [(ngModel)]="subjects.values">
+        <option *ngFor="let s of subjects">{{s}}</option>
+      </select>
+    </div>
+
+---------------------------
+
++ Before we submit form we need to check form Valid first before send to back end : 
+
+We want every thing valid then SAVE Button will show:
+
+- check form : 
+
+<h1>Check Form Valid ? {{studentForm.form.valid}}</h1> = it form valide then it true we can submit form. 
+
+- SAVE button :
+
+<div>
+      <button class="btn btn-primary" [disabled]="!studentForm.form.valid">Save</button>
+    </div>
+
+
+We use : [disabled]="!studentForm.form.valid"
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

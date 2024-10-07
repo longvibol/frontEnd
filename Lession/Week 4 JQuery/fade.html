@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#fadeIn").click(function(){
+                $("div").fadeIn();
+            });  
+            
+            
+            $("#fadeOut").click(function(){
+                $("div").fadeOut();
+            });             
+            
+            $("#fadeToggle").click(function(){
+                $("div").fadeToggle();
+            });  
+
+            $("#fadeTo").click(function(){
+                $("div").fadeTo(100, 0.5);
+            });  
+            
+            $("#show").click(function(){
+                $("div").show();
+            }); 
+
+        });
+
+    </script>
+
+    <style>
+       div{        
+        display: none;
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+       }
+
+    </style>
+</head>
+<body>
+    <button id="fadeIn">Play FadeIn</button>
+    <button id="fadeOut">Play FadeOut</button>
+    <button id="fadeToggle">Play fadeToggle</button>
+    <button id="fadeTo">Play fadeTo 50%</button>
+    <button id="show">Play show</button>
+ <div>
+
+
+ </div>
+   
+</body>
+
+<script>
+</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function save(){
+            let form = document.getElementById("form1");
+            //let name = document.getElementById("name");
+
+            let fData = new FormData(form);
+
+            // console.log("OK");
+            // console.log(form);
+
+            //1- xml http request 
+            //2- Open mean check security togeher 
+            //3. send 
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("POST","http://localhost:8080/brands");
+            xhr.setRequestHeader("Content-Type","application/json");
+
+            let data = {"name": name};
+            // xhr.send(JSON.stringify(data));
+
+            let json =JSON.stringify(Object.fromEntries(fData));
+            xhr.send(json);
+
+           console.log(Object.fromEntries(fData));
+           console.log(json);
+
+            xhr.onreadystatechange = function(){
+
+                if(xhr.readyState == XMLHttpRequest.DONE){
+                    console.log(xhr.response);
+                }
+
+                // if(xhr.status ==200){
+                //     console.log(xhr.response);
+                // }
+
+            };
+
+
+
+        }
+
+    </script>
+</head>
+<body>
+    <p><h1>Welcome to Cambodia!</h1></p>
+    <form id="form1">
+        <input type="text" name="name2" id="name">
+        <input type="button" value="Save" onclick="save()">
+    </form>
+    
+</body>
+</html>

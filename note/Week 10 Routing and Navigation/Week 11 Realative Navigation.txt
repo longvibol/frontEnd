@@ -1,0 +1,89 @@
+Week 11: Realative Navigation 
+
+
+- Absolute route: យើងដាក់ fix routing ចឹងពេលដែលយើងចង់ប្តូរ យើងត្រូវប្តូរ text ទាំងអស់ចឹងវាពិបាក
+
+ {path: "detail", component: StudentDetailComponent},
+ {path: "detail/:id", component: StudentDetailComponent}, 
+
+
+==> Solution we use Relative Route instead : (in the same page)
+
+Ex: we use student-detail.component.ts មក Update : They are in the same page 
+
+goNext(){
+    let nextId = this.studentId + 1;
+    this.router.navigate(["/detail", nextId]);
+  }
+
+  goPrevious(){
+    let previousId = this.studentId -1;
+    this.router.navigate(["/detail", previousId]);
+  }
+
+  goBack(){
+    this.router.navigate(["/list", {myId : this.studentId}]);
+  }
+
+}
+
+
+------------------------
+".." = current component 
+
+goNext(){
+    let nextId = this.studentId + 1;
+    // this.router.navigate(["/detail", nextId]);
+    this.router.navigate(["..", nextId],{relativeTo: this.activateRoute});
+  }
+
+  goPrevious(){
+    let previousId = this.studentId -1;
+    this.router.navigate(["..",previousId],{relativeTo: this.activateRoute});
+  }
+
+  goBack(){
+    this.router.navigate(["/list", {myId : this.studentId}]);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

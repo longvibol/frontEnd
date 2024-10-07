@@ -1,0 +1,106 @@
+Week 22 Audit Entity : អ្នកណាអ្នកបង្កើត បង្កើតពេលណា , បើគេ update Update ពេលណា
+
+https://www.baeldung.com/database-auditing-jpa
+
+
+- Audit we use to tracking who create :
+
+1. Add New Class to create object that store information from user: it need in abstract class becaue 
+we don't want jpa to create tabe in db 
+
+@EntityListeners(AuditingEntityListener.class)
+@MappedSuperclass
+public abstract class AuditEntity {
+
+	@CreatedDate
+	private LocalDateTime dateCreate;
+	
+	@LastModifiedDate
+	private LocalDateTime dateUpdate;
+	
+	@CreatedBy
+	private String userCreate;
+	
+	@LastModifiedBy
+	private String userUpdate;
+	
+}
+2. Create configuration file to do recorde when some one create table 
+
+* ចឹងយើងលើកឧទាហរណ៍ធ្វើលើ entity Brand មុនគេដោយ extend ពី AuditEntity​ ដែលជា base class មកប្រើ
+ដូនេះ ពេលយើងបង្កើត Table Brand it will include the base class inside table Brand
+
+@Data
+@Entity
+@Table(name = "brands", uniqueConstraints = {@UniqueConstraint(columnNames = {"brand_name"})})
+public class Brand extends AuditEntity{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "brand_id")
+	private Long id;
+	
+	@Column(name = "brand_name")
+	private String name;	
+}
+
+
+3. create AuditorAwareImple in package com.piseth.java.school.phoneshopenight.config.security;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+public class AuditorAwareImpl implements AuditorAware<String>{
+
+	@Override
+	public Optional<String> getCurrentAuditor() {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		return Optional.ofNullable(username);
+	}
+
+}
+
+4. in package com.piseth.java.school.phoneshopenight.config; create jpa config 
+
+@Configuration
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
+public class JpaConfig {
+	
+	@Bean
+	public AuditorAware<String> auditorAware(){
+		return new AuditorAwareImpl();
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

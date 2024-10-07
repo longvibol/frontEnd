@@ -1,0 +1,180 @@
+Week 11 - Template Driven Form 
+
+- Form : វាមានតួនាទីសំខាន់ក្នុងការបង្កើត business application (Register, Login, Submit request, Order, Schedule appointment,...)
+
+* Developer task :
+- Data binding : យកទិន្នន័យចេញពី Form នឹង មកកាន់ Model 
+- Change Tracking : គេបញ្ចូលអី
+- Validation : គេបញ្ជូលត្រូវអត់
+- Visual Feedback​: form neng if invalte from why 
+- Error Message 
+- Form Submission : send data from BE to FE
+
+-----------------------------------
+
+Template (collect Data) -> Class (Bind Data) -> Service (Send Data) -> Server
+There are 2 type of Forms
+
+- Template Driven Form : most of the code are in template (most of the code are in the view)
+- Reactive Form : most of the code are in class ( most of the code in the class )
+
+Bing = ភ្ជាប់
+
+-----------------------------------------------------------------------------------------
+
+1. Template Driven Form
+
+- Easy to use ងាយស្រួលប្រើ
+
+- Two way data binding with ngModel​ . think about [()] two way data binding 
+
+- Bulky HTML and minimal component code : កូចជាច្រើននៅក្នុង View 
+
+- Automatically track the form and form element state and validity : វាពិនិត្យមើលមានអីប្រែប្រួលអត់ 
+
+---------------គុណវិបត្តិ
+
+drawback: 
+
+- unit testing is a challenge (need to run end to end with browser) ពិបាកតេស្ត ព្រោះវានៅក្នង view 
+
+- Readability decrease with complex form and validation : ពិបាកអាន
+
+----------------- លក្ខណៈវិនីឆីតើត្រូវប្រើមួយណា
+
+***​ When to use TDF or Reactive Form (កូដជាច្រើនស្ថិតនៅក្នុង Component class) ?
+
+- simple form and unit test need to handle with browser => TDF បើ Form យើងមានតែតិចតួចទេ យើងប្រើ TDF 
+- compflex form and comflex validation, and unit test is absolute nessesary => RF (use with complent form) 
+
+
+Link design form
+
+https://github.com/pisething/front-end-course/blob/week_12_reactive_form/angular/angular-form/src/app/app.component.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

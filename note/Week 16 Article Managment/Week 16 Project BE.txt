@@ -1,0 +1,431 @@
+Week 16 Project BE
+
+---- Set up Express Server ----
+
+Create folder : article_management -> server:
+
+In folder server:
+
+>> npm init --yess = create json package 
+
+
+2. create server.js 
+
+>> npm install express body-parser --save
+
+It will put the dependency to the package.json and create node_modules folder 
+
+==> 
+
+const express = require('express')
+const bodyParser = require('body-parser')
+const PORT = 3000
+
+const app = express(); // create instance from express 
+app.use(bodyParser.json());
+
+app.get('/',function(req, res){
+    res.send('Response from server')
+})
+
+
+app.listen(PORT, function(){
+    console.log("Server is running with port: " + PORT)
+})
+
+==> testing run server.js 
+
+>>node server.js 
+
+==> Server is running with port: 3000
+
+---------- Create api.js ------------------
+
+1. Create folder name : route ( this folder we keep all our API in here ) 
+
+inside we create file : api.js 
+
+--------------
+
+const express = require('express')
+const router = express.Router()
+
+router.get('/',(req, res) =>{
+    res.send('Response from API route')
+})
+
+module.exports = router
+
+
+----------------
+
+2. Add api.js to server.js 
+
+const api = require('./routes/api')
+app.use('/api' ,api)
+
+
+Whole code :
+
+const express = require('express')
+const bodyParser = require('body-parser')
+const api = require('./routes/api')
+const PORT = 3000
+
+const app = express(); // create instance from express 
+
+app.use(bodyParser.json());
+app.use('/api' ,api)
+
+
+app.get('/',function(req, res){
+    res.send('Response from server')
+})
+
+
+app.listen(PORT, function(){
+    console.log("Server is running with port: " + PORT)
+})
+
+
+==> test >> node server.js ==> localhost:3000/api >> Response from API route
+
+
+3. Install MongoDb 
+
+- Install mongoose : is the mapping from JavaScrip to collection in MongoDB.  
+or  
+similar to The same as JPA (Hibernet) is the mapping from Java to Table In database. 
+
+>> npm install --save mongoose (in the server folder) 
+
+
+4. Create model 
+
+create a file model/user.js (inside server model)
+
+Note this process is the backend process but we use JavaScrip to create server 
+
+----------------
+
+const mongoose = require('mongoose') // it is like the import 
+const Schema = mongoose.Schema // instance the schema from mongoose
+
+const userSchema = new Schema({
+    username : String,
+    password : String
+}) // create schema that is the collection of username and password 
+
+module.exports = mongoose.model('user',userSchema,'users')
+
+
+--------------------
+
+
+module.exports = mongoose.model('user',userSchema,'users')
+
+Explain :
+
+- user = is the name in
+- userSchema = we use userSchema that have two collection of username and password and 
+that both collection we assign name : users (user with s) 
+
+Noted: in mongodb គេអត់ប្រើ Table ទេគេប្រើជា collection 
+
+
+==> after we create user model we use it inside the api 
+
+5. How to connect from user.js to mongoDb 
+
+- import User from models / user that we create (it is like the class user)
+
+const User = require('../models/user')
+
+- Create API POST from router 
+
+router.post('/register', (req, res)=>{
+    let userData = req.body
+    let user = new User(userData)
+    user.save().then(registeredUser =>{
+        res.status(200).send(registeredUser)
+    }).catch(err =>{
+        console.error(err)
+    })
+})
+
+-------------------api.js 
+
+const express = require('express')
+const mongoose = require('mongoose')
+const User = require('../models/user')
+const router = express.Router()
+
+const db ="mongodb://localhost:27017/articledb"
+
+router.get('/',(req, res) =>{
+    res.send('Response from API route')
+})
+
+mongoose.connect(db)
+.then(res =>{
+    console.log("Connection successfully to db tesing")
+}).catch(err =>{
+    console.error("Connection Error")
+})
+
+// create POST Api 
+
+router.post('/register', (req, res)=>{
+    let userData = req.body
+    let user = new User(userData)
+    user.save().then(registeredUser =>{
+        res.status(200).send(registeredUser)
+    }).catch(err =>{
+        console.error(err)
+    })
+})
+
+
+module.exports = router
+
+
+--------------- user.js
+
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const userSchema = new Schema({
+    username : String,
+    password : String
+})
+
+module.exports = mongoose.model('User',userSchema,'users')
+
+---------------------------------------------------------------------------------
+
++ In Mongodb : 
+
+Where we consider and take note in MongoDB compass: 
+
+- Create connection : Add new connection > mongodb://localhost:27017
+
+- name of the database : articledb 
+
+( const db ="mongodb://localhost:27017/articledb" ) where we can connection 
+
+
+----------------------------------------------------------------------------------
+
++ PostMan   
+
+POST : localhost:3000/api/register
+
+- body, Raw and Json 
+
+{
+    "username" : "dara",
+    "password" : "dara123"
+}
+
+====================================== In api ==============
+
+We create get article and paid_article 
+
+router.get('/articles',(req,res)=>{
+    let articles = [
+        {
+            "id":1,
+            "title":"Concert at Beach 1",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":2,
+            "title":"Concert at Beach 2",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":3,
+            "title":"Concert at Beach 3",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":4,
+            "title":"Concert at Beach 4",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        }
+    ]
+    res.json(articles)
+})
+
+router.get('/paid_articles',(req,res)=>{
+    let paid_articles = [
+        {
+            "id":5,
+            "title":"Concert at Beach 5 paid",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":6,
+            "title":"Concert at Beach 6 paid",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":7,
+            "title":"Concert at Beach 7 paid",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":8,
+            "title":"Concert at Beach 8 paid",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        }
+    ]
+    res.json(paid_articles)
+})
+
+----------------------------- add login -----------------------
+
+router.post('/login',(req, res) =>{
+    let userData = req.body
+    User.findOne({username: userData.username}).then(user =>{
+        if(!user){
+            res.status(401).send("Invalid username")
+        }else{
+            if(user.password !== userData.password){
+                res.status(401).send("Invalid Password")
+            }else{
+                res.status(200).send(user)
+            }
+        }
+    }).catch(err =>{
+        console.error(err)
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,179 @@
+Week 8 :
+
+----------------- Event binding -----------------
+
+1. Without event info 
+
+* class to template : data binding (យើងទិន្នន័យទៅបង្កើញលើ អេក្រង់)
+* template to class: event binding (input from form យើងយកទិន្នន៏យបញ្ចូលពី អេក្រង់)
+
+Ex: want to create form that we input to the font and it information show in the template 
+
+in HTML :
+
+<button (click)="showMessage()">Save</button>
+
+IN Ts calss:
+
+export class AppComponent {
+  title = 'week8';
+
+  name:string="";
+
+  showMessage(){
+
+    this.name ="Thida"
+
+  }
+
+}
+
+------- Explain --------
+
+-  (click) : event 
+-  ="showMessage()" : event handler 
+
+------- In the view : 
+
+when clink on button Save then it will call showMessage function and name will assing = Thida
+
+--------------------------------------------------------------
+
+2. With event info : (click)="showInfo($event)" in the tag
+
+in html:
+
+<button (click)="showInfo($event)">show Ino</button>
+
+In Tsd:
+
+showInfo(e:any){
+    console.log(e.value);
+  }
+
+==> console 
+
+PointerEvent {isTrusted: true, pointerId: 1, width: 1, height: 1, pressure: 0, …}
+
+
+3. for short body, no need to separate event handler function :
+
+<button (click)="name='Vibol'">singleLineClink</button>
+
+- name is the variable in the TS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

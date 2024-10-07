@@ -1,0 +1,152 @@
+Week 16.2 Call from server
+
+- Want to call from one component to another component 
+No need to use relationship between parent and child 
+
++ we use observabor វាដើរតួរជា Publisher pong ជា Subscriber pong 
+
+We create one is for the source and one variable for Obserabale 
+
+------------------------------
+
+*** Create Service then we can use in everywhere *** 
+
+>> ng g s message
+
+In message.Ts
+We create source and observable :
+
+private _messageSource = new Subject<string>(); // source 
+message$ = this._messageSource.asObservable(); // from message source we create message obseratble 
+
+Explain :
+
+- access modifier : private : for security 
+- _messageSource : is the variable (for private we use _ to identify) 
+- new Subject<String> we create generic type that the source is String 
+- message$ : is the variable for Obserable and $ is the annotation that represent for Obserable 
+
++ យើងចង់ផ្តល់ពត៌មានអីយើងទៅប្រភពនឹងទៅ _messageSource
+ហើយអ្វីដែលយើងចង់ access តាមប្រភពនឹងយើង access តាម message$
+
++ ការបង្កើត Service គឺដើម្បីអោយវាធ្វើអីមួយ ចឹងវាត្រូវតែមាន Function :
+
+sendMessage(text:string){
+    this._messageSource.next(text);
+  }
+
+- Function sent text
+- Next is the Method to Emit the same as Mono in webflow
+
+
+--------------------------
+How to use This above service from observable 
+
+Want to sent message from Parant App to Child : 
+
+1. Inject the service where we want to use srever: 
+
++ Child Component ts:
+
+First : we inject the server :
+
+constructor(private messageService: MessageService){
+
+  }
+
+Second: create variable to get the emit from server :
+
+question!: string;
+
+Third : Subcirbe when child component loading page
+
+ngOnInit(): void {
+    this.messageService.message$.subscribe(text=>{
+      this.question=text;
+    })
+  }
+
+2 In Parent Ts
+
+Inject the service in the parent :
+
+- constructor(private messageService : MessageService){
+
+  }
+
+- create service :
+
+askForLocation(){
+  this.messageService.sendMessage("Where are you?")
+}
+
+
+3. app.component.html 
+
+<h1>Parent component</h1>
+
+<button (click)="askForLocation()">Ask For Location</button>
+<app-child></app-child>
+
+- when click on askForLocation() in the button it will tricker function:
+
+askForLocation(){
+  this.messageService.sendMessage("Where are you?")
+}
+
+Then it will use : messageService.sendMessage (message.service that we create) 
+
+
+==> Where are you?
+
+
+======================
+Summary :
+
+message.service :
+
+>> ng g s message
+
+export class MessageService {
+
+  private _messageService = new Subject<string>();
+  message$ = this._messageService.asObservable();
+
+  sendMessage(text:string){
+    this._messageService.next(text);
+  }
+
+  constructor() { }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+

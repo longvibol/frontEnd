@@ -1,0 +1,144 @@
+Week 13: Nested form group: 
+
+We group the same form group together : Ex: address
+
+1. IN HTML:
+
+<div formGroupName="address">
+
+      <div class="form-group">
+        <label for="">Provice</label>
+        <input type="text" class="form-control" formControlName="province">
+      </div>
+
+      <div class="form-group">
+        <label for="">district</label>
+        <input type="text" class="form-control" formControlName="district">
+      </div>
+
+      <div class="form-group">
+        <label for="">Commune</label>
+        <input type="text" class="form-control" formControlName="commune">
+      </div>
+
+2. In TS we create object:
+
+registrationForm = new FormGroup({
+
+    username : new FormControl,
+    pwd : new FormControl,
+    confirmPwd : new FormControl,
+
+    address : new FormGroup({
+
+      province : new FormControl,
+      district : new FormControl,
+      commune : new FormControl,
+
+    })
+
+  });
+
+------------
+
+Note :
+
+for teh setValue that we use : setValue ត្រូវតែតម្លៃត្រូវទៅនឹង object ដែលយើងមាន​
+
+setValue(){
+    this.registrationForm.setValue({
+
+ERROR Error: Must supply a value for form control with name: 'address'.
+
+
+===> យើងអាចត្រូវប្រើ : patchValue ចឹងយើងអាច អត់ដាក់ Value ខ្លះបាន
+
+{ "username": "Thida", "pwd": "t", "confirmPwd": "t", "address": { "province": null, "district": null, "commune": null } }
+
+========================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

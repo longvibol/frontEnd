@@ -1,0 +1,155 @@
+Week 13.3 Customer Validation :
+
+We want to create customer control by oursevle because Angular can not provide what we want: 
+Ex: we want to put the blick lisk from user input : Admin, tola , dara that these three person can not input to the system 
+
+Code :
+
+>> create folder : command >> username.validatipon.TS
+
+
+function usernameValidator (control :AbstractControl) : {} | null {
+  return null;
+}
+នៅពេលមាន Error កើតឡើង ចំពោះ Validator មានពីរ គឺ Return ជា Object or Return Null :
+
+- Invalide => return 
+but when Valide (វាត្រឹមត្រូវ) no return = return null
+
+* {} | null = គេហៅថា Union type (ប្រជុំ)
+
+- We decare return type "{} | null" = គេដាក់វានៅខាងក្រោយ () but in java we put return type in front function name 
+
+==> 
+
+function usernameValidator (control :AbstractControl) : {[key:string] : any} | null {
+  return null;
+}
+
+- {[key:string] : any} = key and value for the object 
+
+we put in the parter : /admin/
+
+
+- In the form : ទំរងកន្លែងបញ្ចូលមួយនឹងគេហៅថា Control : ex : username ហើយតម្លៃនៅក្នង username នឹងគេហៅថា Value 
+
+Ex:
+
+- let resurlt = /admin/.test(control.value); វាមានចំលើយតែ Ture and false te 
+
+- if(resurlt){
+    return {'forbiddenName': control.value};
+  }
+
+បើ result = true ==> it return object : Key : value 
+បើ អត់មានទេវា Exit 
+
+1. In username.validation.ts
+
+import { AbstractControl } from "@angular/forms";
+
+export function usernameValidator (control :AbstractControl) : {[key:string] : any} | null {
+
+  let resurlt = /admin/.test(control.value);
+  if(resurlt){
+    return {'forbiddenName': control.value};
+  }
+  return null;
+}
+
+==> we user export in front of function so we can use this function in another component
+
+2. app.component.ts
+
+registrationForm = this.fb.group({
+    username : ['',[Validators.required, Validators.minLength(3), usernameValidator]],
+    pwe : [''],
+
+we add usernameValidator (it is the function name)
+
+3. in app.component.html 
+
+<small class="text-danger" *ngIf="username?.errors?.['forbiddenName']">Forbidden Name!</small>
+
+We add to the control that we want to validation. Just only put the key in the customer function that we created! 
+
+=====================
+
+
+we want to have input for the parameter in put instead for patern in put 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

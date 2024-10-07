@@ -1,0 +1,136 @@
+week 14.1 Condition validation 
+
+Ex: subscribe email បើសិនគេមិន check te ចឹងយើងមិនចាំបាច់ Update information អោយគេទេ
+- email mandatory when subscribe is checked: 
+
+<div class="form-group">
+      <label for="">Email</label>
+      <input type="text" class="form-control" formControlName="email">      
+      </div>
+    <div class="form-group">
+      <label for="">Subscribe</label>&nbsp;&nbsp;
+      <input type="checkbox" class="form-check-input" formControlName="subscribe">
+    </div>
+
+ចង់បានពេលគេចុច subscribe ចឹងអោយ control email vir mandatory (ត្រូវតែបញ្ចូល email) so it is the conditional 
+
+
+------------------------------------------------------
+
+Step to change observable from the formControl: 
+
+1. First get the observable from the check button subscriber : 
+
+- implements OnInit (ពេលបង្កើតមកវាត្រូវអោយ Oninit neng check first) 
+
+ចឹងយើងត្រូវ implement function vir : ngOnInit(): void {} 
+
+ngOnInit(): void {
+
+    this.registrationForm = this.fb.group({
+      username : ['',[Validators.required, Validators.minLength(3), usernameValidator2(/admin/)]],
+      pwd : [''],
+      confirmPwd : [''],
+      address : this.fb.group({
+  
+        province : [''],
+        district : [''],
+        commune  : ['']
+      }),
+      email :[''],
+      subscribe : ['']
+    },{validator: passwordValidator});  
+
+    this.registrationForm.get("subscribe")?.valueChanges.subscribe(value =>{
+      console.log(value);
+      let email = this.registrationForm.get('email');
+      if(value){
+        email?.setValidators(Validators.required);
+      }else{
+        email?.clearValidators();
+      }
+      email?.updateValueAndValidity;
+    });
+  }
+
+  get username(){
+    return this.registrationForm.get('username');
+  }
+
+មានន័យថា វាត្រូវតែមានមុននឹងអីផ្សេងដើរ
+
+this.registrationForm.get("subscribe")?.valueChanges.subscribe(value =>{
+      console.log(value);}
+
+==> if we check on the button check ==> the value = true if not check ==> false 
+
+2. យកតម្លៃនឹងមកដាក់លក្ខណ 
+
+this.registrationForm.get("subscribe")?.valueChanges.subscribe(value =>{
+      console.log(value);
+      let email = this.registrationForm.get('email');
+      if(value){
+        email?.setValidators(Validators.required);
+      }else{
+        email?.clearValidators();
+      }
+      email?.updateValueAndValidity;
+    });
+
++ email?.setValidators(Validators.required); = ចាំបាច់ត្រូវតែមានពេល Value = True 
++ email?.clearValidators(); បើ Value = false មិនបាច់ធ្វើការទេ អោយវា Clear Value ving 
++ email?.updateValueAndValidity; បើមិនចូលលក្ខណខាងលើអោយវា Refresh page ving 
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

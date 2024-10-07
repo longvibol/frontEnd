@@ -1,0 +1,26 @@
+<!-- {{title}}
+<img [src]="imagePath" alt="Image not Found">
+<button (click)="doCound()">Cound</button>
+<p>Count Click : {{count}}</p>
+
+<input  type="text" [(ngModel)]="name">
+<p>display name: {{name}}</p>
+
+ <input type="text" [ngModel]="username" (ngModelChange)="username=$event"> 
+<input #usernameRef type="text" [ngModel]="username" (ngModelChange)="doCheckname($event)">
+<p>display name: {{username}}</p>
+
+<input type="text" [(ngModel)]="myname">
+<p>display name: {{myname}}</p> 
+
+<h1>Parent component </h1>
+
+<button (click)="login=true">Log In</button>
+<button (click)="login=false">Log Out</button>
+
+<app-home [isLogin]="login"></app-home> -->
+
+<h1>Parent Component</h1>
+<app-child (childEvent)="greeting()"></app-child>
+
+

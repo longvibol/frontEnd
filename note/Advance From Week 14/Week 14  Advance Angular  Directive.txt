@@ -1,0 +1,350 @@
+Week 14 : Advance Angular : Directive (add and remove component in angular) 
+
+https://angular.dev/guide/directives/attribute-directives
+
+>> website that we can do search : 
+
+<< attribute stackblitz >>
+
+https://stackblitz.com/angular/naavjopgege?file=src%2Fapp%2Fapp.component.ts
+
+------------------------------------------------------------------------------------------------------------
+
+We want to create event in Angular : on mouse when it over the text become Red and release it = Yellow 
+
+>> angular event or "angular mouse events"
+
+https://dev.to/orahul1/angular-mouse-events-41l9
+
+
+Ex: In Html : 
+
+<div #div1 
+  (mouseover)="doMouseEnter(div1)" 
+  (mouseout)="doMouseOut(div1)">  Hello Piseth Java School 
+</div>
+
+<h2 #h2 
+  (mouseover)="doMouseEnter(h2)" 
+  (mouseout)="doMouseOut(h2)">  Hello Piseth From He 
+</h2>
+
+
+In TS: 
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'customDirective';
+
+  doMouseEnter(element : HTMLDivElement){  
+    element.style.color = "blue";
+  }
+
+  doMouseOut(element : HTMLDivElement){
+    element.style.color = "red";
+  } 
+
+}
+
+==> ចឹងយើងពិបានធ្វើ យើងមិនអាចបង្កើតវាអោយគ្រប់ Element and put in each function ទេ​វាពិបាក
+
+ចឹងបានយើងត្រូវការ Directive យើងមកប្រើ។​
+
+---------------------------------------------------------------------------------------------------
+
+>> ng g d directive/setColor 
+
+CREATE src/app/directive/set-color.directive.spec.ts (233 bytes)
+CREATE src/app/directive/set-color.directive.ts (145 bytes)
+UPDATE src/app/app.module.ts (485 bytes)
+
+* ចឹងវាបង្កើត directive យើងមើលទៅ ក្នុង Directive វាមិនមាន ភ្ជាប់ទៅកាន់ Template ទេ​៖
+
+import { Directive } from '@angular/core';
+
+@Directive({
+  selector: '[appSetColor]'
+})
+export class SetColorDirective {
+
+  constructor() { }
+
+}
+
+* ហើយវាបាន Add ទៅកាន់ app.module ទៀត៖
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    SetColorDirective
+  ],
+
+----------------------------------------------------------------------------------------------------
+
+នៅក្នុង Directive យើងត្រូវការ Object មួយដែលធ្វើជា Host​ Element ដើម្បី Set element នឹងធ្វើសកម្មភាពលើវា​ 
+
+constructor(private element: ElementRef) { }
+
+- Element ធាតុដែលយើងត្រូវធ្វើការលើវា 
+
+Ex: 
+
+1. in set-color.directive.ts : 
+
+import { Directive, ElementRef, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appSetColor]'
+})
+export class SetColorDirective {
+
+  constructor(private element: ElementRef) { }
+
+  @HostListener('mouseover')
+  doMouseEnter(){
+    this.element.nativeElement.style.color = "green"
+  }
+
+  @HostListener('mouseout')
+  doMouseOut(){
+    this.element.nativeElement.style.color = "yellow"
+  }
+
+}
+
+2. in HTML how to use it:
+
+<div appSetColor>Using Directive</div>
+
+ចឹងយើងអាចប្រើប្រាស់វាបានគ្រប់ component ទាំងអស់
+
+-------------------------------------------------------------------------------------
+
+1. In TS:
+
+import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+
+@Directive({
+  selector: '[appSetColor]'
+})
+export class SetColorDirective implements OnInit{
+  @Input() hcolor!: string;
+  @Input() oColor!:string;
+  @Input() defaultcolor!: string;
+
+  // we inject the element ElementRef
+  constructor(private element: ElementRef) { }
+
+  ngOnInit(): void {
+    this.element.nativeElement.style.color= this.defaultcolor;
+  }
+
+  @HostListener('mouseover')
+  doMouseEnter(){
+    this.element.nativeElement.style.color = this.hcolor; 
+  }
+
+  @HostListener('mouseout')
+  doMouseOut(){    
+    this.element.nativeElement.style.color = this.oColor;
+  }
+
+}
+
+
+2. In HTML: 
+
+<div #div1 
+  (mouseover)="doMouseEnter(div1)" 
+  (mouseout)="doMouseOut(div1)">  Hello Piseth Java School 
+</div>
+
+<h2 #h2 
+  (mouseover)="doMouseEnter(h2)" 
+  (mouseout)="doMouseOut(h2)">Hello Piseth From AppSetColor! 
+</h2>
+
+<div appSetColor defaultcolor="black" hcolor="blue" oColor="red">Using Directive</div>
+<h1 appSetColor defaultcolor="black" hcolor="red" oColor="blue">Testing from Directive</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

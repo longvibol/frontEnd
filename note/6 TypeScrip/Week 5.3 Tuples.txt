@@ -1,0 +1,76 @@
+Week 5.3 Tuples:
+
+- Typed Arrays : a tuple is a type array with a pre-defined length and types for each index. 
+
+Syntax: 
+
+- let ourTuple : [number, Boolean, string]; 
+- We can use this Tuple to store Object 
+
+Ex:
+
+let students : [number, string, string];
+students = [1,"Dara","Thida"];
+
+console.log(students);
+
+==>   
+
+[1,'Dara','Thida']
+It the same object that we can store!
+
+---------------------------------------------- 
+
+2. Name Tuple 
+To allow us to Provide context for our values at each index. 
+
+Syntax: 
+Ex1: 
+const graph: [number, number] = [55.4, 34.2];
+const [x , y] = graph;
+
+console.log([x , y]);
+console.log(graph); 
+
+==> 
+
+[ 55.4, 34.2 ]
+[ 55.4, 34.2 ]
+
+Ex:2 
+
+let students : [id:number,name:string,gender:string];
+students = [1,"Dara","Thida"];
+
+console.log(students);
+
+==>
+
+[ 1, 'Dara', 'Thida' ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

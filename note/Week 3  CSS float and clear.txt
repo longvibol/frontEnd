@@ -1,0 +1,78 @@
+Week 3 : CSS
+
+The float Property : គេប្រើវាដើម្បីដាក់អោយ Element ដែលជា block នៅជាមួយគ្នាបាន
+
+1.​ដាក់នៅជិតគ្នា
+
+</head>
+
+<style>
+
+    #b1{
+        background-color: yellow;
+        float: left;
+    }
+
+    #b2{
+        background-color: green;
+    }
+
+</style>
+
+<body>
+
+    <div id="b1">Box 1</div>
+    <div id="b2">Box 2</div>
+
+</body>
+
+2. Clear = ផ្តាច់ float ចេញពីគេ
+
+យើងចង់អោយវា clear- left ដាក់​ ចឹងទៅវាចុះបន្ទាត់ហើយ
+#b4{
+        background-color: rgb(255, 0, 221);
+        clear: left;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

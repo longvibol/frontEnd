@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>   
+</head>
+
+<style>   
+
+#container {
+  position: relative;
+  background: purple;
+  width: 400px;
+  height: 400px;
+}
+
+#box {
+  position: absolute;
+  background: red;
+  width: 30px;
+  height: 30px;
+  bottom: 0px;
+}
+</style>
+
+<script>
+
+var box = document.getElementById("box");
+let left2 = 1;
+
+function left() {
+ 
+document.getElementById("box").style.left = left2;
+
+  left2++;
+
+  console.log(left2);
+}
+
+</script>
+
+
+<body>
+
+  <div id="container">
+    <div id="box">Slid Box</div>
+  </div>
+  <button onclick="left()">Move Bok Slie</button>
+
+  <!-- <script src="forloop.js"></script> -->
+  <!-- <script src="Student.js"></script>
+  <script src="myscrip.js"></script> -->
+ 
+</body>
+
+</html>

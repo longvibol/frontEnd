@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+       
+       $(document).ready(function(){
+            $(".profile").click(function (){
+                let src =$(this).children('img').attr('src');
+                let p =$(this).children('');
+                let main =$(this);
+                console.log("src"+src);
+                console.log("p"+p);
+                console.log("main"+main);
+
+                if ($(this).hasClass('.profile')) {
+                    $('#view').show();
+                $('#view').animate(
+                    {left: '40%',width :'30%',height: '30%'}
+                        ,function(){
+                            $('#view').animate({top: '35%',width :'50%',height: '50%',}
+                                ,function(){
+                                    $('#view').animate({left: '25%'}, function(){
+                                        // $('#view').css("background-image","url('../image/kaka.jpg')");
+                                        $('#view').css("background-image","url('"+src+"')");
+                                    });
+                                });
+                $('#view').click(function(){
+                    $('#view').hide();            
+                });
+          });
+                    
+                }
+
+                
+    
+        });
+       });
+
+    </script>
+    <style>
+        .profile img {
+            width: 200px;
+            height: 200px;
+        }
+        .profile{
+            border: 1px solid green;
+            float: left;
+            margin: 10px;
+        }
+        .parent p {
+            text-align: center;
+        }
+        #view{
+            display: none;
+            position: absolute;
+            bottom: 0;
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }     
+      
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="profile">
+            <p>Kaka</p>
+            <img src="../image/kaka.jpg" alt="pic">
+        </div>
+        <div class="profile">
+            <p>Torres</p>
+            <img src="../image/torrest.jpg" alt="pic">
+        </div>
+        <div class="profile">
+            <p>Ronaldo</p>
+            <img src="../image/ronaldo.jpg" alt="pic">
+        </div>        
+    </div>
+
+    <div id="view"></div>  
+    
+   
+</body>
+
+<script>
+</script>
+</html>

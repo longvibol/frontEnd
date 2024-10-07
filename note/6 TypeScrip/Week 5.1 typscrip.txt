@@ -1,0 +1,57 @@
+Week 5.1 typescript 
+
+1. Explicit: Manually; Ex: 5/1 = 5
+2. Implicit: Auto ; Ex : 5 
+
+Ex 1: 
+
+let age : number = 15;
+console.log(typeof age);
+
+==> number
+
+Ex2: inference by it self ព្យាយាមទូសទាយ ខ្លួនឯង
+
+let limit = 30;
+console.log(typeof limit);
+
+==> Number 
+Noted : មាន Type ខ្លះវាមិនអាចទាយបានទេ ចឹងវាដាក់ខ្លួនឯង ថ្មី ឈ្មោះថា "any" 
+
+*** Special Type in TS: 
+
+1. Type : any យកអីដាក់វាចូលក៏បានដែល 
+
+let limit = 30;
+limit = "Dara";
+
+It will error : we can not assign String to Number បានទេ
+So we can assign with Any: 
+
+let limit:any = 30;
+limit = "dara";
+
+console.log(typeof limit);
+console.log(limit);
+
+==> String and dara
+
+2. Or we can use type" Unknow"
+
+let limit:unknown = 30;
+limit = "dara";
+
+console.log(typeof limit);
+console.log(limit);
+
+
+3. undefined and null 
+
+let y : undefined =undefined;
+let z : null =null;
+
+console.log(typeof y); ==> Type = undefined
+console.log(typeof z); ==> Type = object
+
+
+----------------------------------------------------------------
