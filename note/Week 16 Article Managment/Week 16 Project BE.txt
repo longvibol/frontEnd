@@ -6,7 +6,7 @@ Create folder : article_management -> server:
 
 In folder server:
 
->> npm init --yess = create json package 
+>> npm init --yes = create json package 
 
 
 2. create server.js 
