@@ -1,0 +1,296 @@
+Week 17.1 Component Code 
+
+1. Auth server to get the Register to the BE Server 
+
+We use Http to get the data from Template.
+
+In inject httpClient 
+
+>> ng g s auth
+
+in the auth.service we inject the httpClient 
+
+We use POST method (it need two parameter) : Userinput and URL 
+
+
+*** 
+Error first: NullInjectorError
+
+ERROR Error: Uncaught (in promise): NullInjectorError: R3InjectorError(AppModule)[AuthService -> HttpClient -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+NullInjectorError: NullInjectorError: No provider for HttpClient!
+
+==> Add HttpClientModule to app.module.js 
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+
+*** 
+
+*** Error 2nd : CROS (differen server port talking )
+
+In the BE we need to install :
+>>npm install cors --save 
+
+Then in the api.js : 
+We import cors "
+
+const cors = require('cors') // import cors 
+
+router.use(cors()); // use cors 
+
+
+=================================================================
+
+** Article component:
+
+In FE
+
+1. create service to get the data from BE
+
+>> ng g s article
+
+In TS:
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ArticleService {
+
+  baseUrl = "http://localhost:3000/api/";
+
+  constructor(private http : HttpClient) { }
+
+  getArticles(){
+    return this.http.get<any>(this.baseUrl+"articles");
+  }
+}
+
+---Explain 
+
++ baseUrl = "http://localhost:3000/api/"; where we get the BE url 
++ constructor(private http : HttpClient) { } = inject the http to use Method GET
++ getArticles(){
+    return this.http.get<any>(this.baseUrl+"articles");
+  } = our crate function to return from BE 
+
+
+--------------------------------------------------------------------
+
+2. In article component ts:
+
+constructor(private articleService : ArticleService) { }
+
+  ngOnInit(): void {
+    this.articleService.getArticles().subscribe(res =>{
+      this.articles = res;
+    }, err =>{
+      console.log(err);
+    });
+  }
+
+---------------------------
+Explain : 
+
++ constructor(private articleService : ArticleService) { } = inject our service article server
++ ngOnInit(): void {
+    this.articleService.getArticles().subscribe(res =>{
+      this.articles = res;
+    }, err =>{
+      console.log(err);
+    });
+  }
+We use ngOnInit (when we load the component we call the article service) 
+
+*** 
+Error :
+
+"
+Error: src/app/article/article.component.html:5:44 - error TS2339: Property 'title' does not exist on type 'never'.
+
+5           <h5 class="card-title">{{article.title}}</h5>
+
+"
+
+ពេលដាក់មក articles = []; វាអត់ដឹងថាមានអីខ្លះទេនៅក្នុងនឹង​ យើងត្រូវការ Model ជំនួយ ដើម្បីបញ្ជាក់ Type ដែលយើងធ្វើការទាញមកពី DB 
+
+https://v17.angular.io/cli/generate (cli comand) 
+
+==> to sovle the error on type with crateing model :
+
+>> ng g cl model/article 
+
+- In article.model.ts 
+
+export class Article{
+    title?: string;
+    description?: string;
+    date?: string;
+}
+
+- article.component.ts 
+
+export class ArticleComponent implements OnInit {
+
+  articles! : Article[];
+
+  constructor(private articleService : ArticleService) { }
+
+  ngOnInit(): void {
+    this.articleService.getArticles().subscribe(res =>{
+      this.articles = res;
+    }, err =>{
+      console.log(err);
+    });
+  }
+
+}
+
+------------------------------------
+
+*** Apply Authenticaton ***
+
+Only paid users can view paid article 
+
+- user register
+- user login 
+
+---------------- Json Web Token (JWT) ------------------
+
+safe way to represent a set of information between 2 parties 
+
+JWT វាចែកចេញជាបីផ្នែក 
+- header.payload.signature (xxxx.yyyy.zzzz)
+- header : type jwt, hashing algorithm
+- payload: data stored inside jwt
+- signature: use to verify token
+
+Read More: https://jwt.io
+
+- statless : អត់ stock in database ទេ
+
+
+JWT : គឺជាវីធីសាស្រ្តដែលយើងធ្វើការរក្សាទុក information រវាងពីរភាគគី ជាលក្ខណៈ stateless   
+
+---------------------
+
+Install JWT syntax :
+
+jsonwebtoken npm package
+
++ jwt.sign(payload, secretOrPrivateKey,[option, callback]) = ពេលបង្កើត token we use method : sing then we input the payload and secretOrPrivateKey(our own key create)
+
++ jwt.verify(payload, secretOrPrivateKey,[option,callback]) = ពេល verify Token we use verify 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

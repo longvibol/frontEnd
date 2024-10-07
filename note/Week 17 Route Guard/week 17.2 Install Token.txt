@@ -1,0 +1,284 @@
+week 17.2 Install Token
+
+
+safe way to represent a set of information between 2 parties 
+
+JWT វាចែកចេញជាបីផ្នែក 
+- header.payload.signature (xxxx.yyyy.zzzz)
+- header : type jwt, hashing algorithm
+- payload: data stored inside jwt
+- signature: use to verify token
+
+Read More: https://jwt.io
+
+- statless : អត់ stock in database ទេ
+
+
+JWT : គឺជាវីធីសាស្រ្តដែលយើងធ្វើការរក្សាទុក information រវាងពីរភាគគី ជាលក្ខណៈ stateless   
+
+---------------------
+
+Install JWT syntax :
+
+jsonwebtoken npm package
+
++ jwt.sign(payload, secretOrPrivateKey,[option, callback]) = ពេលបង្កើត token we use method : sing then we input the payload and secretOrPrivateKey(our own key create)
+
++ jwt.verify(payload, secretOrPrivateKey,[option,callback]) = ពេល verify Token we use verify 
+
+--- install jwt in server -----------
+
+>> npm install jsonwebtoken --save
+
+
+When we create token : there are two place where we create token:
+
+1. in Register and login 
+
+
+router.post('/register', (req, res)=>{
+    let userData = req.body
+    let user = new User(userData)
+    user.save().then(registeredUser =>{
+        let payload = {subject: registeredUser.username};
+        let token = jwt.sign(payload, 'mySecreatKey');
+        res.status(200).send({token})
+    }).catch(err =>{
+        console.error(err)
+    })
+})
+
+router.post('/login',(req, res) =>{
+    let userData = req.body
+    User.findOne({username: userData.username}).then(user =>{
+        if(!user){
+            res.status(401).send("Invalid username")
+        }else{
+            if(user.password !== userData.password){
+                res.status(401).send("Invalid Password")
+            }else{
+                let payload = {subject: user.username};
+                let token = jwt.sign(payload, 'mySecreatKey');
+                res.status(200).send({token})
+            }
+        }
+    }).catch(err =>{
+        console.error(err)
+    })
+})
+
+
+----------------------------- 
+
+Testing: 
+
+- when we register : 
+
+POST: localhost:3000/api/register
+
+{
+    "username" : "pichkhmer2",
+    "password" : "12"
+}
+
+==> 
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiVG9sYSIsImlhdCI6MTcyODI4ODkyOX0.fWsvovD_SIZb_d0ttRBmo-8aZRsNQ6_ty7vpDf72p-4"
+}
+
+- In Login : 
+
+POST : localhost:3000/api/login
+
+{
+    "username" : "Tola",
+    "password" : "1"
+}
+
+==> 
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiVG9sYSIsImlhdCI6MTcyODI4ODk1N30.YxiQtlXz3J_px1nQDeEU3P3FMEeX5E7RzspUXIl_ajM"
+}
+
+
+----------------------------------------------------------------
+
+How to store the token : we want to store the token in the FE when they request with url it will check the token it is valid or not ?
+
+
+យើងចង់អោយពេលយើងធ្វើការ Register វាធ្វើការរក្សាទុក Token 
+
+- In register.component.ts 
+
+
+registerUser(){
+    //console.log(this.registerData)
+    this.authServer.register(this.registerData).subscribe(res =>{
+      console.log(res); 
+      localStorage.setItem('token',res.token);
+    }, err =>{
+      console.log(err);
+    })
+
+  }  
+
+- In service auth : 
+
+register(user : any){
+    return this.http.post<any>(this.baseUrl+"register",user || null);
+    //it return obserable 
+  }
+
+------------------- 
+
+Note:
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiVG9sYSIsImlhdCI6MTcyODI4ODk1N30.YxiQtlXz3J_px1nQDeEU3P3FMEeX5E7RzspUXIl_ajM"
+}
+
+Explain:
+
+- It have key = "token"
+- localStorage.setItem('token',res.token); where we store the token in the localstorage: 
+
+How to check it : 
+
+In brower -> Application -> check on http://localhost:4200/
+
+on key and value
+
+Note: localstorage: 
+
+(method) Storage.setItem(key: string, value: string): void
+
+------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
