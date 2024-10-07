@@ -1,4 +1,4 @@
-Week 17 Route Guard 
+Week 17 Route Guard : 
 
 Content :
 
@@ -9,4 +9,206 @@ Content :
 5. Add authentication 
 6. Login/Logout button UI logic 
 
- 
+--------------------------------------------------
+
+1. Generate component (register, login, article, paid_article)
+
+>> ng g c register
+>> ng g c login
+>> ng g c article
+>> ng g c paid_article
+
+=======================
+---------------- Register Form -------------------
+
+1. TDF : Template Driven Form 
+2. Reactive Form 
+
+Because it is simple we use TDF on the register form :
+
+In Html:
+
+<div class="card-body">
+            <form class="form">
+              <div class="form-group">
+                <label for="uname1">Username</label>
+                <input type="text" [(ngModel)]="registerData.username" name="username" class="form-control rounded-0" required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" [(ngModel)]="registerData.password"  name="password" class="form-control rounded-0"  required>
+              </div>
+              <button type="button" (click)="registerUser()"  class="btn btn-primary float-right">Register</button>
+            </form>
+          </div>
+
+-------------------- 
+
+Explain: banana in the box
+
+[(ngModel)]="registerData.username" : Two way binding from Template to TS
+
+In TS: 
+
+registerData = {
+    username: '',
+    password: ''
+  }
+
+  registerUser(){
+    console.log(this.registerData)
+
+  }
+
+--------------------------------------------
+
+Summary code Register component: 
+
+In HTML : 
+
+<div class="py-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <span class="anchor" id="formLogin"></span>
+  
+        <!-- form card login -->
+        <div class="card rounded-0">
+          <div class="card-header">
+            <h3 class="mb-0">Register</h3>
+          </div>
+          <div class="card-body">
+            <form class="form">
+              <div class="form-group">
+                <label for="uname1">Username</label>
+                <input type="text" [(ngModel)]="registerData.username" name="username" class="form-control rounded-0" required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" [(ngModel)]="registerData.password"  name="password" class="form-control rounded-0"  required>
+              </div>
+              <button type="button" (click)="registerUser()"  class="btn btn-primary float-right">Register</button>
+            </form>
+          </div>
+          <!--/card-block-->
+        </div>
+        <!-- /form card login -->
+  
+      </div>
+  
+  
+    </div>
+  </div>
+
+
+----------------------------
+
+In TS:
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
+export class RegisterComponent implements OnInit {
+  registerData = {
+    username: '',
+    password: ''
+  }
+
+  registerUser(){
+    console.log(this.registerData)
+
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+*** NOTE ***
+
+Need to add  FormsModule in the app.module.js ( to use TDF) 
+
+Error message:
+
+error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+15 <input type="text" [(ngModel)]="registerData.username" name="username" class="form-control rounded-0" required>
+
+-- Add in app.module.js --  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

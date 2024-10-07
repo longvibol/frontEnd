@@ -1,1 +1,0 @@
-https://github.com/pisething/front-end-course/tree/main/angular/article_management/fe/src

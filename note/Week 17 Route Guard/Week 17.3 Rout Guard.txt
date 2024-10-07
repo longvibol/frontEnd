@@ -1,0 +1,120 @@
+Week 17.3 Rout Guard : អោយឆ្លងកាត់អង្គរមួយសិន (Filter) 
+
+Route Guard : យើងចង់អោយគេ Login សិនបានអោយគេចូលមើល Page យើងកើត ចឹងយើងធ្វើការ Redirection សិនមុនធ្វើការ 
+view page កើត
+
+- it have many function but we use CanActivate មួយសិន​
+
+How to generate rout guard :
+
+syntax: ng g guard [name_guard] 
+
+>> ng g guard auth
+>(*) CanActivate
+ ( ) CanActivateChild
+ ( ) CanDeactivate
+ ( ) CanLoad
+
+We use : CanActivate ==> concetp it 'True' we allow and if false we block 
+
+----------------------------------- Step by step setup : 
+
+1. in service : auth.service.ts : we want to create return true or false whild each page have token or not 
+
+  hasToken():boolean{
+    return !!localStorage.getItem('token');
+  }
+
+*** explain : normaly it catch Key  = token then it return string toekng 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiYWRtaW4iLCJpYXQiOjE3MjgyOTIxNDN9.USO_4SACHIbYAwVMEqYSXwyNIrbq5lQ--c7AH9CNuro'
+
+But we want it return back in True or False if it have token ==> So we put "!!" to convert from value to Turn or Flase
+
+2. in auth.guard.ts 
+
+export class AuthGuard implements CanActivate {
+
+  constructor(private authService: AuthService, private router: Router){}
+
+  canActivate() : boolean{
+    let hasToken = this.authService.hasToken();
+    if(hasToken){
+      return true;
+    }
+    this.router.navigate(['/login']);
+    return false;
+  }
+  
+}
+
+-- explain :
+
++ constructor(private authService: AuthService, private router: Router){}
+
++ canActivate() : boolean{
+    let hasToken = this.authService.hasToken();
+    if(hasToken){
+      return true;
+    }
+    this.router.navigate(['/login']);
+    return false;
+  }
+
+
+if it is True ==> Can access the page and if False ==> not allow 
+we inject the router to navigate the Auth Guard when it success 
+
+
+----------------------- where to use Route Guard ---------
+
+We use it in the app-routing.module.ts and put in where we want to auth guard checking :
+
+{
+    path: 'paid_article',
+    component: PaidArticleComponent,
+    canActivate:[AuthGuard]
+  },
+
+-----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
