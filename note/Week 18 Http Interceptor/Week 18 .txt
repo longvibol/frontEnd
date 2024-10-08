@@ -1,0 +1,210 @@
+Week 18 Http Interceptor 
+
+* Add Authorization request header 
+
+- we create middleware :
+
+-GET localhost:3000/api/articles
+-request  body: No case we use get
+->so we use can check the Token on the request header :
+
+Authorization : Bearer token 
+
+Bearer eyJh............... (form )
+
+*** Process *** 
+req -> verifyToken -> api 
+
+
+--------------------------- How to create Middleware VerifyToken -------------
+Think where we put the Middleware (it should be in the middle of the request to the API 
+
+IN BE : API 
+------------------------
+
+function verifyToken(req, res, next){
+    // check header Authorization 
+    let authorization = req.headers.authorization;
+    if(!authorization){
+        return res.status(401).send("Unauthorized Request[No Authorization Header]")
+    }
+
+    // check Token 
+    let token = authorization.split(" ")[1]
+
+    if(token === undefined){
+        return res.status(401).send("Unauthorized Request [No Token]")
+    }
+
+    // verify Token 
+    let payload = jwt.verify(token,'mySecreatKey')
+    if(!payload){
+        return res.status(401).send("Unauthorized Request [Token No Valid]")
+    }
+
+
+    // assign request = payload (information)
+
+    req.userId = payload.subject;
+    //subject we get from : let payload = {subject: registeredUser.username};
+    next();
+
+}
+
+----------------------
+
+Explain: 
+
+there are 4 step we need to consider :
+
+1. check header Authorization (check if it have header or not) Then 
+2. check Token (we check only the token and split from Bearer) Then if it pass 
+3. Verify Token (after we get the token we verify it valid with our == jwt.verify(token,'mySecreatKey') then if is correct 
+4. Assign request = payload (information)
+5. next(); (allow to pass throw to the API 
+
+
+* error : it is not correct form in JWT. it have XXX.YYY.ZZZ
+Message : " jwt malformed<br> " 
+
+
+-----------------------
+
+Where we put the middle ware (we keep it in middle of the req and api request) 
+
+
+router.get('/paid_articles',verifyToken,(req,res)=>{
+    let paid_articles = [
+        {
+            "id":5,
+            "title":"Concert at Beach 5 paid",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":6,
+            "title":"Concert at Beach 6 paid",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":7,
+            "title":"Concert at Beach 7 paid",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        },
+        {
+            "id":8,
+            "title":"Concert at Beach 8 paid",
+            "description": "article take place in Takeo",
+            "date":"2023-08-23"
+        }
+    ]
+    res.json(paid_articles)
+})
+
+===============================================================
+
+
+***
+
+Problem after we put the Middleware to check the Token in other page need to have authorization in the header. 
+
+Error message check location :
+
+go to Network : paid_articles -> Status Code:
+401 Unauthorized
+
+That what we need to intercept and add the token to the header! 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

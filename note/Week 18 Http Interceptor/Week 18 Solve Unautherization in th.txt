@@ -1,0 +1,177 @@
+Week 18 Solve Unautherization in the header 
+
+** We use Interceptor ** 
+
+ពេលចូលមកអោយវាកាក Check មើលសិន  if it have header allow it not stop and check the authorization 
+
+Interceptor 
+
+req -> interceptor -> api 
+
+Note:
+
+------------ Prevent unauthorized user --------------
+
+to check token is present is not enough because we can manually create token in brower
+- to be secure we have to verify token from backend server
+
+-----------------------------------------------------
+
+Creating token interceptor :
+
+* Modify request to add static header Authorization:
+
+1. Create interceptor in the FE 
+
+>> ng g s token-interceptor 
+
+----------------------------------------
+
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TokenInterceptorService implements HttpInterceptor{
+
+  constructor(private authToken :AuthService) { }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let addHeader = req.clone({
+      setHeaders :{
+        // key1 : "abc", we can add what we want 
+        //Authorization: 'Bearer ' + this.authToken.getToken()
+        Authorization: `Bearer ${this.authToken.getToken()}`
+
+      }
+    });
+
+    return next.handle(addHeader);
+  }
+}
+
+----------------------------------------
+
+យើងត្រូវធ្វើការ បញ្ចូលបន្ថែម Interceptor in the header:
+
+2. In app.module.ts : We add the server to the providers 
+
+providers: [AuthService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true // can use mutiple interceptor 
+  }],
+
+--------------------------------------
+
+Explain :
+- provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true // can use mutiple interceptor 
+
+
+3. in app.components.ts 
+
+export class AppComponent {
+  constructor(public auth:AuthService, private router : Router){}
+
+  title = 'fe';
+  
+  doLogout(){
+    this.auth.logOut();
+    this.router.navigate(['/article'])
+  }
+
+}
+
+----------------------------------------------------------------------
+ 
+Noted on home page article: we change the logic Login and outout 
+
+In app.component.html 
+
+
+<ul class="navbar-nav">
+        <a class="btn btn-outline-success my-2 my-sm-0" *ngIf="!auth.hasToken()" routerLink="/login" routerLinkActive="active">Login</a>
+        <a class="nav-link" *ngIf="!auth.hasToken()" routerLink="/register" routerLinkActive="active">Register</a>
+        <a class="nav-link" *ngIf="auth.hasToken()" (click)="doLogout()" style="cursor:pointer"  >Logout</a>        
+    </ul>
+
+
+------------
+
+Explain : 
+
+*ngIf="!auth.hasToken()" = we put the condition to make it show or hide 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

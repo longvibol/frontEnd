@@ -83,7 +83,7 @@ router.get('/articles',(req,res)=>{
     res.json(articles)
 })
 
-router.get('/paid_articles',(req,res)=>{
+router.get('/paid_articles',verifyToken,(req,res)=>{
     let paid_articles = [
         {
             "id":5,
@@ -112,6 +112,37 @@ router.get('/paid_articles',(req,res)=>{
     ]
     res.json(paid_articles)
 })
+
+// create function : middleware 
+
+function verifyToken(req, res, next){
+    // check header Authorization 
+    let authorization = req.headers.authorization;
+    if(!authorization){
+        return res.status(401).send("Unauthorized Request[No Authorization Header]")
+    }
+
+    // check Token 
+    let token = authorization.split(" ")[1]
+
+    if(token === undefined){
+        return res.status(401).send("Unauthorized Request [No Token]")
+    }
+
+    // verify Token 
+    let payload = jwt.verify(token,'mySecreatKey')
+    if(!payload){
+        return res.status(401).send("Unauthorized Request [Token No Valid]")
+    }
+
+
+    // assign request = payload (information)
+
+    req.userId = payload.subject;
+    //subject we get from : let payload = {subject: registeredUser.username};
+    next();
+
+}
 
 
 module.exports = router
