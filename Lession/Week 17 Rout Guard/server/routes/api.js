@@ -125,11 +125,6 @@ function verifyToken(req, res, next){
     // check Token 
     let token = authorization.split(" ")[1]
 
-    console.log("======================")
-
-    console.log(token)
-
-    console.log("======================")
     if(token === undefined){
         return res.status(401).send("Unauthorized Request [No Token]")
     }
